@@ -2,73 +2,89 @@ package com.appcode.reactnativeapp;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.appcode.reactnativeapp.communication.CommPackage;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import java.lang.reflect.InvocationTargetException;
+import com.appcode.reactnativeapp.hotupdate.FileConstant;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.annotation.Nullable;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
-  private final ReactNativeHost mReactNativeHost =
-      new ReactNativeHost(this) {
-        @Override
-        public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
-        }
+  public static Context appContext;
+  private static MainApplication instance;
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    instance = this;
+    appContext = getApplicationContext();
+    SoLoader.init(this, /* native exopackage */ false);
+  }
+  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+    @Override
+    public boolean getUseDeveloperSupport() {
+      return BuildConfig.DEBUG;
+    }
+//返回JS 的路径   super.getJSBundleFile();   asserts/index.android.bundle
+//    替换这个返回值  bundle路径   patch文件
 
-        @Override
-        protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
-        }
+    @Nullable
+    @Override
+    protected String getJSBundleFile() {
+      File file = new File (FileConstant.JS_BUNDLE_LOCAL_PATH);
+      if(file != null && file.exists()) {
+        return FileConstant.JS_BUNDLE_LOCAL_PATH;
+      } else {
+        return super.getJSBundleFile();
+      }
 
-        @Override
-        protected String getJSMainModuleName() {
-          return "index";
-        }
-      };
+    }
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+      List<ReactPackage> reactPackages = new PackageList(this).getPackages();
+      reactPackages.add(new CommPackage());
+      return reactPackages;
+    }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
+  };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
   }
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-    initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+  /**
+   *包名
+   */
+  public String getAppPackageName() {
+    return this.getPackageName();
   }
 
   /**
-   * Loads Flipper in React Native templates.
-   *
-   * @param context
+   * 获取Application实例
    */
-  private static void initializeFlipper(Context context) {
-    if (BuildConfig.DEBUG) {
-      try {
-        /*
-         We use reflection here to pick up the class that initializes Flipper,
-        since Flipper library is not available in release mode
-        */
-        Class<?> aClass = Class.forName("com.facebook.flipper.ReactNativeFlipper");
-        aClass.getMethod("initializeFlipper", Context.class).invoke(null, context);
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      } catch (NoSuchMethodException e) {
-        e.printStackTrace();
-      } catch (IllegalAccessException e) {
-        e.printStackTrace();
-      } catch (InvocationTargetException e) {
-        e.printStackTrace();
-      }
-    }
+  public static MainApplication getInstance() {
+    return instance;
   }
+
+
+
+
+
 }
