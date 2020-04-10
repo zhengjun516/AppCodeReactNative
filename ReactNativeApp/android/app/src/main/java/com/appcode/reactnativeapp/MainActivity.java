@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         registeReceiver();
         checkPermissions();
-
     }
 
     public void checkPermissions(){
@@ -63,8 +62,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendMsgToRN(View view) {
 
-        startActivity(new Intent(this, MyReactActivity.class));
+        startActivity(new Intent(this, App1ReactActivity.class));
 
+    }
+
+    public void startAppCodeReactActivity(View view){
+        startActivity(new Intent(this, App2ReactActivity.class));
     }
 
     public class CompleteReceiver extends BroadcastReceiver {

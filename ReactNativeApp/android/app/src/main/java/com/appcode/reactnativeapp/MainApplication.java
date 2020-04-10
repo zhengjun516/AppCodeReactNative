@@ -4,23 +4,23 @@ import android.app.Application;
 import android.content.Context;
 
 import com.appcode.reactnativeapp.communication.CommPackage;
+import com.appcode.reactnativeapp.react.AppCodeReactApplication;
+import com.appcode.reactnativeapp.react.AppCodeReactNativeHost;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
+import com.facebook.react.bridge.JSIModulePackage;
 import com.facebook.soloader.SoLoader;
 import com.appcode.reactnativeapp.hotupdate.FileConstant;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application implements ReactApplication, AppCodeReactApplication {
 
   public static Context appContext;
   private static MainApplication instance;
@@ -64,9 +64,32 @@ public class MainApplication extends Application implements ReactApplication {
     }
   };
 
+  private final AppCodeReactNativeHost mAppCodeReactNativeHost = new AppCodeReactNativeHost(this) {
+    @Override
+    public boolean getUseDeveloperSupport() {
+      return BuildConfig.DEBUG;
+    }
+
+    @Override
+    protected List<ReactPackage> getPackages() {
+      return super.getPackages();
+    }
+
+    @androidx.annotation.Nullable
+    @Override
+    protected String getJSBundleFile() {
+      return super.getJSBundleFile();
+    }
+  };
+
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
+  }
+
+  @Override
+  public AppCodeReactNativeHost getAppCodeReactNativeHost() {
+    return mAppCodeReactNativeHost;
   }
 
   /**
