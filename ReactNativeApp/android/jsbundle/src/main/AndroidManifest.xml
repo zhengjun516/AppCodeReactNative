@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.appcode.jsbundle" >
+    <application>
+        <activity android:name="com.appcode.react.AppCodeReactActivity"></activity>
+        <activity android:name="com.facebook.react.MultipleJSBundleActivity"></activity>
+        <activity android:name="com.facebook.react.MultipleJSBundlePreloadActivity"
+            android:theme="@android:style/Theme.Translucent"
+            ></activity>
+
+    </application>
+</manifest>

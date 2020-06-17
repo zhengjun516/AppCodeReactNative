@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     >
     <Button
         android:id="@+id/btn_load"
@@ -23,7 +25,7 @@
         android:layout_below="@+id/btn_load"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="進入RN界面"
+        android:text="進入第一个RN界面"
         android:onClick="sendMsgToRN"
         android:textColor="@android:color/white"
         />
@@ -34,8 +36,28 @@
         android:layout_below="@+id/btn_go"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="向RN发消息"
-        android:onClick="sendMsgToRN"
+        android:text="进入第二个RN界面"
+        android:onClick="startAppCodeReactActivity"
         android:textColor="@android:color/white"
         />
-</RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="拆包方案界面"
+        android:onClick="jumpToMultipleActivity"
+        android:textColor="@android:color/white"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="拆包方案界面2"
+        android:onClick="jumpToMultipleActivity2"
+        android:textColor="@android:color/white"
+        />
+</LinearLayout>

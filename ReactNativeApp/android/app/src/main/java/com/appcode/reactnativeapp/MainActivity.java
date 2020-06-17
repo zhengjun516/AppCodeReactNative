@@ -15,7 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.appcode.jsbundle.GetReactPackageCallback;
+import com.appcode.jsbundle.JSBundle;
+import com.appcode.jsbundle.JSBundleSdk;
+import com.appcode.reactnativeapp.communication.CommPackage;
 import com.appcode.reactnativeapp.hotupdate.HotUpdate;
+import com.facebook.react.PackageList;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactPackage;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,9 +36,42 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        initReactInstance();
+
         setContentView(R.layout.activity_main);
-        registeReceiver();
+        //registeReceiver();
         checkPermissions();
+    }
+
+    private void initReactInstance() {
+        String appName = "ReactNativeApp";
+        /*JSBundle business = new JSBundle(appName, null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+            @Override
+            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
+                PackageList packageList = new PackageList(reactNativeHost);
+                packageList.getPackages().add(new CommPackage());
+                return packageList.getPackages();
+            }
+        });
+        JSBundleSdk.addJSBundle(business);*/
+
+        appName = "AppCodeReactNative";
+       JSBundle business2 = new JSBundle(appName, null, "business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+            @Override
+            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
+                PackageList packageList = new PackageList(reactNativeHost);
+                List<ReactPackage> reactPackages = packageList.getPackages();
+                reactPackages.add(new CommPackage());
+                return reactPackages;
+            }
+        });
+        JSBundleSdk.addJSBundle(business2);
+
+
+
+        JSBundleSdk.newAppCodeReactNativeHost(business2);
+        JSBundleSdk.initReactContext(appName);
     }
 
     public void checkPermissions(){
@@ -61,13 +103,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMsgToRN(View view) {
-
-        startActivity(new Intent(this, App1ReactActivity.class));
-
+        //startActivity(new Intent(this, App1ReactActivity.class));
+        String appName = "ReactNativeApp";
+        JSBundle jsBundle = new JSBundle(appName, null, "index.android.bundle",null,null, new GetReactPackageCallback() {
+            @Override
+            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
+                PackageList packageList = new PackageList(reactNativeHost);
+                packageList.getPackages().add(new CommPackage());
+                return packageList.getPackages();
+            }
+        });
+        JSBundleSdk.startJSBundle(jsBundle);
     }
 
     public void startAppCodeReactActivity(View view){
-        startActivity(new Intent(this, App2ReactActivity.class));
+        String appName = "ReactNativeApp";
+        JSBundle jsBundle = new JSBundle(appName, null, "index.bundle", new GetReactPackageCallback() {
+            @Override
+            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
+                PackageList packageList = new PackageList(reactNativeHost);
+                List<ReactPackage> reactPackages = packageList.getPackages();
+                reactPackages.add(new CommPackage());
+                return reactPackages;
+            }
+        });
+        JSBundleSdk.startJSBundle(jsBundle);
+    }
+
+    public void jumpToMultipleActivity(View view){
+        String appName = "ReactNativeApp";
+        JSBundleSdk.startJSBundle(appName);
+    }
+
+    public void jumpToMultipleActivity2(View view){
+        String appName = "AppCodeReactNative";
+        /**/
+        JSBundleSdk.startJSBundle(appName);
     }
 
     public class CompleteReceiver extends BroadcastReceiver {

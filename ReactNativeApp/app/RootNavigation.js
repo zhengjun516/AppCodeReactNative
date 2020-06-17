@@ -10,7 +10,7 @@ import UI from './ui/UI'
 import Widget from './widget/Widget'
 import Db from './db/Db'
 import NetWork from './network/NetWork'
-import WebView from './webview/WebView'
+import DefaultWebView from './webview/DefaultWebView'
 
 
 const Stack = createStackNavigator();
@@ -54,7 +54,7 @@ export default function StackNavigation(){
                     />
         	    <Stack.Screen
                     name="WebView"
-                    component={WebView}
+                    component={DefaultWebView}
                     options={{ headerShown: false }}
                     />
         		<Stack.Screen

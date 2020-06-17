@@ -1,77 +1,55 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet,ToastAndroid, DeviceEventEmitter,Text, TouchableOpacity,View,NativeModules} from 'react-native';
+import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
+
+import BaseRequest from './BaseRequest'
 
 export default class NetWork extends Component<Props> {
 
 	constructor(props){
 		super(props);
-		this.state={
-			text:"river",
-			text2:"默认",
-		}
+		this.state ={ isLoading: true}
 	}
 
 	componentDidMount():void{
-		DeviceEventEmitter.addListener("EventName",function(msg){
-			let rest = NativeModules.CommModule.MESSAGE;
-			ToastAndroid.show("DeviceEventEmitter收到消息："+ "\n" + rest+"\n"+msg, ToastAndroid.SHORT)
-		})
+	   BaseRequest.getData('https://facebook.github.io/react-native/movies.json')
+        .then((data)=>{
+             this.setState({
+                      isLoading: false,
+                      dataSource: data.movies,
+                    }, function(){
+
+                    });
+
+        })
+        .catch(error=>{
+          console.log(error);
+        })
 	}
 
-	_callPhone(){
-		NativeModules.CommModule.rnCallNative("18910389825");
-	}
 
-	_nativeCallJs(){
-		NativeModules.CommModule.nativeCallRn();
-	}
 
 
 
 	render() {
-	  	return(
-	  	<View style={styles.container}>
-        	<TouchableOpacity onPress={this._callPhone.bind(this)}>
-          		<Text style={styles.hello}>调用Native拨打电话</Text>
-        	</TouchableOpacity>
+	  	    if(this.state.isLoading){
+              return(
+                <View style={{flex: 1, padding: 20}}>
+                  <ActivityIndicator/>
+                </View>
+              )
+            }
 
-        	<TouchableOpacity onPress={this._nativeCallJs.bind(this)}>
-          		<Text style={styles.hello}>Native调用JS</Text>
-        	</TouchableOpacity>
+            return(
+                  <View style={{flex: 1, paddingTop:20}}>
+                    <FlatList
+                      data={this.state.dataSource}
+                      renderItem={({item}) => <Text>{item.title}, {item.releaseYear}</Text>}
+                      keyExtractor={(item, index) => item.id}
+                    />
+                  </View>
+            );
 
-        	<TouchableOpacity>
-          		<Text style={styles.hello}>{this.state.text2}</Text>
-        	</TouchableOpacity>
-
-        	<TouchableOpacity>
-          		<Text style={styles.hello}>{this.state.text2}</Text>
-        	</TouchableOpacity>
-      </View>
-	  	);
 	}
 }
 
 
-const styles = StyleSheet.create({
-  hello: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

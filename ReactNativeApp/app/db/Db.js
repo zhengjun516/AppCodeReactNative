@@ -1,77 +1,115 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet,ToastAndroid, DeviceEventEmitter,Text, TouchableOpacity,View,NativeModules} from 'react-native';
+import {Platform, StyleSheet,Button,Text,View,TextInput} from 'react-native';
+
+import StorageManager from './StorageManager'
 
 export default class Db extends Component<Props> {
 
 	constructor(props){
 		super(props);
-		this.state={
-			text:"river",
-			text2:"默认",
+		this.states={
+            userNameKey:"",
+            userNameValue:"",
+            saveSuccess:false,
+            text:'',
 		}
 	}
 
-	componentDidMount():void{
-		DeviceEventEmitter.addListener("EventName",function(msg){
-			let rest = NativeModules.CommModule.MESSAGE;
-			ToastAndroid.show("DeviceEventEmitter收到消息："+ "\n" + rest+"\n"+msg, ToastAndroid.SHORT)
-		})
+	createData(){
+       StorageManager.add(key,JSON.stringify(value))
+       .then((result)=>{
+            this.setState({
+                saveSuccess:true
+            })
+            console.log(result);
+       }).catch((error)=>{
+               console.log(error);
+       });
 	}
 
-	_callPhone(){
-		NativeModules.CommModule.rnCallNative("18910389825");
-	}
+    _getData(key){
 
-	_nativeCallJs(){
-		NativeModules.CommModule.nativeCallRn();
-	}
+    }
 
+    _updateData(key,value){
+        StorageManager.update(key,value)
+        .then((result)=>{
+            console.log(result);
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
 
+    _removeData(key){
+        StorageManager.remove(key)
+        .then((result)=>{
+           this.setState({
+                        userNameKey:key,
+                        userNameValue:result
+           })
+           console.log(result);
+        }).catch((error)=>{
+           console.log(error);
+        });
+    }
 
 	render() {
 	  	return(
 	  	<View style={styles.container}>
-        	<TouchableOpacity onPress={this._callPhone.bind(this)}>
-          		<Text style={styles.hello}>调用Native拨打电话</Text>
-        	</TouchableOpacity>
+	  	    <View style={styles.inputContainer}>
+	  	        <Text>key:</Text>
+                <TextInput
+                      style={{height: 40}}
+                      placeholder="Type here to translate!"
+                      onChangeText={(text) => this.setState({text})}
+                    />
+	  	    </View>
+	  	    <View style={styles.inputContainer}>
+            	  	        <Text>value:</Text>
+                            <TextInput
+                                  style={{height: 40}}
+                                  placeholder="Type here to translate!"
+                                  onChangeText={(text) => this.setState({text})}
+                                />
+           </View>
 
-        	<TouchableOpacity onPress={this._nativeCallJs.bind(this)}>
-          		<Text style={styles.hello}>Native调用JS</Text>
-        	</TouchableOpacity>
-
-        	<TouchableOpacity>
-          		<Text style={styles.hello}>{this.state.text2}</Text>
-        	</TouchableOpacity>
-
-        	<TouchableOpacity>
-          		<Text style={styles.hello}>{this.state.text2}</Text>
-        	</TouchableOpacity>
-      </View>
+           <View style={styles.buttonContainer}>
+            <Button
+              onPress={createData("userName1","haha")}
+              title="添加数据"
+            />
+            <Button
+              onPress={this._removeData("userName1").bind(this)}
+              title="删除数据"
+            />
+            <Button
+              onPress={this._updateData("userName1","haha1").bind(this)}
+              title="修改数据"
+            />
+            <Button
+              onPress={this._getData("userName1").bind(this)}
+              title="查看数据"
+            />
+            </View>
+        </View>
 	  	);
 	}
 }
 
 
 const styles = StyleSheet.create({
-  hello: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flexDirection:'column',
+    paddingTop:20,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  inputContainer:{
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
+    marginBottom:10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  buttonContainer:{
+    flexDirection:'row',
+    justifyContent:'space-around',
+  }
 });
