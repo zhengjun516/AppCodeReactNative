@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
+import com.appcode.jsbundle.JSBundleManager;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.jsbundle.OnJSBundleLoadListener;
 import com.facebook.react.bridge.ReactContext;
@@ -80,7 +81,7 @@ public class MultipleJSBundleActivity extends AppCompatActivity implements Defau
 	}
 
 	public void loadScript(OnJSBundleLoadListener onJSBundleLoadListener){
-		JSBundle  jsBundle = JSBundleSdk.getJSBundler(getMainComponentName());
+		JSBundle  jsBundle = JSBundleManager.getInstance().getJSBundle(getMainComponentName());
 		/*if(BuildConfig.DEBUG){
 			if(onJSBundleLoadListener != null){
 				onJSBundleLoadListener.onComplete(true,jsBundle);

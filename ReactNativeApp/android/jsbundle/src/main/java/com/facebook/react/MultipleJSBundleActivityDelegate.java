@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.appcode.jsbundle.JSBundleManager;
 import com.appcode.jsbundle.JSBundleSdk;
 
 
@@ -33,7 +34,7 @@ public class MultipleJSBundleActivityDelegate extends ReactActivityDelegate {
 		if(appCodeReactNativeHost != null){
 			return appCodeReactNativeHost;
 		}
-		return new MultipleReactNativeHost(JSBundleSdk.getJSBundler(getMainComponentName()),getPlainActivity().getApplication());
+		return new MultipleReactNativeHost(JSBundleManager.getInstance().getJSBundle(getMainComponentName()),getPlainActivity().getApplication());
 	}
 
 

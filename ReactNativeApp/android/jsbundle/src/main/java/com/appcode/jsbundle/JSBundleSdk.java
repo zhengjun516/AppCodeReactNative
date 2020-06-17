@@ -18,7 +18,7 @@ public class JSBundleSdk {
 
 	private  static Application sApplication;
 
-	private static Map<String,JSBundle> jsBundleMap = new HashMap<>();
+	//private static Map<String,JSBundle> jsBundleMap = new HashMap<>();
 
 	private static String mMainComponentName;
 
@@ -52,15 +52,15 @@ public class JSBundleSdk {
 	}
 
 	public static void addJSBundle(JSBundle jsBundle){
-		jsBundleMap.put(jsBundle.getMainComponentName(),jsBundle);
+		JSBundleManager.getInstance().addJSBundle(jsBundle);
 	}
 
 	public static JSBundle getJSBundler(String mainComponentName){
-		return jsBundleMap.get(mainComponentName);
+		return JSBundleManager.getInstance().getJSBundle(mainComponentName);
 	}
 
 	public static JSBundle removeJSBundler(String mainComponentName){
-		return jsBundleMap.remove(mainComponentName);
+		return JSBundleManager.getInstance().deleteJSBundle(mainComponentName);
 	}
 
 	public static JSBundle getCurrentBundle(){

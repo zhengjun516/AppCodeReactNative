@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
+import com.appcode.jsbundle.JSBundleManager;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.jsbundle.OnJSBundleLoadListener;
 import com.facebook.react.bridge.CatalystInstance;
@@ -20,7 +21,7 @@ public class MultipleJSBundlePreloadActivity extends Activity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		JSBundle jsBundle = JSBundleSdk.getJSBundler(getMainComponentName());
+		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundle(getMainComponentName());
 		ReactNativeHost appCodeReactNativeHost = JSBundleSdk.getAppCodeReactNativeHost(jsBundle.getMainComponentName());
 		mJsBridge = new JSBridge(appCodeReactNativeHost);
 
@@ -52,7 +53,7 @@ public class MultipleJSBundlePreloadActivity extends Activity {
 	}
 
 	public void loadScript(OnJSBundleLoadListener onJSBundleLoadListener){
-		JSBundle  jsBundle = JSBundleSdk.getJSBundler(getMainComponentName());
+		JSBundle  jsBundle = JSBundleManager.getInstance().getJSBundle(getMainComponentName());
 		mJsBridge.loadScriptFile(jsBundle,false);
 		if(onJSBundleLoadListener != null){
 			onJSBundleLoadListener.onComplete(true,jsBundle);
