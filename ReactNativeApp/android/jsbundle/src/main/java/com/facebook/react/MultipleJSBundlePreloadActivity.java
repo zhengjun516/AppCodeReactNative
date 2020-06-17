@@ -10,7 +10,6 @@ import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.jsbundle.OnJSBundleLoadListener;
-import com.appcode.react.AppCodeReactNativeHost;
 import com.facebook.react.bridge.CatalystInstance;
 import com.facebook.react.bridge.ReactContext;
 
@@ -22,7 +21,7 @@ public class MultipleJSBundlePreloadActivity extends Activity {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		JSBundle jsBundle = JSBundleSdk.getJSBundler(getMainComponentName());
-		AppCodeReactNativeHost appCodeReactNativeHost = JSBundleSdk.getAppCodeReactNativeHost(jsBundle.getMainComponentName());
+		ReactNativeHost appCodeReactNativeHost = JSBundleSdk.getAppCodeReactNativeHost(jsBundle.getMainComponentName());
 		mJsBridge = new JSBridge(appCodeReactNativeHost);
 
 		ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
@@ -67,7 +66,7 @@ public class MultipleJSBundlePreloadActivity extends Activity {
 		finish();
 	}
 
-	public CatalystInstance getCatalystInstance(AppCodeReactNativeHost appCodeReactNativeHost) {
+	public CatalystInstance getCatalystInstance(MultipleReactNativeHost appCodeReactNativeHost) {
 		ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
 
 		if (manager.getCurrentReactContext() == null) {

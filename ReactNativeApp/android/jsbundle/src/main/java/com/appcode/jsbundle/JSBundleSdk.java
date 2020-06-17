@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.text.TextUtils;
 import com.appcode.react.AppCodeReactNativeHost;
 import com.facebook.react.MultipleJSBundleActivity;
+import com.facebook.react.MultipleReactNativeHost;
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactNativeHost;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,19 +22,19 @@ public class JSBundleSdk {
 
 	private static String mMainComponentName;
 
-	private static Map<String,AppCodeReactNativeHost> appCodeReactNativeHostMap = new HashMap<>();
+	private static Map<String,ReactNativeHost> appCodeReactNativeHostMap = new HashMap<>();
 
 	public static void init(Application application){
 		sApplication = application;
 	}
 
 	public static void newAppCodeReactNativeHost(JSBundle jsBundle){
-		AppCodeReactNativeHost appCodeReactNativeHost = new AppCodeReactNativeHost(jsBundle,sApplication);
+		MultipleReactNativeHost appCodeReactNativeHost = new MultipleReactNativeHost(jsBundle,sApplication);
 		appCodeReactNativeHostMap.put(jsBundle.getMainComponentName(),appCodeReactNativeHost);
 	}
 
 	public static void initReactContext(String mainComponentName){
-		AppCodeReactNativeHost appCodeReactNativeHost = appCodeReactNativeHostMap.get(mainComponentName);
+		ReactNativeHost appCodeReactNativeHost = appCodeReactNativeHostMap.get(mainComponentName);
 		if(appCodeReactNativeHost != null){
 		 	ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
 		 	if(!manager.hasStartedCreatingInitialContext()){
@@ -41,7 +43,7 @@ public class JSBundleSdk {
 		}
 	}
 
-	public static AppCodeReactNativeHost getAppCodeReactNativeHost(String mainComponentName){
+	public static ReactNativeHost getAppCodeReactNativeHost(String mainComponentName){
 		return appCodeReactNativeHostMap.get(mainComponentName);
 	}
 

@@ -11,24 +11,23 @@ import com.appcode.jsbundle.JSBundle;
 import java.util.Collections;
 import java.util.List;
 
-public class AppCodeMultipleReactNativeHost extends ReactNativeHost {
+public class MultipleReactNativeHost extends ReactNativeHost {
 
 	JSBundle mJsBundle;
-
-	public AppCodeMultipleReactNativeHost(JSBundle jsBundle, Application application) {
+	public MultipleReactNativeHost(JSBundle jsBundle,Application application) {
 		super(application);
 		mJsBundle = jsBundle;
 	}
 
 	@Override
 	public boolean getUseDeveloperSupport() {
-		return BuildConfig.DEBUG;
+		return false;
 	}
 
 	@Override
 	protected List<ReactPackage> getPackages() {
 		if(mJsBundle.getGetReactPackageCallback() != null){
-		  return mJsBundle.getGetReactPackageCallback().getReactPackages(this);
+			return mJsBundle.getGetReactPackageCallback().getReactPackages(this);
 		}
 		return Collections.emptyList();
 	}
@@ -36,12 +35,18 @@ public class AppCodeMultipleReactNativeHost extends ReactNativeHost {
 	@Nullable
 	@Override
 	protected String getJSBundleFile() {
-		return TextUtils.isEmpty(mJsBundle.getJSBundleFile())?null:mJsBundle.getJSBundleFile();
+		if(mJsBundle.isSupportCommonJSBundle()){
+			return mJsBundle.getCommonJSBundleFile();
+		}
+		return mJsBundle.getJSBundleFile();
 	}
 
 	@Nullable
 	@Override
 	protected String getBundleAssetName() {
-		return TextUtils.isEmpty(mJsBundle.getBundleAssetName())?null:mJsBundle.getBundleAssetName();
+		if(mJsBundle.isSupportCoomonJSBundleAsset()){
+			return mJsBundle.getCommonJSBundleAssetName();
+		}
+		return mJsBundle.getBundleAssetName();
 	}
 }

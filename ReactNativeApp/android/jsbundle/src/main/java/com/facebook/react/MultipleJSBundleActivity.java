@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.appcode.jsbundle.BuildConfig;
 import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleSdk;

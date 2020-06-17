@@ -5,13 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.BuildConfig;
-import com.appcode.jsbundle.JSBridge;
-import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleSdk;
-import com.appcode.jsbundle.OnJSBundleLoadListener;
-import com.appcode.react.AppCodeReactNativeHost;
-import com.facebook.react.bridge.ReactContext;
 
 
 public class MultipleJSBundleActivityDelegate extends ReactActivityDelegate {
@@ -35,11 +29,11 @@ public class MultipleJSBundleActivityDelegate extends ReactActivityDelegate {
 
 	@Override
 	public ReactNativeHost getReactNativeHost() {
-		AppCodeReactNativeHost appCodeReactNativeHost = JSBundleSdk.getAppCodeReactNativeHost(getMainComponentName());
+		ReactNativeHost appCodeReactNativeHost = JSBundleSdk.getAppCodeReactNativeHost(getMainComponentName());
 		if(appCodeReactNativeHost != null){
 			return appCodeReactNativeHost;
 		}
-		return new AppCodeReactNativeHost(JSBundleSdk.getJSBundler(getMainComponentName()),getPlainActivity().getApplication());
+		return new MultipleReactNativeHost(JSBundleSdk.getJSBundler(getMainComponentName()),getPlainActivity().getApplication());
 	}
 
 
