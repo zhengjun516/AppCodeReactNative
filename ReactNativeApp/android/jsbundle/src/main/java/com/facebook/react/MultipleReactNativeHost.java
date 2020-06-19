@@ -1,11 +1,8 @@
 package com.facebook.react;
 
 import android.app.Application;
-import android.text.TextUtils;
-
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.BuildConfig;
 import com.appcode.jsbundle.JSBundle;
 
 import java.util.Collections;

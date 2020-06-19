@@ -2,7 +2,7 @@ package com.appcode.react;
 
 import androidx.annotation.Nullable;
 import com.appcode.jsbundle.JSBundle;
-import com.appcode.jsbundle.JSBundleSdk;
+import com.appcode.jsbundle.JSBundleManager;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 
@@ -16,7 +16,7 @@ public class AppCodeReactActivity extends ReactActivity {
 	@Nullable
 	@Override
 	protected String getMainComponentName() {
-		JSBundle jsBundle = JSBundleSdk.getCurrentBundle();
+		JSBundle jsBundle = JSBundleManager.getInstance().getStackTopJSBundle();
 
 		if(jsBundle == null){
 			finish();

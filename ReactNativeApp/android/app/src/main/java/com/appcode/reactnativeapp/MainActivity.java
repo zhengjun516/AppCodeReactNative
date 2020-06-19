@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initReactInstance() {
         String appName = "ReactNativeApp";
-        /*JSBundle business = new JSBundle(appName, null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+        JSBundle business = new JSBundle(appName, null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 return packageList.getPackages();
             }
         });
-        JSBundleSdk.addJSBundle(business);*/
+        JSBundleSdk.addJSBundle(business);
 
         appName = "AppCodeReactNative";
        JSBundle business2 = new JSBundle(appName, null, "business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
@@ -67,11 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         JSBundleSdk.addJSBundle(business2);
-
-
-
-        JSBundleSdk.newAppCodeReactNativeHost(business2);
-        JSBundleSdk.initReactContext(appName);
+        JSBundleSdk.initAllReactContext();
     }
 
     public void checkPermissions(){
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendMsgToRN(View view) {
         //startActivity(new Intent(this, App1ReactActivity.class));
         String appName = "ReactNativeApp";
-        JSBundle jsBundle = new JSBundle(appName, null, "index.android.bundle",null,null, new GetReactPackageCallback() {
+        JSBundle jsBundle = new JSBundle(appName, null, "index.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);

@@ -21,8 +21,8 @@ public class MultipleJSBundlePreloadActivity extends Activity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundle(getMainComponentName());
-		ReactNativeHost appCodeReactNativeHost = JSBundleSdk.getAppCodeReactNativeHost(jsBundle.getMainComponentName());
+		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
+		ReactNativeHost appCodeReactNativeHost = jsBundle.getReactNativeHost();
 		mJsBridge = new JSBridge(appCodeReactNativeHost);
 
 		ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
@@ -53,7 +53,7 @@ public class MultipleJSBundlePreloadActivity extends Activity {
 	}
 
 	public void loadScript(OnJSBundleLoadListener onJSBundleLoadListener){
-		JSBundle  jsBundle = JSBundleManager.getInstance().getJSBundle(getMainComponentName());
+		JSBundle  jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
 		mJsBridge.loadScriptFile(jsBundle,false);
 		if(onJSBundleLoadListener != null){
 			onJSBundleLoadListener.onComplete(true,jsBundle);
