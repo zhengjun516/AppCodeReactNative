@@ -49,13 +49,7 @@ public class JSBundle implements Serializable {
 	}
 
 	public JSBundle(String mainComponentName,boolean isPreload, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-		this.mIsPreload = isPreload;
-		this.mMainComponentName = mainComponentName;
-		this.mJSBundleFile = TextUtils.isEmpty(jSBundleFile)?null:jSBundleFile;
-		this.mJSBundleAssetName = TextUtils.isEmpty(jSBundleAssetName)?null:jSBundleAssetName;
-		this.mCommonJSBundleFile = null;
-		this.mGetReactPackageCallback = getReactPackageCallback;
-		mJSBundleType = JS_BUNDLE_TYPE_STANDARD;
+		this(mainComponentName,isPreload,jSBundleFile,jSBundleAssetName,null,null,getReactPackageCallback);
 	}
 
 	public JSBundle(String mainComponentName, String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
@@ -63,8 +57,8 @@ public class JSBundle implements Serializable {
 	}
 
 	public JSBundle(String mainComponentName, boolean isPreload,String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-		this.mIsPreload = isPreload;
 		this.mMainComponentName = mainComponentName;
+		this.mIsPreload = isPreload;
 		this.mJSBundleFile = TextUtils.isEmpty(jSBundleFile)?null:jSBundleFile;
 		this.mJSBundleAssetName = TextUtils.isEmpty(jSBundleAssetName)?null:jSBundleAssetName;
 		this.mCommonJSBundleFile = TextUtils.isEmpty(commonJSBundleFile)?null:commonJSBundleFile;
