@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initReactInstance() {
         String appName = "ReactNativeApp";
-        JSBundle business = new JSBundle(appName, null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+        JSBundle business = new JSBundle(appName, false,null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);

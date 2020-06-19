@@ -45,10 +45,10 @@ public class JSBundle implements Serializable {
 	private boolean mIsPreload;
 
 	public JSBundle(String mainComponentName, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-		this(true,mainComponentName,jSBundleFile,jSBundleAssetName,getReactPackageCallback);
+		this(mainComponentName,true,jSBundleFile,jSBundleAssetName,getReactPackageCallback);
 	}
 
-	public JSBundle(boolean isPreload,String mainComponentName, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+	public JSBundle(String mainComponentName,boolean isPreload, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
 		this.mIsPreload = isPreload;
 		this.mMainComponentName = mainComponentName;
 		this.mJSBundleFile = TextUtils.isEmpty(jSBundleFile)?null:jSBundleFile;
@@ -59,10 +59,10 @@ public class JSBundle implements Serializable {
 	}
 
 	public JSBundle(String mainComponentName, String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-          this(true,mainComponentName,jSBundleFile,jSBundleAssetName,commonJSBundleFile,commonJSBundleAssetName,getReactPackageCallback);
+          this(mainComponentName,true,jSBundleFile,jSBundleAssetName,commonJSBundleFile,commonJSBundleAssetName,getReactPackageCallback);
 	}
 
-	public JSBundle(boolean isPreload,String mainComponentName, String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+	public JSBundle(String mainComponentName, boolean isPreload,String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
 		this.mIsPreload = isPreload;
 		this.mMainComponentName = mainComponentName;
 		this.mJSBundleFile = TextUtils.isEmpty(jSBundleFile)?null:jSBundleFile;

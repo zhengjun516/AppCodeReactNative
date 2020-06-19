@@ -7,18 +7,14 @@ import android.view.KeyEvent;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
-import com.appcode.jsbundle.OnJSBundleLoadListener;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 
 public class MultipleJSBundleActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
 	private final ReactActivityDelegate mDelegate;
-	private JSBridge mJsBridge;
 
 	public MultipleJSBundleActivity() {
 		mDelegate = createReactActivityDelegate();
@@ -44,53 +40,8 @@ public class MultipleJSBundleActivity extends AppCompatActivity implements Defau
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//mDelegate.onCreate(savedInstanceState);
-		mJsBridge = new JSBridge(getReactNativeHost());
+		mDelegate.onCreate(savedInstanceState);
 
-		ReactInstanceManager manager = getReactNativeHost().getReactInstanceManager();
-		if(!manager.hasStartedCreatingInitialContext()){
-			manager.createReactContextInBackground();
-		}
-
-		if(mJsBridge.getCatalystInstance() == null){
-			manager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener(){
-				@Override
-				public void onReactContextInitialized(ReactContext context) {
-					loadScript(new OnJSBundleLoadListener() {
-						@Override
-						public void onComplete(boolean success, JSBundle jsBundle) {
-							mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
-
-							mDelegate.onCreate(savedInstanceState);
-						}
-					});
-					manager.removeReactInstanceEventListener(this);
-				}
-			});
-		}else{
-			loadScript(new OnJSBundleLoadListener() {
-				@Override
-				public void onComplete(boolean success, JSBundle jsBundle) {
-					mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
-					mDelegate.onCreate(savedInstanceState);
-				}
-			});
-		}
-	}
-
-	public void loadScript(OnJSBundleLoadListener onJSBundleLoadListener){
-		JSBundle  jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
-		/*if(BuildConfig.DEBUG){
-			if(onJSBundleLoadListener != null){
-				onJSBundleLoadListener.onComplete(true,jsBundle);
-			}
-			return;
-		}*/
-
-		mJsBridge.loadScriptFile(jsBundle,false);
-		if(onJSBundleLoadListener != null){
-			onJSBundleLoadListener.onComplete(true,jsBundle);
-		}
 	}
 
 	@Override

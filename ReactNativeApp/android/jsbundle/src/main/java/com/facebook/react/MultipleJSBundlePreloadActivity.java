@@ -9,9 +9,7 @@ import androidx.annotation.Nullable;
 import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
-import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.jsbundle.OnJSBundleLoadListener;
-import com.facebook.react.bridge.CatalystInstance;
 import com.facebook.react.bridge.ReactContext;
 
 public class MultipleJSBundlePreloadActivity extends Activity {
@@ -65,15 +63,6 @@ public class MultipleJSBundlePreloadActivity extends Activity {
 		intent.putExtras(getIntent());
 		startActivity(intent);
 		finish();
-	}
-
-	public CatalystInstance getCatalystInstance(MultipleReactNativeHost appCodeReactNativeHost) {
-		ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
-
-		if (manager.getCurrentReactContext() == null) {
-			return null;
-		}
-		return manager.getCurrentReactContext().getCatalystInstance();
 	}
 
 	public String getMainComponentName() {

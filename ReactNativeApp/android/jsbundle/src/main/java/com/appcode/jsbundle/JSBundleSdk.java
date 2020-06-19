@@ -3,8 +3,10 @@ package com.appcode.jsbundle;
 import android.app.Application;
 import android.content.Intent;
 
+import com.appcode.react.AppCodeReactActivity;
 import com.appcode.react.AppCodeReactNativeHost;
 import com.facebook.react.MultipleJSBundleActivity;
+import com.facebook.react.MultipleJSBundlePreloadActivity;
 import com.facebook.react.MultipleReactNativeHost;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -101,8 +103,12 @@ public class JSBundleSdk {
 		JSBundle jsBundle = getJSBundler(mainComponentName);
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
-
-			Intent intent = new Intent(sApplication, MultipleJSBundleActivity.class);
+			Intent intent;
+			if(jsBundle.isMultipleJSBundle()){
+				intent = new Intent(sApplication, MultipleJSBundlePreloadActivity.class);
+			}else{
+				intent = new Intent(sApplication, AppCodeReactActivity.class);
+			}
 			intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getMainComponentName());
 			intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 			sApplication.startActivity(intent);
