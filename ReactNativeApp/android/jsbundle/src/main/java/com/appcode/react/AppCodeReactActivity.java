@@ -17,12 +17,15 @@ public class AppCodeReactActivity extends ReactActivity {
 	@Override
 	protected String getMainComponentName() {
 		JSBundle jsBundle = JSBundleManager.getInstance().getStackTopJSBundle();
-
 		if(jsBundle == null){
 			finish();
 		}
 		return jsBundle.getMainComponentName();
 	}
 
-
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		JSBundleManager.getInstance().destroyStackTopJSbundle(getMainComponentName());
+	}
 }

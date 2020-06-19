@@ -74,8 +74,12 @@ public class JSBundleSdk {
 		JSBundleManager.getInstance().addJSBundle(jsBundle);
 	}
 
-	public static JSBundle getJSBundler(String mainComponentName){
-		return JSBundleManager.getInstance().getJSBundleFromMultiple(mainComponentName);
+	public static JSBundle getJSBundler(String mainComponentName,boolean isMultiple){
+		if(isMultiple){
+			return JSBundleManager.getInstance().getJSBundleFromMultiple(mainComponentName);
+		}else{
+			return JSBundleManager.getInstance().getJSBundleFromStandard(mainComponentName);
+		}
 	}
 
 	public static JSBundle removeJSBundler(String mainComponentName){
@@ -96,11 +100,11 @@ public class JSBundleSdk {
 				addJSBundle(jsBundle);
 			}
 		}
-		startJSBundle(jsBundle.getMainComponentName());
+		startJSBundle(jsBundle.getMainComponentName(),jsBundle.isMultipleJSBundle());
 	}
 
-	public static void startJSBundle(String mainComponentName){
-		JSBundle jsBundle = getJSBundler(mainComponentName);
+	public static void startJSBundle(String mainComponentName,boolean isMultiple){
+		JSBundle jsBundle = getJSBundler(mainComponentName,isMultiple);
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
 			Intent intent;

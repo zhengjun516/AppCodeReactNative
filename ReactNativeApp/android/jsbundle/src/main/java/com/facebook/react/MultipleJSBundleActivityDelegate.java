@@ -7,12 +7,8 @@ import androidx.annotation.Nullable;
 
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
-import com.appcode.jsbundle.JSBundleSdk;
-
 
 public class MultipleJSBundleActivityDelegate extends ReactActivityDelegate {
-
-
 
 	public MultipleJSBundleActivityDelegate(Activity activity, @Nullable String mainComponentName) {
 		super(activity, mainComponentName);
@@ -26,8 +22,6 @@ public class MultipleJSBundleActivityDelegate extends ReactActivityDelegate {
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 	}
-
-
 
 	@Override
 	public ReactNativeHost getReactNativeHost() {

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        initReactInstance();
+       // initReactInstance();
 
         setContentView(R.layout.activity_main);
         //registeReceiver();
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         JSBundleSdk.addJSBundle(business);
-
         appName = "AppCodeReactNative";
        JSBundle business2 = new JSBundle(appName, null, "business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startAppCodeReactActivity(View view){
-        String appName = "ReactNativeApp";
+        String appName = "AppCodeReactNative";
         JSBundle jsBundle = new JSBundle(appName, null, "index.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
@@ -128,13 +127,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void jumpToMultipleActivity(View view){
         String appName = "ReactNativeApp";
-        JSBundleSdk.startJSBundle(appName);
+        JSBundleSdk.startJSBundle(appName,true);
     }
 
     public void jumpToMultipleActivity2(View view){
         String appName = "AppCodeReactNative";
-        /**/
-        JSBundleSdk.startJSBundle(appName);
+        JSBundleSdk.startJSBundle(appName,true);
     }
 
     public class CompleteReceiver extends BroadcastReceiver {

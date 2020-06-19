@@ -2,6 +2,7 @@ package com.appcode.react;
 
 import androidx.annotation.Nullable;
 
+import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -16,7 +17,11 @@ public class AppCodeReactActivityDelegate extends ReactActivityDelegate {
 
 	@Override
 	public ReactNativeHost getReactNativeHost() {
-		return new AppCodeReactNativeHost(JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
+		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromStandard(getMainComponentName());
+		if(jsBundle.getReactNativeHost() != null){
+			return jsBundle.getReactNativeHost();
+		}
+		return new AppCodeReactNativeHost(JSBundleManager.getInstance().getJSBundleFromStandard(getMainComponentName()),getPlainActivity().getApplication());
 	}
 
 

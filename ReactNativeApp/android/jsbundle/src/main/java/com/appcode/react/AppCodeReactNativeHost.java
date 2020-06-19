@@ -24,7 +24,7 @@ public class AppCodeReactNativeHost extends ReactNativeHost {
 
 	@Override
 	public boolean getUseDeveloperSupport() {
-		return BuildConfig.DEBUG;
+		return false;
 	}
 
 	@Override

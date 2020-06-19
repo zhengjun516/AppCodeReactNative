@@ -30,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     JSBundleSdk.init(this);
   }
+/*
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -62,10 +63,11 @@ public class MainApplication extends Application implements ReactApplication {
       return "index";
     }
   };
+*/
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
+    return null;
   }
 
 
