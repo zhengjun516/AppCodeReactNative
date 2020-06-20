@@ -3,7 +3,7 @@ package com.appcode.reactnativeapp;
 import android.app.Application;
 import android.content.Context;
 
-import com.appcode.jsbundle.JSAppSdk;
+import com.appcode.jsapp.JSAppSdk;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.soloader.SoLoader;

@@ -14,7 +14,7 @@
  * <U>Description:</U>  Update description
  * </PRE>
  */
-package com.appcode.jsbundle;
+package com.appcode.jsapp;
 
 import android.util.Log;
 

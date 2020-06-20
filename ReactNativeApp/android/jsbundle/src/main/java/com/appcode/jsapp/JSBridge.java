@@ -1,4 +1,4 @@
-package com.appcode.jsbundle;
+package com.appcode.jsapp;
 
 import android.content.Context;
 import android.text.TextUtils;

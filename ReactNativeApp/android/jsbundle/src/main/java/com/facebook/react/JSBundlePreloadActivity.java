@@ -6,10 +6,10 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.JSBridge;
-import com.appcode.jsbundle.JSApp;
-import com.appcode.jsbundle.JSAppManager;
-import com.appcode.jsbundle.OnJSAppLoadListener;
+import com.appcode.jsapp.JSBridge;
+import com.appcode.jsapp.JSApp;
+import com.appcode.jsapp.JSAppManager;
+import com.appcode.jsapp.OnJSAppLoadListener;
 import com.facebook.react.bridge.ReactContext;
 
 public class JSBundlePreloadActivity extends Activity {

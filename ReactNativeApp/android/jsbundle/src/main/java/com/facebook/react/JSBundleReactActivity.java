@@ -7,8 +7,8 @@ import android.view.KeyEvent;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.appcode.jsbundle.JSApp;
-import com.appcode.jsbundle.JSAppManager;
+import com.appcode.jsapp.JSApp;
+import com.appcode.jsapp.JSAppManager;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;

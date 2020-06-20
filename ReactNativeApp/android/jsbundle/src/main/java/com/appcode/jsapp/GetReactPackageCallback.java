@@ -1,4 +1,4 @@
-package com.appcode.jsbundle;
+package com.appcode.jsapp;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;

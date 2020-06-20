@@ -1,4 +1,4 @@
-package com.appcode.jsbundle;
+package com.appcode.jsapp;
 
 import java.util.HashMap;
 import java.util.Map;

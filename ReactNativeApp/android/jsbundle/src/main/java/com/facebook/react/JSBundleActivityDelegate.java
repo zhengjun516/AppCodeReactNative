@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.JSApp;
-import com.appcode.jsbundle.JSAppManager;
+import com.appcode.jsapp.JSApp;
+import com.appcode.jsapp.JSAppManager;
 
 public class JSBundleActivityDelegate extends ReactActivityDelegate {
 

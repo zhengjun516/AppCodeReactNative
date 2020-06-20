@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.appcode.jsbundle.GetReactPackageCallback;
-import com.appcode.jsbundle.JSApp;
-import com.appcode.jsbundle.JSAppSdk;
+import com.appcode.jsapp.GetReactPackageCallback;
+import com.appcode.jsapp.JSApp;
+import com.appcode.jsapp.JSAppSdk;
 import com.appcode.reactnativeapp.communication.CommPackage;
 import com.appcode.reactnativeapp.hotupdate.HotUpdate;
 import com.facebook.react.PackageList;

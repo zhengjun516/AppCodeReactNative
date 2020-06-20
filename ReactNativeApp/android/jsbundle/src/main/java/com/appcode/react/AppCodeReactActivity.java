@@ -1,8 +1,8 @@
 package com.appcode.react;
 
 import androidx.annotation.Nullable;
-import com.appcode.jsbundle.JSApp;
-import com.appcode.jsbundle.JSAppManager;
+import com.appcode.jsapp.JSApp;
+import com.appcode.jsapp.JSAppManager;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 

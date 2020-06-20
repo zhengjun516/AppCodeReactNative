@@ -3,7 +3,7 @@ package com.facebook.react;
 import android.app.Application;
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.JSApp;
+import com.appcode.jsapp.JSApp;
 
 import java.util.Collections;
 import java.util.List;

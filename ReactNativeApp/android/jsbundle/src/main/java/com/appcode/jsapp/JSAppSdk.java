@@ -1,4 +1,4 @@
-package com.appcode.jsbundle;
+package com.appcode.jsapp;
 
 import android.app.Application;
 import android.content.Intent;
