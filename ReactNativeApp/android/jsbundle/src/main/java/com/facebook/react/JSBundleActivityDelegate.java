@@ -8,13 +8,13 @@ import androidx.annotation.Nullable;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
 
-public class MultipleJSBundleActivityDelegate extends ReactActivityDelegate {
+public class JSBundleActivityDelegate extends ReactActivityDelegate {
 
-	public MultipleJSBundleActivityDelegate(Activity activity, @Nullable String mainComponentName) {
+	public JSBundleActivityDelegate(Activity activity, @Nullable String mainComponentName) {
 		super(activity, mainComponentName);
 	}
 
-	public MultipleJSBundleActivityDelegate(ReactActivity activity, @Nullable String mainComponentName) {
+	public JSBundleActivityDelegate(ReactActivity activity, @Nullable String mainComponentName) {
 		super(activity, mainComponentName);
 	}
 
@@ -29,7 +29,7 @@ public class MultipleJSBundleActivityDelegate extends ReactActivityDelegate {
 		if(jsBundle.getReactNativeHost() != null){
 			return jsBundle.getReactNativeHost();
 		}
-		return new MultipleReactNativeHost(JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
+		return new JSBundleReactNativeHost(JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
 	}
 
 

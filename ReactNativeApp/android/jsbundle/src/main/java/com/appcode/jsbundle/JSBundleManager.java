@@ -35,10 +35,10 @@ public class JSBundleManager {
 	}
 
 	public boolean hasStandardJSBundle(JSBundle jsBundle){
-		return hasStandardJSBundle(jsBundle.getMainComponentName());
+		return hasStandardJSBundle(jsBundle.getDefaultMainComponentName());
 	}
 	public boolean hasMultipleJSBundle(JSBundle jsBundle){
-		return hasMultipleJSBundle(jsBundle.getMainComponentName());
+		return hasMultipleJSBundle(jsBundle.getDefaultMainComponentName());
 	}
 
 	public boolean hasStandardJSBundle(String mainComonentname){
@@ -51,9 +51,9 @@ public class JSBundleManager {
 
 	public void addJSBundle(JSBundle jsBundle){
 		if(jsBundle.isMultipleJSBundle()){
-			mMultipleJSBundleMap.put(jsBundle.getMainComponentName(),jsBundle);
+			mMultipleJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
 		}else{
-			mStandardJSBundleMap.put(jsBundle.getMainComponentName(),jsBundle);
+			mStandardJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
 		}
 	}
 
@@ -66,14 +66,14 @@ public class JSBundleManager {
 	}
 
 	public JSBundle deleteJSBundleFromStandard(JSBundle jsBundle){
-		return deleteJSBundleFromStandard(jsBundle.getMainComponentName());
+		return deleteJSBundleFromStandard(jsBundle.getDefaultMainComponentName());
 	}
 	public JSBundle deleteJSBundleFromStandard(String mainComonentname){
 		return mStandardJSBundleMap.remove(mainComonentname);
 	}
 
 	public JSBundle deleteJSBundleFromMultiple(JSBundle jsBundle){
-		return deleteJSBundleFromMultiple(jsBundle.getMainComponentName());
+		return deleteJSBundleFromMultiple(jsBundle.getDefaultMainComponentName());
 	}
 
 	public JSBundle deleteJSBundleFromMultiple(String mainComonentname){

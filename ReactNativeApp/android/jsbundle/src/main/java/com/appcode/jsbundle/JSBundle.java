@@ -4,7 +4,10 @@ import android.text.TextUtils;
 
 import com.facebook.react.ReactNativeHost;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 public class JSBundle implements Serializable {
 
@@ -13,10 +16,17 @@ public class JSBundle implements Serializable {
 	public static final int JS_BUNDLE_TYPE_STANDARD = 1;
 	public static final int JS_BUNDLE_TYPE_MULTIPLE = 2;
 
+	private File mAppFilePath;
+
+	/**小程序名*/
+	private String mAppName;
+	private String mPackageName;
 	/**
 	* 入口组件名
 	*/
-	private String mMainComponentName;
+	private List<String> mMainComponentNames;
+
+	private String mDefaultMainComponentName;
 	/**
 	 *bundle文件
 	 */
@@ -44,20 +54,39 @@ public class JSBundle implements Serializable {
 
 	private boolean mIsPreload;
 
-	public JSBundle(String mainComponentName, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-		this(mainComponentName,true,jSBundleFile,jSBundleAssetName,getReactPackageCallback);
+	public JSBundle(File appFilePath){
+		mAppFilePath = appFilePath;
 	}
 
-	public JSBundle(String mainComponentName,boolean isPreload, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-		this(mainComponentName,isPreload,jSBundleFile,jSBundleAssetName,null,null,getReactPackageCallback);
+	public JSBundle(String appName,String packageName,String mainComponentName, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+		this(appName,packageName,mainComponentName,false,jSBundleFile,jSBundleAssetName,getReactPackageCallback);
 	}
 
-	public JSBundle(String mainComponentName, String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-          this(mainComponentName,true,jSBundleFile,jSBundleAssetName,commonJSBundleFile,commonJSBundleAssetName,getReactPackageCallback);
+	public JSBundle(String appName,String packageName,List<String> mainComponentNames,String defaultMainComponentName, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+		this(appName,packageName,mainComponentNames,defaultMainComponentName,false,jSBundleFile,jSBundleAssetName,null,null,getReactPackageCallback);
 	}
 
-	public JSBundle(String mainComponentName, boolean isPreload,String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
-		this.mMainComponentName = mainComponentName;
+	public JSBundle(String appName,String packageName,String mainComponentName,boolean isPreload, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+		this(appName,packageName,Arrays.asList(mainComponentName),mainComponentName,isPreload,jSBundleFile,jSBundleAssetName,getReactPackageCallback);
+	}
+
+	public JSBundle(String appName,String packageName,List<String> mainComponentNames,String defaultMainComponentName,boolean isPreload, String jSBundleFile, String jSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+		this(appName,packageName,mainComponentNames,defaultMainComponentName,isPreload,jSBundleFile,jSBundleAssetName,null,null,getReactPackageCallback);
+	}
+
+	public JSBundle(String appName,String packageName,String mainComponentName, String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+          this(appName,packageName,Arrays.asList(mainComponentName),mainComponentName,false,jSBundleFile,jSBundleAssetName,commonJSBundleFile,commonJSBundleAssetName,getReactPackageCallback);
+	}
+
+	public JSBundle(String appName,String packageName,String mainComponentName, boolean isPreload,String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+		this(appName,packageName,Arrays.asList(mainComponentName),mainComponentName,isPreload,jSBundleFile,jSBundleAssetName,commonJSBundleFile,commonJSBundleAssetName,getReactPackageCallback);
+	}
+
+	public JSBundle(String appName,String packageName,List<String> mainComponentNames, String defaultMainComponentName,boolean isPreload,String jSBundleFile, String jSBundleAssetName,String commonJSBundleFile,String commonJSBundleAssetName,GetReactPackageCallback getReactPackageCallback) {
+		this.mAppName = appName;
+		this.mPackageName = packageName;
+		this.mMainComponentNames = mainComponentNames;
+		this.mDefaultMainComponentName = defaultMainComponentName;
 		this.mIsPreload = isPreload;
 		this.mJSBundleFile = TextUtils.isEmpty(jSBundleFile)?null:jSBundleFile;
 		this.mJSBundleAssetName = TextUtils.isEmpty(jSBundleAssetName)?null:jSBundleAssetName;
@@ -105,12 +134,12 @@ public class JSBundle implements Serializable {
 		return true;
 	}
 
-	public String getMainComponentName() {
-		return mMainComponentName;
+	public String getDefaultMainComponentName() {
+		return mDefaultMainComponentName;
 	}
 
-	public void setMainComponentName(String mMainComponentName) {
-		this.mMainComponentName = mMainComponentName;
+	public void setDefaultMainComponentName(String defaultMainComponentName) {
+		this.mDefaultMainComponentName = defaultMainComponentName;
 	}
 
 	public String getJSBundleFile() {

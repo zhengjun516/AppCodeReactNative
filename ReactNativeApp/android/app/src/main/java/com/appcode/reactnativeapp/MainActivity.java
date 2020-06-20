@@ -24,6 +24,7 @@ import com.facebook.react.PackageList;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-       // initReactInstance();
+        initReactInstance();
 
         setContentView(R.layout.activity_main);
         //registeReceiver();
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initReactInstance() {
         String appName = "ReactNativeApp";
-        JSBundle business = new JSBundle(appName, false,null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+        JSBundle business = new JSBundle("multipleApp","assets.multiple01",appName, false,null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
         JSBundleSdk.addJSBundle(business);
         appName = "AppCodeReactNative";
-       JSBundle business2 = new JSBundle(appName, null, "business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+       JSBundle business2 = new JSBundle("multipleApp", "assets.multiple01", appName,false,null,"business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendMsgToRN(View view) {
         //startActivity(new Intent(this, App1ReactActivity.class));
         String appName = "ReactNativeApp";
-        JSBundle jsBundle = new JSBundle(appName, null, "index.android.bundle", new GetReactPackageCallback() {
+        JSBundle jsBundle = new JSBundle("simpleApp01", "assets.simple01",appName,null, "index.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -112,8 +113,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startAppCodeReactActivity(View view){
-        String appName = "AppCodeReactNative";
-        JSBundle jsBundle = new JSBundle(appName, null, "index.bundle", new GetReactPackageCallback() {
+        String appName = "ReactNativeApp";
+        List<String> mainCompnentNames = new ArrayList<>();
+        mainCompnentNames.add("AppCodeReactNative");
+        mainCompnentNames.add("ReactNativeApp");
+        JSBundle jsBundle = new JSBundle("simpleApp02","assets.simple02",mainCompnentNames, appName, null, "index.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);

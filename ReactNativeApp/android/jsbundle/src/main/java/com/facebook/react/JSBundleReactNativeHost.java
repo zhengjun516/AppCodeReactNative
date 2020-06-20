@@ -8,10 +8,10 @@ import com.appcode.jsbundle.JSBundle;
 import java.util.Collections;
 import java.util.List;
 
-public class MultipleReactNativeHost extends ReactNativeHost {
+public class JSBundleReactNativeHost extends ReactNativeHost {
 
 	JSBundle mJsBundle;
-	public MultipleReactNativeHost(JSBundle jsBundle,Application application) {
+	public JSBundleReactNativeHost(JSBundle jsBundle, Application application) {
 		super(application);
 		mJsBundle = jsBundle;
 	}

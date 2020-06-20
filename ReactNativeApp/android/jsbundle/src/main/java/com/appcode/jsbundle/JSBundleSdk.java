@@ -5,9 +5,8 @@ import android.content.Intent;
 
 import com.appcode.react.AppCodeReactActivity;
 import com.appcode.react.AppCodeReactNativeHost;
-import com.facebook.react.MultipleJSBundleActivity;
-import com.facebook.react.MultipleJSBundlePreloadActivity;
-import com.facebook.react.MultipleReactNativeHost;
+import com.facebook.react.JSBundlePreloadActivity;
+import com.facebook.react.JSBundleReactNativeHost;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 
@@ -18,8 +17,6 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 public class JSBundleSdk {
 
 	private  static Application sApplication;
-
-	//private static Map<String,ReactNativeHost> appCodeReactNativeHostMap = new HashMap<>();
 
 	public static void init(Application application){
 		sApplication = application;
@@ -56,17 +53,17 @@ public class JSBundleSdk {
 	public static void addJSBundle(JSBundle jsBundle){
 		if(jsBundle.isMultipleJSBundle()){
 			if(JSBundleManager.getInstance().hasMultipleJSBundle(jsBundle)){
-				throw new RuntimeException("复合组件："+jsBundle.getMainComponentName()+"已经存在,不能重复添加");
+				throw new RuntimeException("复合组件："+jsBundle.getDefaultMainComponentName()+"已经存在,不能重复添加");
 			}
 		}else{
 			if(JSBundleManager.getInstance().hasStandardJSBundle(jsBundle)){
-				throw new RuntimeException("独立组件："+jsBundle.getMainComponentName()+" 已经存在,不能重复添加");
+				throw new RuntimeException("独立组件："+jsBundle.getDefaultMainComponentName()+" 已经存在,不能重复添加");
 			}
 		}
 
 		ReactNativeHost reactNativeHost;
 		if(jsBundle.isMultipleJSBundle()){
-			reactNativeHost = new MultipleReactNativeHost(jsBundle,sApplication);
+			reactNativeHost = new JSBundleReactNativeHost(jsBundle,sApplication);
 		}else{
 			reactNativeHost = new AppCodeReactNativeHost(jsBundle,sApplication);
 		}
@@ -100,7 +97,7 @@ public class JSBundleSdk {
 				addJSBundle(jsBundle);
 			}
 		}
-		startJSBundle(jsBundle.getMainComponentName(),jsBundle.isMultipleJSBundle());
+		startJSBundle(jsBundle.getDefaultMainComponentName(),jsBundle.isMultipleJSBundle());
 	}
 
 	public static void startJSBundle(String mainComponentName,boolean isMultiple){
@@ -109,15 +106,14 @@ public class JSBundleSdk {
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
 			Intent intent;
 			if(jsBundle.isMultipleJSBundle()){
-				intent = new Intent(sApplication, MultipleJSBundlePreloadActivity.class);
+				intent = new Intent(sApplication, JSBundlePreloadActivity.class);
 			}else{
 				intent = new Intent(sApplication, AppCodeReactActivity.class);
 			}
-			intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getMainComponentName());
+			intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
 			intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 			sApplication.startActivity(intent);
 		}
 	}
-
 
 }

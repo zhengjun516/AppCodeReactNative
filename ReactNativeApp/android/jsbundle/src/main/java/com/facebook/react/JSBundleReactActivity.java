@@ -13,13 +13,11 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 
-public class MultipleJSBundleActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
-	private final ReactActivityDelegate mDelegate;
+public class JSBundleReactActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
+	private  ReactActivityDelegate mDelegate;
+	public JSBundleReactActivity() {
 
-	public MultipleJSBundleActivity() {
-		mDelegate = createReactActivityDelegate();
 	}
-
 	/**
 	 * Returns the name of the main component registered from JavaScript. This is used to schedule
 	 * rendering of the component. e.g. "MoviesApp"
@@ -29,19 +27,21 @@ public class MultipleJSBundleActivity extends AppCompatActivity implements Defau
 		if(jsBundle == null){
 			finish();
 		}
-		return jsBundle.getMainComponentName();
+		return jsBundle.getDefaultMainComponentName();
 	}
 
 	/** Called at construction time, override if you have a custom delegate implementation. */
 	public ReactActivityDelegate createReactActivityDelegate() {
-		return new MultipleJSBundleActivityDelegate(this, getMainComponentName());
+		return new JSBundleActivityDelegate(this, getMainComponentName());
 	}
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mDelegate.onCreate(savedInstanceState);
+		mDelegate = createReactActivityDelegate();
 
+		mDelegate.onCreate(savedInstanceState);
 	}
 
 	@Override
