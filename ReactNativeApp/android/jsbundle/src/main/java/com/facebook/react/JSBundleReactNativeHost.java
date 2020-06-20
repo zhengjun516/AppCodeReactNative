@@ -3,15 +3,15 @@ package com.facebook.react;
 import android.app.Application;
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.JSBundle;
+import com.appcode.jsbundle.JSApp;
 
 import java.util.Collections;
 import java.util.List;
 
 public class JSBundleReactNativeHost extends ReactNativeHost {
 
-	JSBundle mJsBundle;
-	public JSBundleReactNativeHost(JSBundle jsBundle, Application application) {
+	JSApp mJsBundle;
+	public JSBundleReactNativeHost(JSApp jsBundle, Application application) {
 		super(application);
 		mJsBundle = jsBundle;
 	}

@@ -4,40 +4,40 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class JSBundleManager {
-	public static JSBundleManager instance;
+public class JSAppManager {
+	public static JSAppManager instance;
 
-	private Map<String,JSBundle> mStandardJSBundleMap = new HashMap<>();
-	private Map<String,JSBundle> mMultipleJSBundleMap = new HashMap<>();
+	private Map<String, JSApp> mStandardJSBundleMap = new HashMap<>();
+	private Map<String, JSApp> mMultipleJSBundleMap = new HashMap<>();
 
-	private LinkedBlockingDeque<JSBundle> mJsBundlelinkedBlockingDeque = new LinkedBlockingDeque<>();
+	private LinkedBlockingDeque<JSApp> mJsBundlelinkedBlockingDeque = new LinkedBlockingDeque<>();
 
-	private JSBundleManager(){
+	private JSAppManager(){
 
 	}
-	public static JSBundleManager getInstance(){
+	public static JSAppManager getInstance(){
 		if(instance == null){
-			synchronized (JSBundleManager.class){
+			synchronized (JSAppManager.class){
 				if(instance == null){
-					instance = new JSBundleManager();
+					instance = new JSAppManager();
 				}
 			}
 		}
 		return instance;
 	}
 
-	public Map<String, JSBundle> getStandardJSBundleMap() {
+	public Map<String, JSApp> getStandardJSBundleMap() {
 		return mStandardJSBundleMap;
 	}
 
-	public Map<String, JSBundle> getMultipleJSBundleMap() {
+	public Map<String, JSApp> getMultipleJSBundleMap() {
 		return mMultipleJSBundleMap;
 	}
 
-	public boolean hasStandardJSBundle(JSBundle jsBundle){
+	public boolean hasStandardJSBundle(JSApp jsBundle){
 		return hasStandardJSBundle(jsBundle.getDefaultMainComponentName());
 	}
-	public boolean hasMultipleJSBundle(JSBundle jsBundle){
+	public boolean hasMultipleJSBundle(JSApp jsBundle){
 		return hasMultipleJSBundle(jsBundle.getDefaultMainComponentName());
 	}
 
@@ -49,7 +49,7 @@ public class JSBundleManager {
 		return mMultipleJSBundleMap.containsKey(mainComonentname);
 	}
 
-	public void addJSBundle(JSBundle jsBundle){
+	public void addJSBundle(JSApp jsBundle){
 		if(jsBundle.isMultipleJSBundle()){
 			mMultipleJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
 		}else{
@@ -57,34 +57,34 @@ public class JSBundleManager {
 		}
 	}
 
-	public JSBundle getJSBundleFromStandard(String mainComonentname){
+	public JSApp getJSBundleFromStandard(String mainComonentname){
 		return mStandardJSBundleMap.get(mainComonentname);
 	}
 
-	public JSBundle getJSBundleFromMultiple(String mainComonentname){
+	public JSApp getJSBundleFromMultiple(String mainComonentname){
 		return mMultipleJSBundleMap.get(mainComonentname);
 	}
 
-	public JSBundle deleteJSBundleFromStandard(JSBundle jsBundle){
+	public JSApp deleteJSBundleFromStandard(JSApp jsBundle){
 		return deleteJSBundleFromStandard(jsBundle.getDefaultMainComponentName());
 	}
-	public JSBundle deleteJSBundleFromStandard(String mainComonentname){
+	public JSApp deleteJSBundleFromStandard(String mainComonentname){
 		return mStandardJSBundleMap.remove(mainComonentname);
 	}
 
-	public JSBundle deleteJSBundleFromMultiple(JSBundle jsBundle){
+	public JSApp deleteJSBundleFromMultiple(JSApp jsBundle){
 		return deleteJSBundleFromMultiple(jsBundle.getDefaultMainComponentName());
 	}
 
-	public JSBundle deleteJSBundleFromMultiple(String mainComonentname){
+	public JSApp deleteJSBundleFromMultiple(String mainComonentname){
 		return mMultipleJSBundleMap.remove(mainComonentname);
 	}
 
-	public void addJSBundleToStackTop(JSBundle jsBundle){
+	public void addJSBundleToStackTop(JSApp jsBundle){
 		mJsBundlelinkedBlockingDeque.offer(jsBundle);
 	}
 
-	public JSBundle getStackTopJSBundle(){
+	public JSApp getStackTopJSBundle(){
 		return mJsBundlelinkedBlockingDeque.peekFirst();
 	}
 

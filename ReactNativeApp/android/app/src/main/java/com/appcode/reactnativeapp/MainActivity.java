@@ -16,8 +16,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.appcode.jsbundle.GetReactPackageCallback;
-import com.appcode.jsbundle.JSBundle;
-import com.appcode.jsbundle.JSBundleSdk;
+import com.appcode.jsbundle.JSApp;
+import com.appcode.jsbundle.JSAppSdk;
 import com.appcode.reactnativeapp.communication.CommPackage;
 import com.appcode.reactnativeapp.hotupdate.HotUpdate;
 import com.facebook.react.PackageList;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initReactInstance() {
         String appName = "ReactNativeApp";
-        JSBundle business = new JSBundle("multipleApp","assets.multiple01",appName, false,null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+        JSApp business = new JSApp("multipleApp","assets.multiple01",appName, false,null, "business.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 return packageList.getPackages();
             }
         });
-        JSBundleSdk.addJSBundle(business);
+        JSAppSdk.addJSBundle(business);
         appName = "AppCodeReactNative";
-       JSBundle business2 = new JSBundle("multipleApp", "assets.multiple01", appName,false,null,"business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
+       JSApp business2 = new JSApp("multipleApp", "assets.multiple01", appName,false,null,"business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 return reactPackages;
             }
         });
-        JSBundleSdk.addJSBundle(business2);
-        JSBundleSdk.initAllReactContext();
+        JSAppSdk.addJSBundle(business2);
+        JSAppSdk.initAllReactContext();
     }
 
     public void checkPermissions(){
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendMsgToRN(View view) {
         //startActivity(new Intent(this, App1ReactActivity.class));
         String appName = "ReactNativeApp";
-        JSBundle jsBundle = new JSBundle("simpleApp01", "assets.simple01",appName,null, "index.android.bundle", new GetReactPackageCallback() {
+        JSApp jsBundle = new JSApp("simpleApp01", "assets.simple01",appName,null, "index.android.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 return packageList.getPackages();
             }
         });
-        JSBundleSdk.startJSBundle(jsBundle);
+        JSAppSdk.startJSBundle(jsBundle);
     }
 
     public void startAppCodeReactActivity(View view){
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> mainCompnentNames = new ArrayList<>();
         mainCompnentNames.add("AppCodeReactNative");
         mainCompnentNames.add("ReactNativeApp");
-        JSBundle jsBundle = new JSBundle("simpleApp02","assets.simple02",mainCompnentNames, appName, null, "index.bundle", new GetReactPackageCallback() {
+        JSApp jsBundle = new JSApp("simpleApp02","assets.simple02",mainCompnentNames, appName, null, "index.bundle", new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -126,17 +126,17 @@ public class MainActivity extends AppCompatActivity {
                 return reactPackages;
             }
         });
-        JSBundleSdk.startJSBundle(jsBundle);
+        JSAppSdk.startJSBundle(jsBundle);
     }
 
     public void jumpToMultipleActivity(View view){
         String appName = "ReactNativeApp";
-        JSBundleSdk.startJSBundle(appName,true);
+        JSAppSdk.startJSBundle(appName,true);
     }
 
     public void jumpToMultipleActivity2(View view){
         String appName = "AppCodeReactNative";
-        JSBundleSdk.startJSBundle(appName,true);
+        JSAppSdk.startJSBundle(appName,true);
     }
 
     public class CompleteReceiver extends BroadcastReceiver {

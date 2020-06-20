@@ -5,8 +5,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.BuildConfig;
-import com.appcode.jsbundle.JSBundle;
+import com.appcode.jsbundle.JSApp;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 
@@ -15,9 +14,9 @@ import java.util.List;
 
 public class AppCodeReactNativeHost extends ReactNativeHost {
 
-	JSBundle mJsBundle;
+	JSApp mJsBundle;
 
-	public AppCodeReactNativeHost(JSBundle jsBundle, Application application) {
+	public AppCodeReactNativeHost(JSApp jsBundle, Application application) {
 		super(application);
 		mJsBundle = jsBundle;
 	}

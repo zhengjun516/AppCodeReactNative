@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.JSBundle;
-import com.appcode.jsbundle.JSBundleManager;
+import com.appcode.jsbundle.JSApp;
+import com.appcode.jsbundle.JSAppManager;
 
 public class JSBundleActivityDelegate extends ReactActivityDelegate {
 
@@ -25,11 +25,11 @@ public class JSBundleActivityDelegate extends ReactActivityDelegate {
 
 	@Override
 	public ReactNativeHost getReactNativeHost() {
-		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
+		JSApp jsBundle = JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
 		if(jsBundle.getReactNativeHost() != null){
 			return jsBundle.getReactNativeHost();
 		}
-		return new JSBundleReactNativeHost(JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
+		return new JSBundleReactNativeHost(JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
 	}
 
 

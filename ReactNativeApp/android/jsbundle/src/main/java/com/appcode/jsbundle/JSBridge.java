@@ -29,11 +29,11 @@ public class JSBridge {
 		return  reactContext.getCatalystInstance();
 	}
 
-	public void loadScriptFile(JSBundle jsBundle,boolean loadSynchronously){
+	public void loadScriptFile(JSApp jsBundle, boolean loadSynchronously){
 		if(!TextUtils.isEmpty(jsBundle.getJSBundleFile())){
 			loadScriptFromFile(jsBundle.getJSBundleFile(),jsBundle.getJSBundleFile(),loadSynchronously);
 		}else{
-			loadScriptFromAsset(JSBundleSdk.getApplication(),jsBundle.getBundleAssetName(),loadSynchronously);
+			loadScriptFromAsset(JSAppSdk.getApplication(),jsBundle.getBundleAssetName(),loadSynchronously);
 		}
 	}
 

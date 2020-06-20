@@ -7,8 +7,8 @@ import android.view.KeyEvent;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.appcode.jsbundle.JSBundle;
-import com.appcode.jsbundle.JSBundleManager;
+import com.appcode.jsbundle.JSApp;
+import com.appcode.jsbundle.JSAppManager;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
@@ -23,7 +23,7 @@ public class JSBundleReactActivity extends AppCompatActivity implements DefaultH
 	 * rendering of the component. e.g. "MoviesApp"
 	 */
 	public @Nullable String getMainComponentName() {
-		JSBundle jsBundle = JSBundleManager.getInstance().getStackTopJSBundle();
+		JSApp jsBundle = JSAppManager.getInstance().getStackTopJSBundle();
 		if(jsBundle == null){
 			finish();
 		}
@@ -60,7 +60,7 @@ public class JSBundleReactActivity extends AppCompatActivity implements DefaultH
 	public void onDestroy() {
 		super.onDestroy();
 		mDelegate.onDestroy();
-		JSBundleManager.getInstance().destroyStackTopJSbundle(getMainComponentName());
+		JSAppManager.getInstance().destroyStackTopJSbundle(getMainComponentName());
 	}
 
 	@Override

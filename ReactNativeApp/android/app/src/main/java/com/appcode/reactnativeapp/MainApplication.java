@@ -3,19 +3,10 @@ package com.appcode.reactnativeapp;
 import android.app.Application;
 import android.content.Context;
 
-import com.appcode.jsbundle.JSBundleSdk;
-import com.appcode.reactnativeapp.communication.CommPackage;
-import com.facebook.react.PackageList;
+import com.appcode.jsbundle.JSAppSdk;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
-import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.appcode.reactnativeapp.hotupdate.FileConstant;
-
-import java.io.File;
-import java.util.List;
-
-import javax.annotation.Nullable;
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -28,7 +19,7 @@ public class MainApplication extends Application implements ReactApplication {
     instance = this;
     appContext = getApplicationContext();
     SoLoader.init(this, /* native exopackage */ false);
-    JSBundleSdk.init(this);
+    JSAppSdk.init(this);
   }
 /*
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {

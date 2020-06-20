@@ -7,9 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.appcode.jsbundle.JSBridge;
-import com.appcode.jsbundle.JSBundle;
-import com.appcode.jsbundle.JSBundleManager;
-import com.appcode.jsbundle.OnJSBundleLoadListener;
+import com.appcode.jsbundle.JSApp;
+import com.appcode.jsbundle.JSAppManager;
+import com.appcode.jsbundle.OnJSAppLoadListener;
 import com.facebook.react.bridge.ReactContext;
 
 public class JSBundlePreloadActivity extends Activity {
@@ -19,7 +19,7 @@ public class JSBundlePreloadActivity extends Activity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
+		JSApp jsBundle = JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
 		ReactNativeHost appCodeReactNativeHost = jsBundle.getReactNativeHost();
 		mJsBridge = new JSBridge(appCodeReactNativeHost);
 
@@ -28,9 +28,9 @@ public class JSBundlePreloadActivity extends Activity {
 			manager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener(){
 				@Override
 				public void onReactContextInitialized(ReactContext context) {
-					loadScript(new OnJSBundleLoadListener() {
+					loadScript(new OnJSAppLoadListener() {
 						@Override
-						public void onComplete(boolean success, JSBundle jsBundle) {
+						public void onComplete(boolean success, JSApp jsBundle) {
 							mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
 							startToMultipeJSBundleActivity();
 						}
@@ -40,9 +40,9 @@ public class JSBundlePreloadActivity extends Activity {
 			});
 			manager.createReactContextInBackground();
 		}else{
-			loadScript(new OnJSBundleLoadListener() {
+			loadScript(new OnJSAppLoadListener() {
 				@Override
-				public void onComplete(boolean success, JSBundle jsBundle) {
+				public void onComplete(boolean success, JSApp jsBundle) {
 					mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
 					startToMultipeJSBundleActivity();
 				}
@@ -50,8 +50,8 @@ public class JSBundlePreloadActivity extends Activity {
 		}
 	}
 
-	public void loadScript(OnJSBundleLoadListener onJSBundleLoadListener){
-		JSBundle  jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
+	public void loadScript(OnJSAppLoadListener onJSBundleLoadListener){
+		JSApp jsBundle = JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
 		mJsBridge.loadScriptFile(jsBundle,false);
 		if(onJSBundleLoadListener != null){
 			onJSBundleLoadListener.onComplete(true,jsBundle);
@@ -66,6 +66,6 @@ public class JSBundlePreloadActivity extends Activity {
 	}
 
 	public String getMainComponentName() {
-		return getIntent().getStringExtra(JSBundle.MAIN_COMPONENT_NAME);
+		return getIntent().getStringExtra(JSApp.MAIN_COMPONENT_NAME);
 	}
 }
