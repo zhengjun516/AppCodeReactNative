@@ -3,6 +3,7 @@ package com.facebook.react;
 import android.app.Application;
 import androidx.annotation.Nullable;
 
+import com.appcode.jsapp.ApplicationProxy;
 import com.appcode.jsapp.JSApp;
 
 import java.util.Collections;
@@ -11,8 +12,8 @@ import java.util.List;
 public class JSAppReactNativeHost extends ReactNativeHost {
 
 	JSApp mJsBundle;
-	public JSAppReactNativeHost(JSApp jsBundle, Application application) {
-		super(application);
+	public JSAppReactNativeHost(JSApp jsBundle, ApplicationProxy application) {
+		super(application.getApplication());
 		mJsBundle = jsBundle;
 	}
 

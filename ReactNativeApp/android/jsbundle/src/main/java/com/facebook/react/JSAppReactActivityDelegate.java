@@ -26,10 +26,8 @@ public class JSAppReactActivityDelegate extends ReactActivityDelegate {
 	@Override
 	public ReactNativeHost getReactNativeHost() {
 		JSApp jsBundle = JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
-		if(jsBundle.getReactNativeHost() != null){
-			return jsBundle.getReactNativeHost();
-		}
-		return new JSAppReactNativeHost(JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
+
+		return jsBundle.getReactNativeHost();
 	}
 
 

@@ -69,9 +69,9 @@ public class JSAppSdk {
 
 		ReactNativeHost reactNativeHost;
 		if(jsApp.isMultipleJSBundle()){
-			reactNativeHost = new JSAppReactNativeHost(jsApp,sApplication);
+			reactNativeHost = new JSAppReactNativeHost(jsApp,new ApplicationProxy(sApplication));
 		}else{
-			reactNativeHost = new AppCodeReactNativeHost(jsApp,sApplication);
+			reactNativeHost = new AppCodeReactNativeHost(jsApp,new ApplicationProxy(sApplication));
 		}
 		jsApp.setReactNativeHost(reactNativeHost);
 		JSAppManager.getInstance().addJSBundle(jsApp);
