@@ -1,17 +1,17 @@
-package com.appcode.react;
+package com.appcode.jsapp;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 
-public class AppCodeApplication extends Application implements ReactApplication {
+public class JSApplication extends Application implements ReactApplication {
 
 	private Application mApplication;
 
 	public ReactNativeHost mReactNativeHost;
 
-	public AppCodeApplication(Application application) {
+	public JSApplication(Application application) {
 		mApplication = application;
 	}
 

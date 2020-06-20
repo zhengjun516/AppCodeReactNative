@@ -13,9 +13,9 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 
-public class JSBundleReactActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
+public class JSAppReactActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
 	private  ReactActivityDelegate mDelegate;
-	public JSBundleReactActivity() {
+	public JSAppReactActivity() {
 
 	}
 	/**
@@ -32,7 +32,7 @@ public class JSBundleReactActivity extends AppCompatActivity implements DefaultH
 
 	/** Called at construction time, override if you have a custom delegate implementation. */
 	public ReactActivityDelegate createReactActivityDelegate() {
-		return new JSBundleActivityDelegate(this, getMainComponentName());
+		return new JSAppReactActivityDelegate(this, getMainComponentName());
 	}
 
 

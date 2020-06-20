@@ -8,13 +8,13 @@ import androidx.annotation.Nullable;
 import com.appcode.jsapp.JSApp;
 import com.appcode.jsapp.JSAppManager;
 
-public class JSBundleActivityDelegate extends ReactActivityDelegate {
+public class JSAppReactActivityDelegate extends ReactActivityDelegate {
 
-	public JSBundleActivityDelegate(Activity activity, @Nullable String mainComponentName) {
+	public JSAppReactActivityDelegate(Activity activity, @Nullable String mainComponentName) {
 		super(activity, mainComponentName);
 	}
 
-	public JSBundleActivityDelegate(ReactActivity activity, @Nullable String mainComponentName) {
+	public JSAppReactActivityDelegate(ReactActivity activity, @Nullable String mainComponentName) {
 		super(activity, mainComponentName);
 	}
 
@@ -29,7 +29,7 @@ public class JSBundleActivityDelegate extends ReactActivityDelegate {
 		if(jsBundle.getReactNativeHost() != null){
 			return jsBundle.getReactNativeHost();
 		}
-		return new JSBundleReactNativeHost(JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
+		return new JSAppReactNativeHost(JSAppManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
 	}
 
 

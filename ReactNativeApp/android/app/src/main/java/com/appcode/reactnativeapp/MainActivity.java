@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 return packageList.getPackages();
             }
         });
-        JSAppSdk.addJSBundle(business);
+        JSAppSdk.addJSApp(business);
         appName = "AppCodeReactNative";
        JSApp business2 = new JSApp("multipleApp", "assets.multiple01", appName,false,null,"business2.android.bundle",null,"base.android.bundle", new GetReactPackageCallback() {
             @Override
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 return reactPackages;
             }
         });
-        JSAppSdk.addJSBundle(business2);
+        JSAppSdk.addJSApp(business2);
         JSAppSdk.initAllReactContext();
     }
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 return packageList.getPackages();
             }
         });
-        JSAppSdk.startJSBundle(jsBundle);
+        JSAppSdk.startJSApp(jsBundle);
     }
 
     public void startAppCodeReactActivity(View view){
@@ -126,17 +126,17 @@ public class MainActivity extends AppCompatActivity {
                 return reactPackages;
             }
         });
-        JSAppSdk.startJSBundle(jsBundle);
+        JSAppSdk.startJSApp(jsBundle);
     }
 
     public void jumpToMultipleActivity(View view){
         String appName = "ReactNativeApp";
-        JSAppSdk.startJSBundle(appName,true);
+        JSAppSdk.startJSApp(appName,true);
     }
 
     public void jumpToMultipleActivity2(View view){
         String appName = "AppCodeReactNative";
-        JSAppSdk.startJSBundle(appName,true);
+        JSAppSdk.startJSApp(appName,true);
     }
 
     public class CompleteReceiver extends BroadcastReceiver {

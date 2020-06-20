@@ -8,10 +8,10 @@ import com.appcode.jsapp.JSApp;
 import java.util.Collections;
 import java.util.List;
 
-public class JSBundleReactNativeHost extends ReactNativeHost {
+public class JSAppReactNativeHost extends ReactNativeHost {
 
 	JSApp mJsBundle;
-	public JSBundleReactNativeHost(JSApp jsBundle, Application application) {
+	public JSAppReactNativeHost(JSApp jsBundle, Application application) {
 		super(application);
 		mJsBundle = jsBundle;
 	}

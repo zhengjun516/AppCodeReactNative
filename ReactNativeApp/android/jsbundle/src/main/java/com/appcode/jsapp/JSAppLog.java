@@ -18,7 +18,7 @@ package com.appcode.jsapp;
 
 import android.util.Log;
 
-public class JSBLog {
+public class JSAppLog {
 
     public static String TAG  = "JSBundle_";
 

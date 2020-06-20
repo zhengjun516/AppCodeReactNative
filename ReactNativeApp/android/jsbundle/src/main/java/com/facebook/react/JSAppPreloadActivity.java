@@ -12,7 +12,7 @@ import com.appcode.jsapp.JSAppManager;
 import com.appcode.jsapp.OnJSAppLoadListener;
 import com.facebook.react.bridge.ReactContext;
 
-public class JSBundlePreloadActivity extends Activity {
+public class JSAppPreloadActivity extends Activity {
 
 	private JSBridge mJsBridge;
 
@@ -59,7 +59,7 @@ public class JSBundlePreloadActivity extends Activity {
 	}
 
 	private void startToMultipeJSBundleActivity() {
-		Intent intent = new Intent(getBaseContext(), JSBundleReactActivity.class);
+		Intent intent = new Intent(getBaseContext(), JSAppReactActivity.class);
 		intent.putExtras(getIntent());
 		startActivity(intent);
 		finish();
