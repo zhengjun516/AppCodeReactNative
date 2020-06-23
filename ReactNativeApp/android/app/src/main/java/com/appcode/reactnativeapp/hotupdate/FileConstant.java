@@ -17,7 +17,7 @@ public class FileConstant {
     /**
      * bundle文件名
      */
-    public static  String JS_BUNDLE_LOCAL_FILE = "index.android.bundle";
+    public static  String JS_BUNDLE_LOCAL_FILE = "bundles/bundle02/index.android.bundle";
 
     public static  String PATCH_IMG_FILE = "patch_imgs.txt";
 
