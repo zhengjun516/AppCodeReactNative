@@ -17,11 +17,11 @@ public class AppCodeReactActivityDelegate extends ReactActivityDelegate {
 
 	@Override
 	public ReactNativeHost getReactNativeHost() {
-		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromStandard(getMainComponentName());
+		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundle(getMainComponentName());
 		if(jsBundle.getReactNativeHost() != null){
 			return jsBundle.getReactNativeHost();
 		}
-		return new AppCodeReactNativeHost(JSBundleManager.getInstance().getJSBundleFromStandard(getMainComponentName()),getPlainActivity().getApplication());
+		return new AppCodeReactNativeHost(JSBundleManager.getInstance().getJSBundle(getMainComponentName()),getPlainActivity().getApplication());
 	}
 
 

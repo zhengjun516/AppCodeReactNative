@@ -27,12 +27,12 @@ public class JSBundleSdk {
 	}
 
 	public static void initAllReactContext(){
-		Map<String,JSBundle> standardJSBundleMapBundleMap = JSBundleManager.getInstance().getStandardJSBundleMap();
+		Map<String,JSBundle> standardJSBundleMapBundleMap = JSBundleManager.getInstance().getJSBundleMap();
 		for(JSBundle jsBundle:standardJSBundleMapBundleMap.values()){
 			initReactContext(jsBundle);
 		}
 
-		Map<String,JSBundle> multipleJSBundleMap = JSBundleManager.getInstance().getMultipleJSBundleMap();
+		Map<String,JSBundle> multipleJSBundleMap = JSBundleManager.getInstance().getJSBundleMap();
 		for(JSBundle jsBundle:multipleJSBundleMap.values()){
 			initReactContext(jsBundle);
 		}
@@ -55,24 +55,18 @@ public class JSBundleSdk {
 	}
 
 	public static void addJSBundle(JSBundle jsBundle){
-		if(jsBundle.isSimpleJSBundle()){
-			if(JSBundleManager.getInstance().hasStandardJSBundle(jsBundle)){
-				throw new RuntimeException("独立组件："+jsBundle.getPackageName()+" 已经存在,不能重复添加");
-			}
-		}else{
-			if(JSBundleManager.getInstance().hasMultipleJSBundle(jsBundle)){
-				throw new RuntimeException("复合组件："+jsBundle.getPackageName()+"已经存在,不能重复添加");
-			}
+		if(JSBundleManager.getInstance().hasJSBundle(jsBundle)){
+			throw new RuntimeException("组件："+jsBundle.getPackageName()+" 已经存在,不能重复添加");
 		}
 		JSBundleManager.getInstance().addJSBundle(jsBundle);
 	}
 
 	public static JSBundle getJSBundler(JSIntent jsIntent){
-		return JSBundleManager.getInstance().getJSBundleFromMultiple(jsIntent.getPackageName());
+		return JSBundleManager.getInstance().getJSBundle(jsIntent.getPackageName());
 	}
 
 	public static JSBundle removeJSBundler(String mainComponentName){
-		return JSBundleManager.getInstance().deleteJSBundleFromMultiple(mainComponentName);
+		return JSBundleManager.getInstance().deleteJSBundle(mainComponentName);
 	}
 
 

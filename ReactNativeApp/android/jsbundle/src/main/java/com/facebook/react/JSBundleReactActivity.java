@@ -34,7 +34,7 @@ public class JSBundleReactActivity extends AppCompatActivity implements DefaultH
 	/** Called at construction time, override if you have a custom delegate implementation. */
 	public ReactActivityDelegate createReactActivityDelegate() {
 		JSIntent jsIntent = getIntent().getParcelableExtra(JSIntent.KEY_JS_INTENT);
-		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(jsIntent.getPackageName());
+		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundle(jsIntent.getPackageName());
 		return new JSBundleActivityDelegate(this, jsBundle,jsIntent);
 	}
 

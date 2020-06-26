@@ -28,7 +28,7 @@ public class JSBundlePreloadActivity extends Activity {
 			return;
 		}
 
-		mJsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(jsIntent.getPackageName());
+		mJsBundle = JSBundleManager.getInstance().getJSBundle(jsIntent.getPackageName());
 
 		if(mJsBundle == null){
 			finish();
