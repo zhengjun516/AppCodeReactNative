@@ -32,18 +32,20 @@ public class JSBundleReactNativeHost extends ReactNativeHost {
 	@Nullable
 	@Override
 	protected String getJSBundleFile() {
-		if(mJsBundle.isMultipleJSBundle()){
-			return mJsBundle.getCommonJSBundleFile();
+		if(mJsBundle.isSimpleJSBundle()){
+			return mJsBundle.getJSBundleFile();
 		}
-		return mJsBundle.getJSBundleFile();
+		return mJsBundle.getCommonJSBundleFile();
+
 	}
 
 	@Nullable
 	@Override
 	protected String getBundleAssetName() {
-		if(mJsBundle.isMultipleJSBundle()){
-			return mJsBundle.getCommonJSBundleAssetName();
+		if(mJsBundle.isSimpleJSBundle()){
+			return mJsBundle.getBundleAssetName();
 		}
-		return mJsBundle.getBundleAssetName();
+		return mJsBundle.getCommonJSBundleAssetName();
+
 	}
 }

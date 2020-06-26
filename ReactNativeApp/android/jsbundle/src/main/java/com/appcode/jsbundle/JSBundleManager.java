@@ -39,10 +39,10 @@ public class JSBundleManager {
 	}
 
 	public boolean hasStandardJSBundle(JSBundle jsBundle){
-		return hasStandardJSBundle(jsBundle.getDefaultMainComponentName());
+		return hasStandardJSBundle(jsBundle.getPackageName());
 	}
 	public boolean hasMultipleJSBundle(JSBundle jsBundle){
-		return hasMultipleJSBundle(jsBundle.getDefaultMainComponentName());
+		return hasMultipleJSBundle(jsBundle.getPackageName());
 	}
 
 	public boolean hasStandardJSBundle(String mainComonentname){
@@ -55,17 +55,18 @@ public class JSBundleManager {
 
 	public void addJSBundle(JSBundle jsBundle){
 		ReactNativeHost reactNativeHost;
-		if(jsBundle.isMultipleJSBundle()){
-			reactNativeHost = new JSBundleReactNativeHost(jsBundle,JSBundleSdk.getApplication());
-		}else{
+		if(jsBundle.isSimpleJSBundle()){
 			reactNativeHost = new AppCodeReactNativeHost(jsBundle,JSBundleSdk.getApplication());
+		}else{
+			reactNativeHost = new JSBundleReactNativeHost(jsBundle,JSBundleSdk.getApplication());
 		}
 		jsBundle.setReactNativeHost(reactNativeHost);
 
-		if(jsBundle.isMultipleJSBundle()){
-			mMultipleJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
+		if(jsBundle.isSimpleJSBundle()){
+			mStandardJSBundleMap.put(jsBundle.getPackageName(),jsBundle);
 		}else{
-			mStandardJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
+			mMultipleJSBundleMap.put(jsBundle.getPackageName(),jsBundle);
+
 		}
 	}
 
@@ -78,14 +79,14 @@ public class JSBundleManager {
 	}
 
 	public JSBundle deleteJSBundleFromStandard(JSBundle jsBundle){
-		return deleteJSBundleFromStandard(jsBundle.getDefaultMainComponentName());
+		return deleteJSBundleFromStandard(jsBundle.getPackageName());
 	}
 	public JSBundle deleteJSBundleFromStandard(String mainComonentname){
 		return mStandardJSBundleMap.remove(mainComonentname);
 	}
 
 	public JSBundle deleteJSBundleFromMultiple(JSBundle jsBundle){
-		return deleteJSBundleFromMultiple(jsBundle.getDefaultMainComponentName());
+		return deleteJSBundleFromMultiple(jsBundle.getPackageName());
 	}
 
 	public JSBundle deleteJSBundleFromMultiple(String mainComonentname){

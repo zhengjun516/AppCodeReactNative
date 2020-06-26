@@ -4,9 +4,7 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.appcode.react.AppCodeReactActivity;
-import com.appcode.react.AppCodeReactNativeHost;
 import com.facebook.react.JSBundlePreloadActivity;
-import com.facebook.react.JSBundleReactNativeHost;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 
@@ -57,13 +55,13 @@ public class JSBundleSdk {
 	}
 
 	public static void addJSBundle(JSBundle jsBundle){
-		if(jsBundle.isMultipleJSBundle()){
-			if(JSBundleManager.getInstance().hasMultipleJSBundle(jsBundle)){
-				throw new RuntimeException("复合组件："+jsBundle.getDefaultMainComponentName()+"已经存在,不能重复添加");
+		if(jsBundle.isSimpleJSBundle()){
+			if(JSBundleManager.getInstance().hasStandardJSBundle(jsBundle)){
+				throw new RuntimeException("独立组件："+jsBundle.getPackageName()+" 已经存在,不能重复添加");
 			}
 		}else{
-			if(JSBundleManager.getInstance().hasStandardJSBundle(jsBundle)){
-				throw new RuntimeException("独立组件："+jsBundle.getDefaultMainComponentName()+" 已经存在,不能重复添加");
+			if(JSBundleManager.getInstance().hasMultipleJSBundle(jsBundle)){
+				throw new RuntimeException("复合组件："+jsBundle.getPackageName()+"已经存在,不能重复添加");
 			}
 		}
 		JSBundleManager.getInstance().addJSBundle(jsBundle);
@@ -84,10 +82,10 @@ public class JSBundleSdk {
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
 			Intent intent;
-			if(jsBundle.isMultipleJSBundle()){
-				intent = new Intent(sApplication, JSBundlePreloadActivity.class);
-			}else{
+			if(jsBundle.isSimpleJSBundle()){
 				intent = new Intent(sApplication, AppCodeReactActivity.class);
+			}else{
+				intent = new Intent(sApplication, JSBundlePreloadActivity.class);
 			}
 			//intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
 			intent.putExtra(JSIntent.KEY_JS_INTENT,jsIntent);
