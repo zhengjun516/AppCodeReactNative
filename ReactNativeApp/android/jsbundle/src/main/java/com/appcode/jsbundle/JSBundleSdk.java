@@ -21,7 +21,7 @@ public class JSBundleSdk {
 	}
 
 	public static void initAssetsJSBundle(GetReactPackageCallback getReactPackageCallback){
-		JSBundleAssetsManager jsBundleAssetsManager = Singleton.get(JSBundleAssetsManager.class);
+		JSBundleFileAssetsManager jsBundleAssetsManager = Singleton.get(JSBundleFileAssetsManager.class);
 		jsBundleAssetsManager.setGetReactPackageCallback(getReactPackageCallback);
 		jsBundleAssetsManager.init("");
 	}

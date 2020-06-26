@@ -3,37 +3,30 @@ package com.appcode.jsbundle;
 import android.content.res.AssetManager;
 import android.text.TextUtils;
 
-import com.facebook.react.ReactNativeHost;
-import com.facebook.react.ReactPackage;
-
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.appcode.jsbundle.JSBundleConstant.ASSETS_DIR;
+public abstract class JSBundleFileBaseManager {
+	public static final String TAG = JSBundleFileBaseManager.class.getSimpleName();
 
-public class JSBundleAssetsManager {
-	public static final String TAG = JSBundleAssetsManager.class.getSimpleName();
 
-	private AssetManager mAssetManager;
-	private List<JSBundle> jsBundles;
-	private String mBundlesDir = JSBundleConstant.BUNDLES_DIR;
+	protected String mBundlesDir;
+	protected List<JSBundle> jsBundles;
+	protected GetReactPackageCallback getReactPackageCallback;
 
-	private GetReactPackageCallback getReactPackageCallback;
-
-	public JSBundleAssetsManager(){
-		mAssetManager = JSBundleSdk.getApplication().getAssets();
+	public JSBundleFileBaseManager(String bundlesDir){
+		mBundlesDir = bundlesDir;
 		jsBundles = new ArrayList<>();
-	}
-
-	public void setGetReactPackageCallback(GetReactPackageCallback getReactPackageCallback){
-		this.getReactPackageCallback = getReactPackageCallback;
 	}
 
 	public void init(String bundlesDir){
@@ -41,7 +34,8 @@ public class JSBundleAssetsManager {
 			if(!TextUtils.isEmpty(bundlesDir)){
 				mBundlesDir = bundlesDir;
 			}
-			String[] bundleDirs = mAssetManager.list(mBundlesDir);
+
+			String[] bundleDirs = getChildDirs(null,mBundlesDir);
 			for(String bundleDir : bundleDirs){
 				parseBundleDir(bundleDir);
 			}
@@ -50,8 +44,9 @@ public class JSBundleAssetsManager {
 		}
 	}
 
-	private void parseBundleDir(String bundleDir) throws IOException {
-		String[] bundleFiles = mAssetManager.list(JSBundleConstant.BUNDLES_DIR+ File.separator+bundleDir);
+	protected void parseBundleDir(String bundleDir) throws IOException {
+
+		String[] bundleFiles = getChildDirs(mBundlesDir,bundleDir);
 		int i = 0;
 		for(String bundleFile:bundleFiles){
 			if(bundleFile.endsWith(".bundle")){
@@ -64,7 +59,7 @@ public class JSBundleAssetsManager {
 		if(i == 1){
 			for(String bundleFile:bundleFiles){
 				if(bundleFile.endsWith(".bundle")){
-					JSBundleInfo jsBundleInfo = readAssetsJSBundle(JSBundleConstant.BUNDLES_DIR+ File.separator+bundleDir+File.separator+bundleFile);
+					JSBundleInfo jsBundleInfo = readAssetsJSBundle(JSBundleConstant.DIR_BUNDLES + File.separator+bundleDir+File.separator+bundleFile);
 					if(jsBundleInfo != null){
 						JSBundle jsBundle = new JSBundle(jsBundleInfo);
 						jsBundle.setGetReactPackageCallback(getReactPackageCallback);
@@ -79,7 +74,7 @@ public class JSBundleAssetsManager {
 
 			for(String bundleFile:bundleFiles){
 				if(bundleFile.endsWith(".bundle")){
-					JSBundleInfo jsBundleInfo = readAssetsJSBundle(JSBundleConstant.BUNDLES_DIR+ File.separator+bundleDir+File.separator+bundleFile);
+					JSBundleInfo jsBundleInfo = readAssetsJSBundle(JSBundleConstant.DIR_BUNDLES + File.separator+bundleDir+File.separator+bundleFile);
 					if(jsBundleInfo.isBaseBundle()){
 						baseJSBundleInfo = jsBundleInfo;
 					}else{
@@ -97,7 +92,8 @@ public class JSBundleAssetsManager {
 
 	public JSBundleInfo readAssetsJSBundle(String jsBundleFile) throws IOException {
 		List<String> jsBundleComponentList = new ArrayList<>();
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(mAssetManager.open(jsBundleFile)));
+
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getInputStream(jsBundleFile)));
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
 			if(line.contains("exports={name:\"")){
@@ -145,4 +141,17 @@ public class JSBundleAssetsManager {
 		}
 	}
 
+
+
+	public void setGetReactPackageCallback(GetReactPackageCallback getReactPackageCallback){
+		this.getReactPackageCallback = getReactPackageCallback;
+	}
+
+	public GetReactPackageCallback getGetReactPackageCallback() {
+		return getReactPackageCallback;
+	}
+
+	public abstract String[] getChildDirs(String parentDir,String bundlesDir) throws IOException;
+
+	public abstract InputStream getInputStream(String jsBundleFile) throws IOException;
 }
