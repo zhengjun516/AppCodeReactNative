@@ -78,50 +78,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMsgToRN(View view) {
-        //startActivity(new Intent(this, App1ReactActivity.class));
-     /*   String appName = "ReactNativeApp";
-        JSBundle jsBundle = new JSBundle(appName,null, "bundles/bundle02/index.android.bundle" );
-        jsBundle.setGetReactPackageCallback(new GetReactPackageCallback() {
-            @Override
-            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-                PackageList packageList = new PackageList(reactNativeHost);
-                packageList.getPackages().add(new CommPackage());
-                return packageList.getPackages();
-            }
-        });*/
-       // JSBundleSdk.startJSBundle(jsBundle);
-        String appName = "ReactNativeApp";
-       // JSBundleSdk.startJSBundle(appName,false);
+       //String appName = "ReactNativeApp";
+        String appName = "AppCodeReactNative";
+        JSIntent jsIntent = new JSIntent("bundle01/index.bundle",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void startAppCodeReactActivity(View view){
-   /*     String appName = "ReactNativeApp";
-        List<String> mainCompnentNames = new ArrayList<>();
-        mainCompnentNames.add("AppCodeReactNative");
-        mainCompnentNames.add("ReactNativeApp");
-        JSBundle jsBundle = new JSBundle(mainCompnentNames, appName,null, "bundles/bundle01/index.bundle");
-        jsBundle.setGetReactPackageCallback(new GetReactPackageCallback() {
-            @Override
-            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-                PackageList packageList = new PackageList(reactNativeHost);
-                List<ReactPackage> reactPackages = packageList.getPackages();
-                reactPackages.add(new CommPackage());
-                return reactPackages;
-            }
-        });*/
-        String appName = "AppCodeReactNative";
-       // JSBundleSdk.startJSBundle(appName,false);
+
+        String appName = "ReactNativeApp";
+        JSIntent jsIntent = new JSIntent("bundle02/index.android.bundle",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void jumpToMultipleActivity(View view){
         String appName = "ReactNativeApp";
-        JSIntent jsIntent = new JSIntent("bundles/bundle03/business.android.bundle",appName);
+        JSIntent jsIntent = new JSIntent("bundle03/business.android.bundle",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void jumpToMultipleActivity2(View view){
         String appName = "AppCodeReactNative";
-        JSIntent jsIntent = new JSIntent("bundles/bundle03/business2.android.bundle",appName);
+        JSIntent jsIntent = new JSIntent("bundle03/business2.android.bundle",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
 

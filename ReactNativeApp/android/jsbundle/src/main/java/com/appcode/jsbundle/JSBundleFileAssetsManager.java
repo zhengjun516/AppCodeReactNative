@@ -11,7 +11,6 @@ public class JSBundleFileAssetsManager extends JSBundleFileBaseManager {
 
 	private AssetManager mAssetManager;
 
-	private String parentDir;
 
 	public JSBundleFileAssetsManager(){
 		super(JSBundleConstant.DIR_BUNDLES);

@@ -21,9 +21,9 @@ public class JSBundleSdk {
 	}
 
 	public static void initAssetsJSBundle(GetReactPackageCallback getReactPackageCallback){
-		JSBundleFileAssetsManager jsBundleAssetsManager = Singleton.get(JSBundleFileAssetsManager.class);
-		jsBundleAssetsManager.setGetReactPackageCallback(getReactPackageCallback);
-		jsBundleAssetsManager.init("");
+		JSBundleFileBaseManager jsBundleFileBaseManager = Singleton.get(JSBundleFileLocalManager.class);
+		jsBundleFileBaseManager.setGetReactPackageCallback(getReactPackageCallback);
+		jsBundleFileBaseManager.init("");
 	}
 
 	public static void initAllReactContext(){
@@ -75,12 +75,8 @@ public class JSBundleSdk {
 		JSBundle jsBundle = getJSBundler(jsIntent);
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
-			Intent intent;
-			if(jsBundle.isSimpleJSBundle()){
-				intent = new Intent(sApplication, AppCodeReactActivity.class);
-			}else{
-				intent = new Intent(sApplication, JSBundlePreloadActivity.class);
-			}
+
+			Intent	intent = new Intent(sApplication, JSBundlePreloadActivity.class);
 			//intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
 			intent.putExtra(JSIntent.KEY_JS_INTENT,jsIntent);
 			intent.setFlags(FLAG_ACTIVITY_NEW_TASK);

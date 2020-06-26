@@ -74,7 +74,12 @@ public class JSBundle implements Serializable {
 
 
 	public String getPackageName() {
-		return mJSBundleInfo.getJsBundleFile();
+		if(mJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_ASSETS){
+			return mJSBundleInfo.getJsBundleFile().replace(JSBundleConstant.DIR_BUNDLES+"/","");
+		}else if(mJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_SDCARD){
+			return mJSBundleInfo.getJsBundleFile().replace(JSBundleConstant.BUNDLES_PATH_DATA+"/","");
+		}
+		return null;
 	}
 
 	public String getJSBundleFile() {

@@ -37,16 +37,16 @@ public abstract class JSBundleFileBaseManager {
 
 			String[] bundleDirs = getChildDirs(null,mBundlesDir);
 			for(String bundleDir : bundleDirs){
-				parseBundleDir(bundleDir);
+				parseBundleDir(mBundlesDir,bundleDir);
 			}
 		}catch (IOException e){
 			JSBLog.e(TAG,e);
 		}
 	}
 
-	protected void parseBundleDir(String bundleDir) throws IOException {
+	protected void parseBundleDir(String parentDir,String bundleDir) throws IOException {
 
-		String[] bundleFiles = getChildDirs(mBundlesDir,bundleDir);
+		String[] bundleFiles = getChildDirs(parentDir,bundleDir);
 		int i = 0;
 		for(String bundleFile:bundleFiles){
 			if(bundleFile.endsWith(".bundle")){
@@ -59,7 +59,7 @@ public abstract class JSBundleFileBaseManager {
 		if(i == 1){
 			for(String bundleFile:bundleFiles){
 				if(bundleFile.endsWith(".bundle")){
-					JSBundleInfo jsBundleInfo = readAssetsJSBundle(JSBundleConstant.DIR_BUNDLES + File.separator+bundleDir+File.separator+bundleFile);
+					JSBundleInfo jsBundleInfo = readAssetsJSBundle(parentDir+File.separator+bundleDir+File.separator+bundleFile);
 					if(jsBundleInfo != null){
 						JSBundle jsBundle = new JSBundle(jsBundleInfo);
 						jsBundle.setGetReactPackageCallback(getReactPackageCallback);
@@ -74,7 +74,7 @@ public abstract class JSBundleFileBaseManager {
 
 			for(String bundleFile:bundleFiles){
 				if(bundleFile.endsWith(".bundle")){
-					JSBundleInfo jsBundleInfo = readAssetsJSBundle(JSBundleConstant.DIR_BUNDLES + File.separator+bundleDir+File.separator+bundleFile);
+					JSBundleInfo jsBundleInfo = readAssetsJSBundle(parentDir+File.separator+bundleDir+File.separator+bundleFile);
 					if(jsBundleInfo.isBaseBundle()){
 						baseJSBundleInfo = jsBundleInfo;
 					}else{

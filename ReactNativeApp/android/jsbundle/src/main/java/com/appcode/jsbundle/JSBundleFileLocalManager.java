@@ -18,7 +18,7 @@ public class JSBundleFileLocalManager extends JSBundleFileBaseManager{
 
 	@Override
 	public String[] getChildDirs(String parentDir,String bundlesDir) {
-		File file = new File(mBundlesDir);
+		File file = new File(parentDir==null?bundlesDir:parentDir+File.separator+bundlesDir);
 		if(!file.isDirectory()){
 			return null;
 		}
