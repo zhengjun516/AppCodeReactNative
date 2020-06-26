@@ -3,6 +3,7 @@ package com.appcode.reactnativeapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.appcode.jsbundle.GetReactPackageCallback;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.reactnativeapp.communication.CommPackage;
 import com.facebook.react.PackageList;
@@ -29,6 +30,15 @@ public class MainApplication extends Application implements ReactApplication {
     appContext = getApplicationContext();
     SoLoader.init(this, /* native exopackage */ false);
     JSBundleSdk.init(this);
+    JSBundleSdk.initAssetsJSBundle(new GetReactPackageCallback() {
+      @Override
+      public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
+        PackageList packageList = new PackageList(reactNativeHost);
+        List<ReactPackage> reactPackages = packageList.getPackages();
+        reactPackages.add(new CommPackage());
+        return reactPackages;
+      }
+    });
   }
 /*
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {

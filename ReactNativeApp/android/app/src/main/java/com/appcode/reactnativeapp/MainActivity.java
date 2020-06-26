@@ -41,32 +41,10 @@ public class MainActivity extends AppCompatActivity {
         initReactInstance();
 
         setContentView(R.layout.activity_main);
-        //registeReceiver();
         checkPermissions();
     }
 
     private void initReactInstance() {
-        String appName = "ReactNativeApp";
-        JSBundle business = new JSBundle("multipleApp","assets.multiple01",appName, false,null, "bundles/bundle03/business.android.bundle",null, "bundles/bundle03/base.android.bundle", new GetReactPackageCallback() {
-            @Override
-            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-                PackageList packageList = new PackageList(reactNativeHost);
-                packageList.getPackages().add(new CommPackage());
-                return packageList.getPackages();
-            }
-        });
-        JSBundleSdk.addJSBundle(business);
-        appName = "AppCodeReactNative";
-       JSBundle business2 = new JSBundle("multipleApp", "assets.multiple01", appName,false,null, "bundles/bundle03/business2.android.bundle",null, "bundles/bundle03/base.android.bundle", new GetReactPackageCallback() {
-            @Override
-            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-                PackageList packageList = new PackageList(reactNativeHost);
-                List<ReactPackage> reactPackages = packageList.getPackages();
-                reactPackages.add(new CommPackage());
-                return reactPackages;
-            }
-        });
-        JSBundleSdk.addJSBundle(business2);
         JSBundleSdk.initAllReactContext();
     }
 
@@ -100,24 +78,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendMsgToRN(View view) {
         //startActivity(new Intent(this, App1ReactActivity.class));
-        String appName = "ReactNativeApp";
-        JSBundle jsBundle = new JSBundle("simpleApp01", "assets.simple01",appName,null, "bundles/bundle02/index.android.bundle", new GetReactPackageCallback() {
+     /*   String appName = "ReactNativeApp";
+        JSBundle jsBundle = new JSBundle(appName,null, "bundles/bundle02/index.android.bundle" );
+        jsBundle.setGetReactPackageCallback(new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
                 packageList.getPackages().add(new CommPackage());
                 return packageList.getPackages();
             }
-        });
-        JSBundleSdk.startJSBundle(jsBundle);
+        });*/
+       // JSBundleSdk.startJSBundle(jsBundle);
     }
 
     public void startAppCodeReactActivity(View view){
-        String appName = "ReactNativeApp";
+   /*     String appName = "ReactNativeApp";
         List<String> mainCompnentNames = new ArrayList<>();
         mainCompnentNames.add("AppCodeReactNative");
         mainCompnentNames.add("ReactNativeApp");
-        JSBundle jsBundle = new JSBundle("simpleApp02","assets.simple02",mainCompnentNames, appName,null, "bundles/bundle01/index.bundle", new GetReactPackageCallback() {
+        JSBundle jsBundle = new JSBundle(mainCompnentNames, appName,null, "bundles/bundle01/index.bundle");
+        jsBundle.setGetReactPackageCallback(new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -126,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 return reactPackages;
             }
         });
-        JSBundleSdk.startJSBundle(jsBundle);
+        JSBundleSdk.startJSBundle(jsBundle);*/
     }
 
     public void jumpToMultipleActivity(View view){

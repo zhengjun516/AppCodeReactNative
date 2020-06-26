@@ -22,6 +22,12 @@ public class JSBundleSdk {
 		sApplication = application;
 	}
 
+	public static void initAssetsJSBundle(GetReactPackageCallback getReactPackageCallback){
+		JSBundleAssetsManager jsBundleAssetsManager = Singleton.get(JSBundleAssetsManager.class);
+		jsBundleAssetsManager.setGetReactPackageCallback(getReactPackageCallback);
+		jsBundleAssetsManager.init("");
+	}
+
 	public static void initAllReactContext(){
 		Map<String,JSBundle> standardJSBundleMapBundleMap = JSBundleManager.getInstance().getStandardJSBundleMap();
 		for(JSBundle jsBundle:standardJSBundleMapBundleMap.values()){
@@ -60,14 +66,6 @@ public class JSBundleSdk {
 				throw new RuntimeException("独立组件："+jsBundle.getDefaultMainComponentName()+" 已经存在,不能重复添加");
 			}
 		}
-
-		ReactNativeHost reactNativeHost;
-		if(jsBundle.isMultipleJSBundle()){
-			reactNativeHost = new JSBundleReactNativeHost(jsBundle,sApplication);
-		}else{
-			reactNativeHost = new AppCodeReactNativeHost(jsBundle,sApplication);
-		}
-		jsBundle.setReactNativeHost(reactNativeHost);
 		JSBundleManager.getInstance().addJSBundle(jsBundle);
 	}
 

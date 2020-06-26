@@ -1,5 +1,9 @@
 package com.appcode.jsbundle;
 
+import com.appcode.react.AppCodeReactNativeHost;
+import com.facebook.react.JSBundleReactNativeHost;
+import com.facebook.react.ReactNativeHost;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -50,6 +54,14 @@ public class JSBundleManager {
 	}
 
 	public void addJSBundle(JSBundle jsBundle){
+		ReactNativeHost reactNativeHost;
+		if(jsBundle.isMultipleJSBundle()){
+			reactNativeHost = new JSBundleReactNativeHost(jsBundle,JSBundleSdk.getApplication());
+		}else{
+			reactNativeHost = new AppCodeReactNativeHost(jsBundle,JSBundleSdk.getApplication());
+		}
+		jsBundle.setReactNativeHost(reactNativeHost);
+
 		if(jsBundle.isMultipleJSBundle()){
 			mMultipleJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
 		}else{
