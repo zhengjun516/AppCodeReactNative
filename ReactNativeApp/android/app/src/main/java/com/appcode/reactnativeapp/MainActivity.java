@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import com.appcode.jsbundle.GetReactPackageCallback;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleSdk;
+import com.appcode.jsbundle.JSIntent;
 import com.appcode.reactnativeapp.communication.CommPackage;
 import com.appcode.reactnativeapp.hotupdate.HotUpdate;
 import com.facebook.react.PackageList;
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
        // JSBundleSdk.startJSBundle(jsBundle);
+        String appName = "ReactNativeApp";
+       // JSBundleSdk.startJSBundle(appName,false);
     }
 
     public void startAppCodeReactActivity(View view){
@@ -105,18 +108,21 @@ public class MainActivity extends AppCompatActivity {
                 reactPackages.add(new CommPackage());
                 return reactPackages;
             }
-        });
-        JSBundleSdk.startJSBundle(jsBundle);*/
+        });*/
+        String appName = "AppCodeReactNative";
+       // JSBundleSdk.startJSBundle(appName,false);
     }
 
     public void jumpToMultipleActivity(View view){
         String appName = "ReactNativeApp";
-        JSBundleSdk.startJSBundle(appName,true);
+        JSIntent jsIntent = new JSIntent("bundles/bundle03/business.android.bundle",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void jumpToMultipleActivity2(View view){
         String appName = "AppCodeReactNative";
-        JSBundleSdk.startJSBundle(appName,true);
+        JSIntent jsIntent = new JSIntent("bundles/bundle03/business2.android.bundle",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public class CompleteReceiver extends BroadcastReceiver {

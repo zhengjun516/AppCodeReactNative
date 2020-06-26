@@ -32,7 +32,7 @@ public class JSBundleReactNativeHost extends ReactNativeHost {
 	@Nullable
 	@Override
 	protected String getJSBundleFile() {
-		if(mJsBundle.isSupportCommonJSBundle()){
+		if(mJsBundle.isMultipleJSBundle()){
 			return mJsBundle.getCommonJSBundleFile();
 		}
 		return mJsBundle.getJSBundleFile();
@@ -41,7 +41,7 @@ public class JSBundleReactNativeHost extends ReactNativeHost {
 	@Nullable
 	@Override
 	protected String getBundleAssetName() {
-		if(mJsBundle.isSupportCoomonJSBundleAsset()){
+		if(mJsBundle.isMultipleJSBundle()){
 			return mJsBundle.getCommonJSBundleAssetName();
 		}
 		return mJsBundle.getBundleAssetName();

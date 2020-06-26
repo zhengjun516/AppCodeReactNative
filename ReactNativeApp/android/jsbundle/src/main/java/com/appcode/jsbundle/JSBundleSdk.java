@@ -69,12 +69,8 @@ public class JSBundleSdk {
 		JSBundleManager.getInstance().addJSBundle(jsBundle);
 	}
 
-	public static JSBundle getJSBundler(String mainComponentName,boolean isMultiple){
-		if(isMultiple){
-			return JSBundleManager.getInstance().getJSBundleFromMultiple(mainComponentName);
-		}else{
-			return JSBundleManager.getInstance().getJSBundleFromStandard(mainComponentName);
-		}
+	public static JSBundle getJSBundler(JSIntent jsIntent){
+		return JSBundleManager.getInstance().getJSBundleFromMultiple(jsIntent.getPackageName());
 	}
 
 	public static JSBundle removeJSBundler(String mainComponentName){
@@ -82,24 +78,9 @@ public class JSBundleSdk {
 	}
 
 
-	public static void startJSBundle(JSBundle jsBundle){
-		if(jsBundle == null){
-			throw new RuntimeException("jsBundle is null");
-		}
-		if(jsBundle.isMultipleJSBundle()){
-			if(!JSBundleManager.getInstance().hasMultipleJSBundle(jsBundle)){
-				addJSBundle(jsBundle);
-			}
-		}else{
-			if(!JSBundleManager.getInstance().hasStandardJSBundle(jsBundle)){
-				addJSBundle(jsBundle);
-			}
-		}
-		startJSBundle(jsBundle.getDefaultMainComponentName(),jsBundle.isMultipleJSBundle());
-	}
 
-	public static void startJSBundle(String mainComponentName,boolean isMultiple){
-		JSBundle jsBundle = getJSBundler(mainComponentName,isMultiple);
+	public static void startJSBundle(JSIntent jsIntent){
+		JSBundle jsBundle = getJSBundler(jsIntent);
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
 			Intent intent;
@@ -108,7 +89,8 @@ public class JSBundleSdk {
 			}else{
 				intent = new Intent(sApplication, AppCodeReactActivity.class);
 			}
-			intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
+			//intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
+			intent.putExtra(JSIntent.KEY_JS_INTENT,jsIntent);
 			intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 			sApplication.startActivity(intent);
 		}

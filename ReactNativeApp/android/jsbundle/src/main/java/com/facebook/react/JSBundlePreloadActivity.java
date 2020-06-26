@@ -9,20 +9,34 @@ import androidx.annotation.Nullable;
 import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
+import com.appcode.jsbundle.JSIntent;
 import com.appcode.jsbundle.OnJSBundleLoadListener;
 import com.facebook.react.bridge.ReactContext;
 
 public class JSBundlePreloadActivity extends Activity {
 
 	private JSBridge mJsBridge;
+	private JSBundle mJsBundle;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
-		ReactNativeHost appCodeReactNativeHost = jsBundle.getReactNativeHost();
-		mJsBridge = new JSBridge(appCodeReactNativeHost);
+		JSIntent jsIntent = (JSIntent) getIntent().getParcelableExtra(JSIntent.KEY_JS_INTENT);
 
+		if(jsIntent == null){
+			finish();
+			return;
+		}
+
+		mJsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(jsIntent.getPackageName());
+
+		if(mJsBundle == null){
+			finish();
+			return;
+		}
+
+		ReactNativeHost appCodeReactNativeHost = mJsBundle.getReactNativeHost();
+		mJsBridge = new JSBridge(appCodeReactNativeHost);
 		ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
 		if(!manager.hasStartedCreatingInitialContext() || mJsBridge.getCatalystInstance() == null){
 			manager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener(){
@@ -51,10 +65,9 @@ public class JSBundlePreloadActivity extends Activity {
 	}
 
 	public void loadScript(OnJSBundleLoadListener onJSBundleLoadListener){
-		JSBundle  jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
-		mJsBridge.loadScriptFile(jsBundle,false);
+		mJsBridge.loadScriptFile(mJsBundle,false);
 		if(onJSBundleLoadListener != null){
-			onJSBundleLoadListener.onComplete(true,jsBundle);
+			onJSBundleLoadListener.onComplete(true,mJsBundle);
 		}
 	}
 

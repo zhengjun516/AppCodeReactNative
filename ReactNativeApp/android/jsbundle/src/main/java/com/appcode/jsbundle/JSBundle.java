@@ -43,6 +43,10 @@ public class JSBundle implements Serializable {
 	 */
 	private String mCommonJSBundleAssetName;
 
+	private JSBundleInfo mJSBundleInfo;
+
+	private JSBundleInfo mBaseJSBundleInfo;
+
 	private GetReactPackageCallback mGetReactPackageCallback;
 
 	private ReactNativeHost mReactNativeHost;
@@ -50,6 +54,31 @@ public class JSBundle implements Serializable {
 	private int mJSBundleType;
 
 	private boolean mIsPreload;
+
+
+	public JSBundle(JSBundleInfo jsBundleInfo) {
+		this(jsBundleInfo,false);
+	}
+
+	public JSBundle(JSBundleInfo jsBundleInfo,boolean isPreload) {
+		this(jsBundleInfo,null,false);
+	}
+
+	public JSBundle(JSBundleInfo jsBundleInfo, JSBundleInfo mBaseJSBundleInfo) {
+		this(jsBundleInfo,mBaseJSBundleInfo,false);
+	}
+
+	public JSBundle(JSBundleInfo mJSBundleInfo, JSBundleInfo mBaseJSBundleInfo,boolean isPreload) {
+		this.mJSBundleInfo = mJSBundleInfo;
+		this.mBaseJSBundleInfo = mBaseJSBundleInfo;
+		this.mIsPreload = isPreload;
+
+		if(mBaseJSBundleInfo == null){
+			mJSBundleType = JS_BUNDLE_TYPE_STANDARD;
+		}else{
+			mJSBundleType = JS_BUNDLE_TYPE_MULTIPLE;
+		}
+	}
 
 	public JSBundle(String mainComponentName, String jSBundleFile, String jSBundleAssetName) {
 		this(mainComponentName,false,jSBundleFile,jSBundleAssetName);
@@ -125,7 +154,7 @@ public class JSBundle implements Serializable {
 	}
 
 	public String getDefaultMainComponentName() {
-		return mDefaultMainComponentName;
+		return mJSBundleInfo.getJsBundleFile();
 	}
 
 	public void setDefaultMainComponentName(String defaultMainComponentName) {
@@ -133,15 +162,22 @@ public class JSBundle implements Serializable {
 	}
 
 	public String getJSBundleFile() {
-		return mJSBundleFile;
+		if(mJSBundleInfo != null){
+			if(mJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_SDCARD){
+				return mJSBundleInfo.getJsBundleFile();
+			}
+		}
+		return null;
 	}
 
-	public void setJSBundleFile(String mJSBundleFile) {
-		this.mJSBundleFile = mJSBundleFile;
-	}
 
 	public String getBundleAssetName() {
-		return mJSBundleAssetName;
+		if(mJSBundleInfo != null){
+			if(mJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_ASSETS){
+				return mJSBundleInfo.getJsBundleFile();
+			}
+		}
+		return null;
 	}
 
 	public void setBundleAssetName(String mBundleAssetName) {
@@ -149,19 +185,22 @@ public class JSBundle implements Serializable {
 	}
 
 	public String getCommonJSBundleFile() {
-		return mCommonJSBundleFile;
+		if(mBaseJSBundleInfo != null){
+			if(mBaseJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_SDCARD){
+				return mBaseJSBundleInfo.getJsBundleFile();
+			}
+		}
+		return null;
 	}
 
-	public void setCommonJSBundleFile(String commonJSBundleFile) {
-		this.mCommonJSBundleFile = commonJSBundleFile;
-	}
 
 	public String getCommonJSBundleAssetName() {
-		return mCommonJSBundleAssetName;
-	}
-
-	public void setCommonJSBundleAssetName(String commonJSBundleAssetName) {
-		this.mCommonJSBundleAssetName = commonJSBundleAssetName;
+		if(mBaseJSBundleInfo != null){
+			if(mBaseJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_ASSETS){
+				return mBaseJSBundleInfo.getJsBundleFile();
+			}
+		}
+		return null;
 	}
 
 	public GetReactPackageCallback getGetReactPackageCallback() {

@@ -66,9 +66,9 @@ public class JSBundleAssetsManager {
 				if(bundleFile.endsWith(".bundle")){
 					JSBundleInfo jsBundleInfo = readAssetsJSBundle(JSBundleConstant.BUNDLES_DIR+ File.separator+bundleDir+File.separator+bundleFile);
 					if(jsBundleInfo != null){
-						JSBundle jsBundle = new JSBundle(jsBundleInfo.getMainComponentNames().get(0),false,null,jsBundleInfo.getJsBundleFile());
+						JSBundle jsBundle = new JSBundle(jsBundleInfo);
 						jsBundle.setGetReactPackageCallback(getReactPackageCallback);
-					//	JSBundleManager.getInstance().addJSBundle(jsBundle);
+						JSBundleManager.getInstance().addJSBundle(jsBundle);
 					}
 				}
 			}
@@ -88,7 +88,7 @@ public class JSBundleAssetsManager {
 				}
 			}
 			for(JSBundleInfo jsBundleInfo:jsBundleInfoHashMap.values()){
-				jsBundle = new JSBundle(jsBundleInfo.getMainComponentNames().get(0),true,null,jsBundleInfo.getJsBundleFile(),null,baseJSBundleInfo.getJsBundleFile());
+				jsBundle = new JSBundle(jsBundleInfo,baseJSBundleInfo);
 				jsBundle.setGetReactPackageCallback(getReactPackageCallback);
 				JSBundleManager.getInstance().addJSBundle(jsBundle);
 			}
