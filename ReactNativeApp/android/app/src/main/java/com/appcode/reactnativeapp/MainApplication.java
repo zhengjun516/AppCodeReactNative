@@ -30,15 +30,6 @@ public class MainApplication extends Application implements ReactApplication {
     appContext = getApplicationContext();
     SoLoader.init(this, /* native exopackage */ false);
     JSBundleSdk.init(this);
-    JSBundleSdk.initAssetsJSBundle(new GetReactPackageCallback() {
-      @Override
-      public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-        PackageList packageList = new PackageList(reactNativeHost);
-        List<ReactPackage> reactPackages = packageList.getPackages();
-        reactPackages.add(new CommPackage());
-        return reactPackages;
-      }
-    });
   }
 
   @Override

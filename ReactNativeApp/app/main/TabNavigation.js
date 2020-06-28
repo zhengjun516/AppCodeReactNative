@@ -43,8 +43,8 @@ export default class TabNavigation extends Component{
                     <TabBarItem
                       tintColor={tintColor}
                       focused={focused}
-                      normalImage={require('../../res/images/icon_tabbar_homepage.png')}
-                      selectedImage={require('../../res/images/icon_tabbar_homepage_selected.png')} />
+                      normalImage={'res_images_icon_tabbar_homepage.png'}
+                      selectedImage={'res_images_icon_tabbar_homepage_selected.png'} />
                   ),
                 }}
                  />
@@ -56,8 +56,8 @@ export default class TabNavigation extends Component{
                     <TabBarItem
                       tintColor={tintColor}
                       focused={focused}
-                      normalImage={require('../../res/images/icon_tabbar_merchant_normal.png')}
-                      selectedImage={require('../../res/images/icon_tabbar_merchant_selected.png')} />
+                      normalImage={'res_images_icon_tabbar_merchant_normal.png'}
+                      selectedImage={'res_images_icon_tabbar_merchant_selected.png'} />
                   ),
                 }}
                 />
@@ -69,8 +69,8 @@ export default class TabNavigation extends Component{
                     <TabBarItem
                       tintColor={tintColor}
                       focused={focused}
-                      normalImage={require('../../res/images/icon_tabbar_misc.png')}
-                      selectedImage={require('../../res/images/icon_tabbar_misc_selected.png')}/>
+                      normalImage={'res_images_icon_tabbar_misc.png'}
+                      selectedImage={'res_images_icon_tabbar_misc_selected.png'}/>
                   ),
                 }}
                 />
@@ -82,8 +82,8 @@ export default class TabNavigation extends Component{
                     <TabBarItem
                       tintColor={tintColor}
                       focused={focused}
-                      normalImage={require('../../res/images/icon_tabbar_mine.png')}
-                      selectedImage={require('../../res/images/icon_tabbar_mine_selected.png')}
+                      normalImage={'res_images_icon_tabbar_mine.png'}
+                      selectedImage={'res_images_icon_tabbar_mine_selected.png'}
                        />
                   ),
                 }}

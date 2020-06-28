@@ -36,8 +36,8 @@ public class JSBundleReactNativeHost extends ReactNativeHost {
 			return mJsBundle.getJSBundleFile();
 		}
 		return mJsBundle.getCommonJSBundleFile();
-
 	}
+
 
 	@Nullable
 	@Override

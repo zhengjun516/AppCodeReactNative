@@ -43,6 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         checkPermissions();
+        requestPermission();
+
+        JSBundleSdk.initAssetsJSBundle(new GetReactPackageCallback() {
+            @Override
+            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
+                PackageList packageList = new PackageList(reactNativeHost);
+                List<ReactPackage> reactPackages = packageList.getPackages();
+                reactPackages.add(new CommPackage());
+                return reactPackages;
+            }
+        });
     }
 
     private void initReactInstance() {
@@ -78,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMsgToRN(View view) {
-       //String appName = "ReactNativeApp";
-        String appName = "AppCodeReactNative";
+        String appName = "ReactNativeApp";
+        //String appName = "AppCodeReactNative";
         JSIntent jsIntent = new JSIntent("bundle01/index.bundle",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
@@ -110,6 +121,23 @@ public class MainActivity extends AppCompatActivity {
             long completeId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,-1);
             if(completeId == mDownLoadId) {
                 HotUpdate.handleZIP(getApplicationContext());
+            }
+        }
+    }
+
+    private void requestPermission() {
+        String[] permissions = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+        };
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(this, permissions, 1);
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, 1);
             }
         }
     }

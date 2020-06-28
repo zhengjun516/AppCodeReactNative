@@ -12,8 +12,18 @@ public class JSBundleFileLocalManager extends JSBundleFileBaseManager{
 	private Context mContext;
 
 	public JSBundleFileLocalManager(){
-		super(JSBundleConstant.BUNDLES_PATH_DATA);
+		super(JSBundleConstant.BUNDLES_PATH_SDCARD);
 		mContext = JSBundleSdk.getApplication();
+	}
+
+	@Override
+	public void init(String bundlesDir) {
+		copyAssetsBundlesToSdcard();
+		super.init(bundlesDir);
+	}
+
+	public void copyAssetsBundlesToSdcard(){
+		JSFileUtil.copyAssets(JSBundleConstant.DIR_BUNDLES,JSBundleConstant.BUNDLES_PATH_SDCARD);
 	}
 
 	@Override

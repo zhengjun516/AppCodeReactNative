@@ -77,7 +77,8 @@ public class JSBundle implements Serializable {
 		if(mJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_ASSETS){
 			return mJSBundleInfo.getJsBundleFile().replace(JSBundleConstant.DIR_BUNDLES+"/","");
 		}else if(mJSBundleInfo.getJsBundleLocationType() == JSBundleInfo.BUNDLE_LOCATION_SDCARD){
-			return mJSBundleInfo.getJsBundleFile().replace(JSBundleConstant.BUNDLES_PATH_DATA+"/","");
+			String jsBundleFilePath = mJSBundleInfo.getJsBundleFile().substring(mJSBundleInfo.getJsBundleFile().indexOf(JSBundleConstant.DIR_BUNDLES));
+			return jsBundleFilePath.replace(JSBundleConstant.DIR_BUNDLES+"/","");
 		}
 		return null;
 	}
