@@ -1,0 +1,23 @@
+{
+  "base": {
+    "outputDir": "android/app/src/main/assets/bundles/bundle03",
+    "outputFile": "base.android.bundle",
+    "outputResDir":"android/app/src/main/assets/bundles/bundle03/res",
+    "entryFile": "base.js",
+    "configFile":"base.config.js"
+  },
+  "business": {
+    "outputDir": "android/app/src/main/assets/bundles/bundle03",
+    "outputFile": "business.android.bundle",
+    "outputResDir":"android/app/src/main/assets/bundles/bundle03/res",
+    "entryFile": "index.js",
+    "configFile":"business.config.js"
+  },
+  "business2": {
+    "outputDir": "android/app/src/main/assets/bundles/bundle03",
+    "outputFile": "business2.android.bundle",
+    "outputResDir":"android/app/src/main/assets/bundles/bundle03/res",
+    "entryFile": "index2.js",
+    "configFile":"business.config.js"
+  }
+}
