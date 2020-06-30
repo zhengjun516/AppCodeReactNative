@@ -3,6 +3,7 @@ package com.appcode.reactnativeapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.appcode.downloadsdk.DownloadSdk;
 import com.appcode.jsbundle.GetReactPackageCallback;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.reactnativeapp.communication.CommPackage;
@@ -28,8 +29,11 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     instance = this;
     appContext = getApplicationContext();
-    SoLoader.init(this, /* native exopackage */ false);
+    /* native exopackage */
+    SoLoader.init(this,  false);
     JSBundleSdk.init(this);
+    JSBundleSdk.setDebug(true);
+    DownloadSdk.init(this);
   }
 
   @Override

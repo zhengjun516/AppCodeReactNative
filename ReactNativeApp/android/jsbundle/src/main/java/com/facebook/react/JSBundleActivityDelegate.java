@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.appcode.jsbundle.JSBundle;
-import com.appcode.jsbundle.JSBundleManager;
 import com.appcode.jsbundle.JSIntent;
 
 public class JSBundleActivityDelegate extends ReactActivityDelegate {

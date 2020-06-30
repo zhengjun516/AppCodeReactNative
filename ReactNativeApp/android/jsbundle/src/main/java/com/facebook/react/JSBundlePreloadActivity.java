@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.appcode.jsbundle.JSBridge;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
+import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.jsbundle.JSIntent;
 import com.appcode.jsbundle.OnJSBundleLoadListener;
 import com.facebook.react.bridge.ReactContext;
@@ -21,8 +22,8 @@ public class JSBundlePreloadActivity extends Activity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		JSIntent jsIntent = (JSIntent) getIntent().getParcelableExtra(JSIntent.KEY_JS_INTENT);
 
+		JSIntent jsIntent = (JSIntent) getIntent().getParcelableExtra(JSIntent.KEY_JS_INTENT);
 		if(jsIntent == null){
 			finish();
 			return;
@@ -35,36 +36,46 @@ public class JSBundlePreloadActivity extends Activity {
 			return;
 		}
 
-		ReactNativeHost appCodeReactNativeHost = mJsBundle.getReactNativeHost();
-		mJsBridge = new JSBridge(appCodeReactNativeHost);
-		ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
-		if(!manager.hasStartedCreatingInitialContext() || mJsBridge.getCatalystInstance() == null){
-			manager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener(){
-				@Override
-				public void onReactContextInitialized(ReactContext context) {
-					loadScript(new OnJSBundleLoadListener() {
-						@Override
-						public void onComplete(boolean success, JSBundle jsBundle) {
-							mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
-							startToMultipeJSBundleActivity();
-						}
-					});
-					manager.removeReactInstanceEventListener(this);
-				}
-			});
-			manager.createReactContextInBackground();
+		if(JSBundleSdk.isIsDebug()){
+			startToMultipeJSBundleActivity();
 		}else{
-			loadScript(new OnJSBundleLoadListener() {
-				@Override
-				public void onComplete(boolean success, JSBundle jsBundle) {
-					mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
-					startToMultipeJSBundleActivity();
-				}
-			});
+			ReactNativeHost appCodeReactNativeHost = mJsBundle.getReactNativeHost();
+			mJsBridge = new JSBridge(appCodeReactNativeHost);
+			ReactInstanceManager manager = appCodeReactNativeHost.getReactInstanceManager();
+			if(!manager.hasStartedCreatingInitialContext() || mJsBridge.getCatalystInstance() == null){
+				manager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener(){
+					@Override
+					public void onReactContextInitialized(ReactContext context) {
+						loadScript(new OnJSBundleLoadListener() {
+							@Override
+							public void onComplete(boolean success, JSBundle jsBundle) {
+								mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
+								startToMultipeJSBundleActivity();
+							}
+						});
+						manager.removeReactInstanceEventListener(this);
+					}
+				});
+				manager.createReactContextInBackground();
+			}else{
+				loadScript(new OnJSBundleLoadListener() {
+					@Override
+					public void onComplete(boolean success, JSBundle jsBundle) {
+						mJsBridge.setJsBundleAssetPath(manager.getCurrentReactContext(),jsBundle.getBundleAssetName());
+						startToMultipeJSBundleActivity();
+					}
+				});
+			}
 		}
 	}
 
 	public void loadScript(OnJSBundleLoadListener onJSBundleLoadListener){
+		//当设置成debug模式时，所有需要的业务代码已经都加载好了
+		if(BuildConfig.DEBUG){
+			onJSBundleLoadListener.onComplete(true,null);
+			return;
+		}
+
 		mJsBridge.loadScriptFile(mJsBundle,false);
 		if(onJSBundleLoadListener != null){
 			onJSBundleLoadListener.onComplete(true,mJsBundle);

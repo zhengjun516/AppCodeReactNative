@@ -15,9 +15,18 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 public class JSBundleSdk {
 
 	private  static Application sApplication;
+	private  static boolean sIsDebug;
 
 	public static void init(Application application){
 		sApplication = application;
+	}
+
+	public static void setDebug(boolean isDebug){
+		sIsDebug = isDebug;
+	}
+
+	public static boolean isIsDebug(){
+		return sIsDebug;
 	}
 
 	public static void initAssetsJSBundle(GetReactPackageCallback getReactPackageCallback){
@@ -72,10 +81,10 @@ public class JSBundleSdk {
 
 
 	public static void startJSBundle(JSIntent jsIntent){
+
 		JSBundle jsBundle = getJSBundler(jsIntent);
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
-
 			Intent	intent = new Intent(sApplication, JSBundlePreloadActivity.class);
 			//intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
 			intent.putExtra(JSIntent.KEY_JS_INTENT,jsIntent);
