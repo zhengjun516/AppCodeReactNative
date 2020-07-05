@@ -3,18 +3,20 @@
 import os
 import json
 import subprocess
+import getopt
+import sys
 
-from os import path
-from pathlib import Path
 from logger import logger
 ROOT_PATH = os.path.normpath(os.path.dirname(os.path.abspath(os.path.join(__file__,'../'))))
 PATH = os.path.normpath(os.path.dirname(os.path.abspath(__file__))) + '/'
+BUNDLES_PATH=ROOT_PATH+"/"+"bundles"
 
 class BundleConfig:
-    def __init__(self,outputDir,outputFile,outputResDir,entryFile,configFile):
-        self.outputDir=outputDir
+    def __init__(self,moduleName,bundleDir,outputFile,bundleResDir,entryFile,configFile):
+        self.moduleName=moduleName
+        self.bundleDir=bundleDir
         self.outputFile=outputFile
-        self.outputResDir=outputResDir
+        self.bundleResDir=bundleResDir
         self.entryFile=entryFile
         self.configFile=configFile
 def get_root_path(path):
@@ -22,21 +24,39 @@ def get_root_path(path):
     logger.info("filePath:"+filePath)
     return filePath
 
-def build_bundle(bundleConfig,dev):
+def zip(path,zipFile,bundleDir):
+    logger.info("path:"+path+"  zipFile:"+zipFile+" modelPath:"+bundleDir)
 
+    #subprocess.check_call(['rm ','-r',path+"/"+zipFile])
+
+    os.system('cd '+path+'&& zip -r -o '+path+"/"+zipFile+" ./"+bundleDir)
+    #subprocess.check_call(['cd',path,'&& zip','-r','-m','-o',path+"/"+zipFile,modelPath])
+
+
+def build_bundle(path,bundleConfig,dev):
     logger.info("buildBundle:dev:"+str(dev))
+    if len(bundleConfig.bundleDir)>0:
+        bundle_path=path+"/"+bundleConfig.moduleName+"/"+bundleConfig.bundleDir+'/'
+        bundle_res_path=path+"/"+bundleConfig.moduleName+"/"+bundleConfig.bundleDir+'/'+bundleConfig.bundleResDir+'/'
+    else:
+        bundle_path=path+"/"+bundleConfig.moduleName+"/"
+        bundle_res_path=path+"/"+bundleConfig.moduleName+'/'+bundleConfig.bundleResDir+'/'
 
-    if not path.exists(bundleConfig.outputDir):
-        os.makedirs(bundleConfig.outputDir)
-    if not path.exists(bundleConfig.outputResDir):
-        os.makedirs(bundleConfig.outputResDir,0o777)
+    if not os.path.exists(bundle_path):
+        os.makedirs(bundle_path,0o777)
+
+    if not os.path.exists(bundle_res_path):
+        os.makedirs(bundle_res_path,0o777)
 
     subprocess.check_call(['yarn','react-native','bundle','--platform','android',\
                            '--dev','true'if dev else 'false',\
                            '--entry-file',get_root_path(bundleConfig.entryFile),\
-                           '--bundle-output',get_root_path(bundleConfig.outputDir+'/'+bundleConfig.outputFile),\
-                           '--assets-dest',get_root_path(bundleConfig.outputResDir),\
+                           '--bundle-output',bundle_path+bundleConfig.outputFile,\
+                           '--assets-dest',bundle_res_path,\
                            '--config',get_root_path(bundleConfig.configFile)])
+
+
+    zip(path+"/"+bundleConfig.moduleName,bundleConfig.bundleDir+".zip",bundleConfig.bundleDir)
 
 
 def parse_config(configFile):
@@ -44,25 +64,42 @@ def parse_config(configFile):
 
     bundleConfigList=[]
     with open(configFile,'r', encoding='UTF-8') as configFile:
-        configJson = json.load(configFile)
-        baseConfig = configJson['base']
-        baseBundle = BundleConfig(baseConfig['outputDir'],baseConfig['outputFile'],baseConfig['outputResDir'],baseConfig['entryFile'],baseConfig['configFile'])
+        config = json.load(configFile)
+        baseBundle = BundleConfig(config['modelName'],config['bundleDir'],config['outputFile'],config['bundleResDir'],config['entryFile'],config['configFile'])
         bundleConfigList.append(baseBundle)
-        business = configJson['business']
-        businessBundle = BundleConfig(business['outputDir'],business['outputFile'],business['outputResDir'],business['entryFile'],business['configFile'])
-        bundleConfigList.append(businessBundle)
-        business = configJson['business2']
-        businessBundle = BundleConfig(business['outputDir'],business['outputFile'],business['outputResDir'],business['entryFile'],business['configFile'])
-        bundleConfigList.append(businessBundle)
-
     return bundleConfigList
 
+#开始执行
 def cmd():
     logger.info("start build")
-    print(PATH)
-    bundleConfigList = parse_config(PATH+"config.json")
-    for bundleConfig in bundleConfigList:
-        build_bundle(bundleConfig,False)
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], 'hc:d:o', ['help', 'config=', 'dev=','output='])
+        config_file=None
+        dev=None
+        output=None
+        for opt, arg in opts:
+            if opt in ('-h', '--help'):
+                sys.exit(1)
+            elif opt in ('-c', '--config'):
+                config_file=arg
+            elif opt in ('-d', '--debug'):
+                dev=arg.lower() in ["true", "1"]
+            elif opt in ('-o', '--output'):
+                output=arg
 
+        bundleConfigList = parse_config(config_file)
+        for bundleConfig in bundleConfigList:
+            build_bundle(BUNDLES_PATH,bundleConfig,dev)
+
+    except getopt.GetoptError as e:
+        logger.info('GetoptError', e)
+        sys.exit()
+
+    logger.info("***** End Building  *****")
+    logger.close()
+
+'''
+主程序入口
+'''
 if __name__ == '__main__':
     cmd()

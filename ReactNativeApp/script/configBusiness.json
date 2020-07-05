@@ -1,0 +1,8 @@
+{
+    "modelName": "bundle03",
+    "bundleDir": "business",
+    "outputFile": "business.android.bundle",
+    "bundleResDir":"res",
+    "entryFile": "index.js",
+    "configFile":"business.config.js"
+}

@@ -1,0 +1,8 @@
+{
+    "modelName": "bundle03",
+    "bundleDir": "base",
+    "outputFile": "base.android.bundle",
+    "bundleResDir":"res",
+    "entryFile": "base.js",
+    "configFile":"base.config.js"
+}
