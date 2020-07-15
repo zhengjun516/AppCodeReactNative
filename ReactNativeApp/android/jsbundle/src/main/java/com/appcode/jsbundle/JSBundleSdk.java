@@ -3,7 +3,6 @@ package com.appcode.jsbundle;
 import android.app.Application;
 import android.content.Intent;
 
-import com.appcode.react.AppCodeReactActivity;
 import com.facebook.react.JSBundlePreloadActivity;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -65,7 +64,7 @@ public class JSBundleSdk {
 
 	public static void addJSBundle(JSBundle jsBundle){
 		if(JSBundleManager.getInstance().hasJSBundle(jsBundle)){
-			throw new RuntimeException("组件："+jsBundle.getPackageName()+" 已经存在,不能重复添加");
+			throw new RuntimeException("组件："+jsBundle.getBundleDir()+" 已经存在,不能重复添加");
 		}
 		JSBundleManager.getInstance().addJSBundle(jsBundle);
 	}

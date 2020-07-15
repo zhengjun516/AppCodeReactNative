@@ -1,13 +1,12 @@
 package com.appcode.jsbundle;
 
-import android.content.res.AssetManager;
 import android.text.TextUtils;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,12 +20,10 @@ public abstract class JSBundleFileBaseManager {
 
 
 	protected String mBundlesDir;
-	protected List<JSBundle> jsBundles;
 	protected GetReactPackageCallback getReactPackageCallback;
 
 	public JSBundleFileBaseManager(String bundlesDir){
 		mBundlesDir = bundlesDir;
-		jsBundles = new ArrayList<>();
 	}
 
 	public void init(String bundlesDir){
@@ -36,15 +33,59 @@ public abstract class JSBundleFileBaseManager {
 			}
 
 			String[] bundleDirs = getChildDirs(null,mBundlesDir);
+
+			JSBundleInfo baseJSBundleInfo = null;
+            List<JSBundleInfo> jsBundleInfos = new ArrayList<>();
 			for(String bundleDir : bundleDirs){
-				parseBundleDir(mBundlesDir,bundleDir);
+				JSBundleInfo jsBundleInfo = parseBundleDir(mBundlesDir,bundleDir);
+				if(jsBundleInfo.isBaseBundle){
+					baseJSBundleInfo = jsBundleInfo;
+				}else{
+					jsBundleInfos.add(jsBundleInfo);
+				}
+			}
+
+			for(JSBundleInfo jsBundleInfo:jsBundleInfos){
+				JSBundle jsBundle = new JSBundle(jsBundleInfo,baseJSBundleInfo);
+				jsBundle.setGetReactPackageCallback(getReactPackageCallback);
+				JSBundleManager.getInstance().addJSBundle(jsBundle);
 			}
 		}catch (IOException e){
+			JSBLog.e(TAG,e);
+		}catch (JSONException e){
 			JSBLog.e(TAG,e);
 		}
 	}
 
-	protected void parseBundleDir(String parentDir,String bundleDir) throws IOException {
+	protected JSBundleInfo parseBundleDir(String parentDir, String bundleDir) throws IOException, JSONException {
+			String bundleDirPath = parentDir+File.separator+bundleDir+File.separator;
+			String manifestJson = readManifest(bundleDirPath+"manifest.json");
+			JSONObject jsonObject = new JSONObject(manifestJson);
+			JSBundleInfo jsBundleInfo = new JSBundleInfo(parentDir,
+					jsonObject.optString(JSBundleInfo.BUNDLE_DIR),
+														jsonObject.optString(JSBundleInfo.BUNDLE_FILE),
+														jsonObject.optString(JSBundleInfo.BUNDLE_RES_DIR),
+														jsonObject.optString(JSBundleInfo.MAIN_COMPONENT),
+														jsonObject.optInt(JSBundleInfo.VERSION),
+														jsonObject.optBoolean(JSBundleInfo.IS_BASE_BUNDLE),
+														jsonObject.optBoolean(JSBundleInfo.IS_PRELOAD),
+														jsonObject.optString(JSBundleInfo.MD5));
+			return jsBundleInfo;
+	}
+
+	public String readManifest(String manifestFile) throws IOException{
+		BufferedReader bufferedReader  = new BufferedReader(new InputStreamReader(getInputStream(manifestFile)));
+		StringBuilder builder = new StringBuilder();
+		String line;
+		while((line=bufferedReader.readLine()) != null){
+			builder.append(line);
+		}
+		bufferedReader.close();
+		return builder.toString();
+	}
+
+
+	protected void parseBundleDir2(String parentDir,String bundleDir) throws IOException {
 
 		String[] bundleFiles = getChildDirs(parentDir,bundleDir);
 		int i = 0;

@@ -1,8 +1,10 @@
 {
-    "modelName": "bundle03",
+    "version": 1,
     "bundleDir": "business",
     "outputFile": "business.android.bundle",
-    "bundleResDir":"res",
     "entryFile": "index.js",
-    "configFile":"business.config.js"
+    "configFile":"business.config.js",
+    "isBase": false,
+    "isPreload": true,
+    "md5":""
 }

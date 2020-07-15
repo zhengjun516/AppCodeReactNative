@@ -32,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     /* native exopackage */
     SoLoader.init(this,  false);
     JSBundleSdk.init(this);
-    JSBundleSdk.setDebug(true);
+    JSBundleSdk.setDebug(false);
     DownloadSdk.init(this);
   }
 

@@ -5,6 +5,7 @@ import json
 import subprocess
 import getopt
 import sys
+import hashlib
 
 from logger import logger
 ROOT_PATH = os.path.normpath(os.path.dirname(os.path.abspath(os.path.join(__file__,'../'))))
@@ -12,35 +13,85 @@ PATH = os.path.normpath(os.path.dirname(os.path.abspath(__file__))) + '/'
 BUNDLES_PATH=ROOT_PATH+"/"+"bundles"
 
 class BundleConfig:
-    def __init__(self,moduleName,bundleDir,outputFile,bundleResDir,entryFile,configFile):
-        self.moduleName=moduleName
+    def __init__(self,bundleDir,version,outputFile,entryFile,configFile,isBase,isPreload):
         self.bundleDir=bundleDir
+        self.version=version
         self.outputFile=outputFile
-        self.bundleResDir=bundleResDir
         self.entryFile=entryFile
         self.configFile=configFile
+        self.isBase=isBase
+        self.isPreload = isPreload
+        self.md5=""
 def get_root_path(path):
     filePath = os.path.normpath(os.path.dirname(os.path.abspath(os.path.join(__file__,"../"))))+"/"+path
     logger.info("filePath:"+filePath)
     return filePath
 
-def zip(path,zipFile,bundleDir):
-    logger.info("path:"+path+"  zipFile:"+zipFile+" modelPath:"+bundleDir)
+def get_file_md5(file_path):
+    logger.info("file_path:"+file_path)
+    if os.path.isfile(file_path):
+        file = open(file_path,'rb')
+        md5 = hashlib.md5()
+        md5.update(file.read())
+        md5_value = md5.hexdigest()
+        logger.info("md5_value:"+str(md5_value))
+        file.close()
+    else:
+        return ""
+    return str(md5_value).lower()
+
+def get_suffix_file(prefix,file_folder):
+    if not os.path.exists(file_folder):
+        return None
+
+    files = os.listdir(file_folder)
+    for index in range(len(files)):
+        if prefix == os.path.splitext(files[index])[1]:
+            logger.info("get_suffix_file:"+files[index])
+            return files[index]
+
+    return None
+
+def create_manifest(module_path,bundleConfig):
+    manifest = {'bundleDir':'','version':1,'mainComponent':'','md5':'',"isBase":False,'isPreload':False}
+    manifest['bundleDir'] = bundleConfig.bundleDir;
+    manifest['version'] = bundleConfig.version;
+
+    bundle_file_folder = module_path+"/"+bundleConfig.bundleDir+"/"
+    bundle_file = get_suffix_file(".bundle",bundle_file_folder)
+    manifest['bundleFile'] = bundle_file
+    manifest['isBase'] = bundleConfig.isBase;
+    manifest['isPreload']=bundleConfig.isPreload
+    manifest['md5'] = get_file_md5(bundle_file_folder+bundle_file)
+
+    app_json_file_folder = module_path+"/"+bundleConfig.bundleDir+"/raw/"
+    app_json_file = get_suffix_file(".json",app_json_file_folder)
+    if app_json_file is not None:
+        with open(app_json_file_folder+app_json_file,'r', encoding='UTF-8') as app_file:
+            app_json = json.load(app_file)
+            manifest['mainComponent'] = app_json["name"]
+
+    manifest_json_file =  module_path+"/"+bundleConfig.bundleDir+"/"+"manifest.json"
+    with open(manifest_json_file,'w', encoding='UTF-8') as manifest_file:
+        json.dump(manifest,manifest_file)
+
+def zip(module_path,zipFile,bundleDir):
+    logger.info("module_path:"+module_path+"  zipFile:"+zipFile+" modelPath:"+bundleDir)
 
     #subprocess.check_call(['rm ','-r',path+"/"+zipFile])
 
-    os.system('cd '+path+'&& zip -r -o '+path+"/"+zipFile+" ./"+bundleDir)
+    os.system('cd '+module_path+'&& zip -r -o '+module_path+"/"+zipFile+" ./"+bundleDir)
     #subprocess.check_call(['cd',path,'&& zip','-r','-m','-o',path+"/"+zipFile,modelPath])
 
 
 def build_bundle(path,bundleConfig,dev):
     logger.info("buildBundle:dev:"+str(dev))
     if len(bundleConfig.bundleDir)>0:
-        bundle_path=path+"/"+bundleConfig.moduleName+"/"+bundleConfig.bundleDir+'/'
-        bundle_res_path=path+"/"+bundleConfig.moduleName+"/"+bundleConfig.bundleDir+'/'+bundleConfig.bundleResDir+'/'
+        bundle_path=path+"/"+bundleConfig.bundleDir+'/'
+        bundle_res_path=path+"/"+bundleConfig.bundleDir+'/'
     else:
-        bundle_path=path+"/"+bundleConfig.moduleName+"/"
-        bundle_res_path=path+"/"+bundleConfig.moduleName+'/'+bundleConfig.bundleResDir+'/'
+        bundle_path=path
+        bundle_res_path=path+"/"
 
     if not os.path.exists(bundle_path):
         os.makedirs(bundle_path,0o777)
@@ -55,8 +106,8 @@ def build_bundle(path,bundleConfig,dev):
                            '--assets-dest',bundle_res_path,\
                            '--config',get_root_path(bundleConfig.configFile)])
 
-
-    zip(path+"/"+bundleConfig.moduleName,bundleConfig.bundleDir+".zip",bundleConfig.bundleDir)
+    create_manifest(path,bundleConfig)
+    zip(path,bundleConfig.bundleDir+".zip",bundleConfig.bundleDir)
 
 
 def parse_config(configFile):
@@ -65,8 +116,9 @@ def parse_config(configFile):
     bundleConfigList=[]
     with open(configFile,'r', encoding='UTF-8') as configFile:
         config = json.load(configFile)
-        baseBundle = BundleConfig(config['modelName'],config['bundleDir'],config['outputFile'],config['bundleResDir'],config['entryFile'],config['configFile'])
+        baseBundle = BundleConfig(config['bundleDir'],config['version'],config['outputFile'],config['entryFile'],config['configFile'],config['isBase'],config['isPreload'])
         bundleConfigList.append(baseBundle)
+
     return bundleConfigList
 
 #开始执行

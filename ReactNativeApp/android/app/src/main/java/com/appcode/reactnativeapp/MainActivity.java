@@ -91,26 +91,26 @@ public class MainActivity extends AppCompatActivity {
     public void sendMsgToRN(View view) {
         String appName = "ReactNativeApp";
         //String appName = "AppCodeReactNative";
-        JSIntent jsIntent = new JSIntent("bundle01/index.bundle",appName);
+        JSIntent jsIntent = new JSIntent("business",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void startAppCodeReactActivity(View view){
 
         String appName = "ReactNativeApp";
-        JSIntent jsIntent = new JSIntent("bundle02/index.android.bundle",appName);
+        JSIntent jsIntent = new JSIntent("business2",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void jumpToMultipleActivity(View view){
         String appName = "ReactNativeApp";
-        JSIntent jsIntent = new JSIntent("bundle03/business.android.bundle",appName);
+        JSIntent jsIntent = new JSIntent("business",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void jumpToMultipleActivity2(View view){
         String appName = "AppCodeReactNative";
-        JSIntent jsIntent = new JSIntent("bundle03/business2.android.bundle",appName);
+        JSIntent jsIntent = new JSIntent("business2",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
 

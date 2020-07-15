@@ -28,7 +28,7 @@ public class JSBundleReactActivity extends AppCompatActivity implements DefaultH
 		if(jsBundle == null){
 			finish();
 		}
-		return jsBundle.getPackageName();
+		return jsBundle.getBundleDir();
 	}
 
 	/** Called at construction time, override if you have a custom delegate implementation. */

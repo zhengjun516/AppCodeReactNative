@@ -35,7 +35,7 @@ public class JSBundleManager {
 
 
 	public boolean hasJSBundle(JSBundle jsBundle){
-		return hasJSBundle(jsBundle.getPackageName());
+		return hasJSBundle(jsBundle.getBundleDir());
 	}
 
 
@@ -52,7 +52,7 @@ public class JSBundleManager {
 		}
 		jsBundle.setReactNativeHost(reactNativeHost);
 
-		mJSBundleMap.put(jsBundle.getPackageName(),jsBundle);
+		mJSBundleMap.put(jsBundle.getBundleDir(),jsBundle);
 
 	}
 
@@ -62,7 +62,7 @@ public class JSBundleManager {
 
 
 	public JSBundle deleteJSBundle(JSBundle jsBundle){
-		return deleteJSBundle(jsBundle.getPackageName());
+		return deleteJSBundle(jsBundle.getBundleDir());
 	}
 
 	public JSBundle deleteJSBundle(String mainComonentname){
