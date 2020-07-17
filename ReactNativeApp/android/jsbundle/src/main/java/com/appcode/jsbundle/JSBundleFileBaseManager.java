@@ -64,7 +64,6 @@ public abstract class JSBundleFileBaseManager {
 			JSBundleInfo jsBundleInfo = new JSBundleInfo(parentDir,
 					jsonObject.optString(JSBundleInfo.BUNDLE_DIR),
 														jsonObject.optString(JSBundleInfo.BUNDLE_FILE),
-														jsonObject.optString(JSBundleInfo.BUNDLE_RES_DIR),
 														jsonObject.optString(JSBundleInfo.MAIN_COMPONENT),
 														jsonObject.optInt(JSBundleInfo.VERSION),
 														jsonObject.optBoolean(JSBundleInfo.IS_BASE_BUNDLE),

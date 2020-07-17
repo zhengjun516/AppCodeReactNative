@@ -11,7 +11,6 @@ public class JSBundleInfo implements Serializable {
 	public static final String VERSION = "version";
 	public static final String BUNDLE_DIR = "bundleDir";
 	public static final String BUNDLE_FILE = "bundleFile";
-	public static final String BUNDLE_RES_DIR = "bundleResDir";
 	public static final String MAIN_COMPONENT = "mainComponent";
 	public static final String IS_BASE_BUNDLE = "isBase";
 	public static final String IS_PRELOAD= "isPreload";
@@ -29,7 +28,6 @@ public class JSBundleInfo implements Serializable {
 	public int mVersion;
 	public String mJsBundleFile;
 	public String mBundleDir;
-	public String mBundleResDir;
 	public boolean isBaseBundle;
 	public boolean isPreload;
 	public String mMD5;
@@ -38,11 +36,10 @@ public class JSBundleInfo implements Serializable {
 
 
 	public int jsBundleLocationType;
-	public JSBundleInfo(String bundleParentPath,String mBundleDir,String mJsBundleFile, String mBundleResDir,String mainComponent,int version,boolean isBaseBundle,boolean isPreload, String mMD5) {
+	public JSBundleInfo(String bundleParentPath,String mBundleDir,String mJsBundleFile,String mainComponent,int version,boolean isBaseBundle,boolean isPreload, String mMD5) {
 		this.mBundleParentPath= bundleParentPath;
 		this.mBundleDir = mBundleDir;
 		this.mJsBundleFile = mJsBundleFile;
-		this.mBundleResDir = mBundleResDir;
 		this.mainComponentNames = Arrays.asList(mainComponent);
 		this.mVersion = version;
 		this.isBaseBundle = isBaseBundle;
