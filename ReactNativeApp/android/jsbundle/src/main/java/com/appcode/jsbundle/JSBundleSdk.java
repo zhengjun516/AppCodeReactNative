@@ -15,6 +15,7 @@ public class JSBundleSdk {
 
 	private  static Application sApplication;
 	private  static boolean sIsDebug;
+	private  static boolean sEnableCopyFromAssets;
 
 	public static void init(Application application){
 		sApplication = application;
@@ -24,14 +25,32 @@ public class JSBundleSdk {
 		sIsDebug = isDebug;
 	}
 
+	public static void setEnableCopyFromAssets(boolean enableCopyFromAssets){
+		sEnableCopyFromAssets = enableCopyFromAssets;
+	}
+
+	public static boolean isEnableCopyFromAssets() {
+		return sEnableCopyFromAssets;
+	}
+
 	public static boolean isIsDebug(){
 		return sIsDebug;
 	}
 
 	public static void initAssetsJSBundle(GetReactPackageCallback getReactPackageCallback){
+		JSBundleFileBaseManager jsBundleFileBaseManager = Singleton.get(JSBundleFileAssetsManager.class);
+		jsBundleFileBaseManager.setGetReactPackageCallback(getReactPackageCallback);
+		jsBundleFileBaseManager.init("");
+	}
+
+	public static void initSDCardJSBundle(GetReactPackageCallback getReactPackageCallback){
 		JSBundleFileBaseManager jsBundleFileBaseManager = Singleton.get(JSBundleFileLocalManager.class);
 		jsBundleFileBaseManager.setGetReactPackageCallback(getReactPackageCallback);
 		jsBundleFileBaseManager.init("");
+		int bundleCount = JSBundleManager.getInstance().getJSBundleMap().size();
+		if(bundleCount <= 0){
+			initAssetsJSBundle(getReactPackageCallback);
+		}
 	}
 
 	public static void initAllReactContext(){

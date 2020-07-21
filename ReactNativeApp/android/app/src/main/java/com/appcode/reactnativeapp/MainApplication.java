@@ -33,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this,  false);
     JSBundleSdk.init(this);
     JSBundleSdk.setDebug(false);
+    JSBundleSdk.setEnableCopyFromAssets(true);
     DownloadSdk.init(this);
   }
 

@@ -18,7 +18,9 @@ public class JSBundleFileLocalManager extends JSBundleFileBaseManager{
 
 	@Override
 	public void init(String bundlesDir) {
-		copyAssetsBundlesToSdcard();
+		if(JSBundleSdk.isEnableCopyFromAssets()){
+			copyAssetsBundlesToSdcard();
+		}
 		super.init(bundlesDir);
 	}
 

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         checkPermissions();
         requestPermission();
 
-        JSBundleSdk.initAssetsJSBundle(new GetReactPackageCallback() {
+        JSBundleSdk.initSDCardJSBundle(new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
