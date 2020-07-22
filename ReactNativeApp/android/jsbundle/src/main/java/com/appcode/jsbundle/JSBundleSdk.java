@@ -3,10 +3,7 @@ package com.appcode.jsbundle;
 import android.app.Application;
 import android.content.Intent;
 
-import com.appcode.react.AppCodeReactActivity;
-import com.appcode.react.AppCodeReactNativeHost;
 import com.facebook.react.JSBundlePreloadActivity;
-import com.facebook.react.JSBundleReactNativeHost;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 
@@ -17,18 +14,52 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 public class JSBundleSdk {
 
 	private  static Application sApplication;
+	private  static boolean sIsDebug;
+	private  static boolean sEnableCopyFromAssets;
 
 	public static void init(Application application){
 		sApplication = application;
 	}
 
+	public static void setDebug(boolean isDebug){
+		sIsDebug = isDebug;
+	}
+
+	public static void setEnableCopyFromAssets(boolean enableCopyFromAssets){
+		sEnableCopyFromAssets = enableCopyFromAssets;
+	}
+
+	public static boolean isEnableCopyFromAssets() {
+		return sEnableCopyFromAssets;
+	}
+
+	public static boolean isIsDebug(){
+		return sIsDebug;
+	}
+
+	public static void initAssetsJSBundle(GetReactPackageCallback getReactPackageCallback){
+		JSBundleFileBaseManager jsBundleFileBaseManager = Singleton.get(JSBundleFileAssetsManager.class);
+		jsBundleFileBaseManager.setGetReactPackageCallback(getReactPackageCallback);
+		jsBundleFileBaseManager.init("");
+	}
+
+	public static void initSDCardJSBundle(GetReactPackageCallback getReactPackageCallback){
+		JSBundleFileBaseManager jsBundleFileBaseManager = Singleton.get(JSBundleFileLocalManager.class);
+		jsBundleFileBaseManager.setGetReactPackageCallback(getReactPackageCallback);
+		jsBundleFileBaseManager.init("");
+		int bundleCount = JSBundleManager.getInstance().getJSBundleMap().size();
+		if(bundleCount <= 0){
+			initAssetsJSBundle(getReactPackageCallback);
+		}
+	}
+
 	public static void initAllReactContext(){
-		Map<String,JSBundle> standardJSBundleMapBundleMap = JSBundleManager.getInstance().getStandardJSBundleMap();
+		Map<String,JSBundle> standardJSBundleMapBundleMap = JSBundleManager.getInstance().getJSBundleMap();
 		for(JSBundle jsBundle:standardJSBundleMapBundleMap.values()){
 			initReactContext(jsBundle);
 		}
 
-		Map<String,JSBundle> multipleJSBundleMap = JSBundleManager.getInstance().getMultipleJSBundleMap();
+		Map<String,JSBundle> multipleJSBundleMap = JSBundleManager.getInstance().getJSBundleMap();
 		for(JSBundle jsBundle:multipleJSBundleMap.values()){
 			initReactContext(jsBundle);
 		}
@@ -51,66 +82,30 @@ public class JSBundleSdk {
 	}
 
 	public static void addJSBundle(JSBundle jsBundle){
-		if(jsBundle.isMultipleJSBundle()){
-			if(JSBundleManager.getInstance().hasMultipleJSBundle(jsBundle)){
-				throw new RuntimeException("复合组件："+jsBundle.getDefaultMainComponentName()+"已经存在,不能重复添加");
-			}
-		}else{
-			if(JSBundleManager.getInstance().hasStandardJSBundle(jsBundle)){
-				throw new RuntimeException("独立组件："+jsBundle.getDefaultMainComponentName()+" 已经存在,不能重复添加");
-			}
+		if(JSBundleManager.getInstance().hasJSBundle(jsBundle)){
+			throw new RuntimeException("组件："+jsBundle.getBundleDir()+" 已经存在,不能重复添加");
 		}
-
-		ReactNativeHost reactNativeHost;
-		if(jsBundle.isMultipleJSBundle()){
-			reactNativeHost = new JSBundleReactNativeHost(jsBundle,sApplication);
-		}else{
-			reactNativeHost = new AppCodeReactNativeHost(jsBundle,sApplication);
-		}
-		jsBundle.setReactNativeHost(reactNativeHost);
 		JSBundleManager.getInstance().addJSBundle(jsBundle);
 	}
 
-	public static JSBundle getJSBundler(String mainComponentName,boolean isMultiple){
-		if(isMultiple){
-			return JSBundleManager.getInstance().getJSBundleFromMultiple(mainComponentName);
-		}else{
-			return JSBundleManager.getInstance().getJSBundleFromStandard(mainComponentName);
-		}
+	public static JSBundle getJSBundler(JSIntent jsIntent){
+		return JSBundleManager.getInstance().getJSBundle(jsIntent.getPackageName());
 	}
 
 	public static JSBundle removeJSBundler(String mainComponentName){
-		return JSBundleManager.getInstance().deleteJSBundleFromMultiple(mainComponentName);
+		return JSBundleManager.getInstance().deleteJSBundle(mainComponentName);
 	}
 
 
-	public static void startJSBundle(JSBundle jsBundle){
-		if(jsBundle == null){
-			throw new RuntimeException("jsBundle is null");
-		}
-		if(jsBundle.isMultipleJSBundle()){
-			if(!JSBundleManager.getInstance().hasMultipleJSBundle(jsBundle)){
-				addJSBundle(jsBundle);
-			}
-		}else{
-			if(!JSBundleManager.getInstance().hasStandardJSBundle(jsBundle)){
-				addJSBundle(jsBundle);
-			}
-		}
-		startJSBundle(jsBundle.getDefaultMainComponentName(),jsBundle.isMultipleJSBundle());
-	}
 
-	public static void startJSBundle(String mainComponentName,boolean isMultiple){
-		JSBundle jsBundle = getJSBundler(mainComponentName,isMultiple);
+	public static void startJSBundle(JSIntent jsIntent){
+
+		JSBundle jsBundle = getJSBundler(jsIntent);
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
-			Intent intent;
-			if(jsBundle.isMultipleJSBundle()){
-				intent = new Intent(sApplication, JSBundlePreloadActivity.class);
-			}else{
-				intent = new Intent(sApplication, AppCodeReactActivity.class);
-			}
-			intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
+			Intent	intent = new Intent(sApplication, JSBundlePreloadActivity.class);
+			//intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
+			intent.putExtra(JSIntent.KEY_JS_INTENT,jsIntent);
 			intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 			sApplication.startActivity(intent);
 		}

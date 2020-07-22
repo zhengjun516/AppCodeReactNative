@@ -1,5 +1,9 @@
 package com.appcode.jsbundle;
 
+import com.appcode.react.AppCodeReactNativeHost;
+import com.facebook.react.JSBundleReactNativeHost;
+import com.facebook.react.ReactNativeHost;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -7,8 +11,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class JSBundleManager {
 	public static JSBundleManager instance;
 
-	private Map<String,JSBundle> mStandardJSBundleMap = new HashMap<>();
-	private Map<String,JSBundle> mMultipleJSBundleMap = new HashMap<>();
+	private Map<String,JSBundle> mJSBundleMap = new HashMap<>();
 
 	private LinkedBlockingDeque<JSBundle> mJsBundlelinkedBlockingDeque = new LinkedBlockingDeque<>();
 
@@ -26,58 +29,44 @@ public class JSBundleManager {
 		return instance;
 	}
 
-	public Map<String, JSBundle> getStandardJSBundleMap() {
-		return mStandardJSBundleMap;
+	public Map<String, JSBundle> getJSBundleMap() {
+		return mJSBundleMap;
 	}
 
-	public Map<String, JSBundle> getMultipleJSBundleMap() {
-		return mMultipleJSBundleMap;
+
+	public boolean hasJSBundle(JSBundle jsBundle){
+		return hasJSBundle(jsBundle.getBundleDir());
 	}
 
-	public boolean hasStandardJSBundle(JSBundle jsBundle){
-		return hasStandardJSBundle(jsBundle.getDefaultMainComponentName());
-	}
-	public boolean hasMultipleJSBundle(JSBundle jsBundle){
-		return hasMultipleJSBundle(jsBundle.getDefaultMainComponentName());
-	}
 
-	public boolean hasStandardJSBundle(String mainComonentname){
-		return mStandardJSBundleMap.containsKey(mainComonentname);
-	}
-
-	public boolean hasMultipleJSBundle(String mainComonentname){
-		return mMultipleJSBundleMap.containsKey(mainComonentname);
+	public boolean hasJSBundle(String mainComonentname){
+		return mJSBundleMap.containsKey(mainComonentname);
 	}
 
 	public void addJSBundle(JSBundle jsBundle){
-		if(jsBundle.isMultipleJSBundle()){
-			mMultipleJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
+		ReactNativeHost reactNativeHost;
+		if(jsBundle.isSimpleJSBundle()){
+			reactNativeHost = new AppCodeReactNativeHost(jsBundle,JSBundleSdk.getApplication());
 		}else{
-			mStandardJSBundleMap.put(jsBundle.getDefaultMainComponentName(),jsBundle);
+			reactNativeHost = new JSBundleReactNativeHost(jsBundle,JSBundleSdk.getApplication());
 		}
+		jsBundle.setReactNativeHost(reactNativeHost);
+
+		mJSBundleMap.put(jsBundle.getBundleDir(),jsBundle);
+
 	}
 
-	public JSBundle getJSBundleFromStandard(String mainComonentname){
-		return mStandardJSBundleMap.get(mainComonentname);
+	public JSBundle getJSBundle(String mainComonentname){
+		return mJSBundleMap.get(mainComonentname);
 	}
 
-	public JSBundle getJSBundleFromMultiple(String mainComonentname){
-		return mMultipleJSBundleMap.get(mainComonentname);
+
+	public JSBundle deleteJSBundle(JSBundle jsBundle){
+		return deleteJSBundle(jsBundle.getBundleDir());
 	}
 
-	public JSBundle deleteJSBundleFromStandard(JSBundle jsBundle){
-		return deleteJSBundleFromStandard(jsBundle.getDefaultMainComponentName());
-	}
-	public JSBundle deleteJSBundleFromStandard(String mainComonentname){
-		return mStandardJSBundleMap.remove(mainComonentname);
-	}
-
-	public JSBundle deleteJSBundleFromMultiple(JSBundle jsBundle){
-		return deleteJSBundleFromMultiple(jsBundle.getDefaultMainComponentName());
-	}
-
-	public JSBundle deleteJSBundleFromMultiple(String mainComonentname){
-		return mMultipleJSBundleMap.remove(mainComonentname);
+	public JSBundle deleteJSBundle(String mainComonentname){
+		return mJSBundleMap.remove(mainComonentname);
 	}
 
 	public void addJSBundleToStackTop(JSBundle jsBundle){

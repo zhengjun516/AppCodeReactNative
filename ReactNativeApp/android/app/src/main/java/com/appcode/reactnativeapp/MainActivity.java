@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import com.appcode.jsbundle.GetReactPackageCallback;
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleSdk;
+import com.appcode.jsbundle.JSIntent;
 import com.appcode.reactnativeapp.communication.CommPackage;
 import com.appcode.reactnativeapp.hotupdate.HotUpdate;
 import com.facebook.react.PackageList;
@@ -41,23 +42,10 @@ public class MainActivity extends AppCompatActivity {
         initReactInstance();
 
         setContentView(R.layout.activity_main);
-        //registeReceiver();
         checkPermissions();
-    }
+        requestPermission();
 
-    private void initReactInstance() {
-        String appName = "ReactNativeApp";
-        JSBundle business = new JSBundle("multipleApp","assets.multiple01",appName, false,null, "bundles/bundle03/business.android.bundle",null, "bundles/bundle03/base.android.bundle", new GetReactPackageCallback() {
-            @Override
-            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-                PackageList packageList = new PackageList(reactNativeHost);
-                packageList.getPackages().add(new CommPackage());
-                return packageList.getPackages();
-            }
-        });
-        JSBundleSdk.addJSBundle(business);
-        appName = "AppCodeReactNative";
-       JSBundle business2 = new JSBundle("multipleApp", "assets.multiple01", appName,false,null, "bundles/bundle03/business2.android.bundle",null, "bundles/bundle03/base.android.bundle", new GetReactPackageCallback() {
+        JSBundleSdk.initSDCardJSBundle(new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
                 PackageList packageList = new PackageList(reactNativeHost);
@@ -66,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 return reactPackages;
             }
         });
-        JSBundleSdk.addJSBundle(business2);
+    }
+
+    private void initReactInstance() {
         JSBundleSdk.initAllReactContext();
     }
 
@@ -99,44 +89,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMsgToRN(View view) {
-        //startActivity(new Intent(this, App1ReactActivity.class));
         String appName = "ReactNativeApp";
-        JSBundle jsBundle = new JSBundle("simpleApp01", "assets.simple01",appName,null, "bundles/bundle02/index.android.bundle", new GetReactPackageCallback() {
-            @Override
-            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-                PackageList packageList = new PackageList(reactNativeHost);
-                packageList.getPackages().add(new CommPackage());
-                return packageList.getPackages();
-            }
-        });
-        JSBundleSdk.startJSBundle(jsBundle);
+        //String appName = "AppCodeReactNative";
+        JSIntent jsIntent = new JSIntent("business",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void startAppCodeReactActivity(View view){
+
         String appName = "ReactNativeApp";
-        List<String> mainCompnentNames = new ArrayList<>();
-        mainCompnentNames.add("AppCodeReactNative");
-        mainCompnentNames.add("ReactNativeApp");
-        JSBundle jsBundle = new JSBundle("simpleApp02","assets.simple02",mainCompnentNames, appName,null, "bundles/bundle01/index.bundle", new GetReactPackageCallback() {
-            @Override
-            public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
-                PackageList packageList = new PackageList(reactNativeHost);
-                List<ReactPackage> reactPackages = packageList.getPackages();
-                reactPackages.add(new CommPackage());
-                return reactPackages;
-            }
-        });
-        JSBundleSdk.startJSBundle(jsBundle);
+        JSIntent jsIntent = new JSIntent("business2",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void jumpToMultipleActivity(View view){
         String appName = "ReactNativeApp";
-        JSBundleSdk.startJSBundle(appName,true);
+        JSIntent jsIntent = new JSIntent("business",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public void jumpToMultipleActivity2(View view){
         String appName = "AppCodeReactNative";
-        JSBundleSdk.startJSBundle(appName,true);
+        JSIntent jsIntent = new JSIntent("business2",appName);
+        JSBundleSdk.startJSBundle(jsIntent);
     }
 
     public class CompleteReceiver extends BroadcastReceiver {
@@ -146,6 +121,23 @@ public class MainActivity extends AppCompatActivity {
             long completeId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,-1);
             if(completeId == mDownLoadId) {
                 HotUpdate.handleZIP(getApplicationContext());
+            }
+        }
+    }
+
+    private void requestPermission() {
+        String[] permissions = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+        };
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(this, permissions, 1);
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, 1);
             }
         }
     }

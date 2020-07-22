@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.BuildConfig;
 import com.appcode.jsbundle.JSBundle;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;

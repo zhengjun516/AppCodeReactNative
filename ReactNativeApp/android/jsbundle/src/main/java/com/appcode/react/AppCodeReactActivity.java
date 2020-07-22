@@ -20,7 +20,7 @@ public class AppCodeReactActivity extends ReactActivity {
 		if(jsBundle == null){
 			finish();
 		}
-		return jsBundle.getDefaultMainComponentName();
+		return jsBundle.getBundleDir();
 	}
 
 	@Override

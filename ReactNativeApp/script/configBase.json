@@ -1,0 +1,10 @@
+{
+    "bundleDir": "base",
+    "version": 1,
+    "outputFile": "base.android.bundle",
+    "entryFile": "base.js",
+    "configFile":"base.config.js",
+    "isBase": true,
+    "isPreload": true,
+    "md5":""
+}

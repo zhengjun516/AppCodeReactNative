@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.appcode.jsbundle.JSBundle;
 import com.appcode.jsbundle.JSBundleManager;
+import com.appcode.jsbundle.JSIntent;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
@@ -27,12 +28,14 @@ public class JSBundleReactActivity extends AppCompatActivity implements DefaultH
 		if(jsBundle == null){
 			finish();
 		}
-		return jsBundle.getDefaultMainComponentName();
+		return jsBundle.getBundleDir();
 	}
 
 	/** Called at construction time, override if you have a custom delegate implementation. */
 	public ReactActivityDelegate createReactActivityDelegate() {
-		return new JSBundleActivityDelegate(this, getMainComponentName());
+		JSIntent jsIntent = getIntent().getParcelableExtra(JSIntent.KEY_JS_INTENT);
+		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundle(jsIntent.getPackageName());
+		return new JSBundleActivityDelegate(this, jsBundle,jsIntent);
 	}
 
 

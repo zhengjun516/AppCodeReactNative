@@ -3,6 +3,8 @@ package com.appcode.reactnativeapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.appcode.downloadsdk.DownloadSdk;
+import com.appcode.jsbundle.GetReactPackageCallback;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.reactnativeapp.communication.CommPackage;
 import com.facebook.react.PackageList;
@@ -27,43 +29,13 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     instance = this;
     appContext = getApplicationContext();
-    SoLoader.init(this, /* native exopackage */ false);
+    /* native exopackage */
+    SoLoader.init(this,  false);
     JSBundleSdk.init(this);
+    JSBundleSdk.setDebug(false);
+    JSBundleSdk.setEnableCopyFromAssets(true);
+    DownloadSdk.init(this);
   }
-/*
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-    @Override
-    public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
-    }
-//返回JS 的路径   super.getJSBundleFile();   asserts/index.android.bundle
-//    替换这个返回值  bundle路径   patch文件
-
-    @Nullable
-    @Override
-    protected String getJSBundleFile() {
-      File file = new File (FileConstant.JS_BUNDLE_LOCAL_PATH);
-      if(file != null && file.exists()) {
-        return FileConstant.JS_BUNDLE_LOCAL_PATH;
-      } else {
-        return super.getJSBundleFile();
-      }
-
-    }
-
-    @Override
-    protected List<ReactPackage> getPackages() {
-      List<ReactPackage> reactPackages = new PackageList(this).getPackages();
-      reactPackages.add(new CommPackage());
-      return reactPackages;
-    }
-
-    @Override
-    protected String getJSMainModuleName() {
-      return "index";
-    }
-  };
-*/
 
   @Override
   public ReactNativeHost getReactNativeHost() {

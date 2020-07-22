@@ -6,12 +6,14 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.appcode.jsbundle.JSBundle;
-import com.appcode.jsbundle.JSBundleManager;
+import com.appcode.jsbundle.JSIntent;
 
 public class JSBundleActivityDelegate extends ReactActivityDelegate {
+	JSBundle mJSBundle;
 
-	public JSBundleActivityDelegate(Activity activity, @Nullable String mainComponentName) {
-		super(activity, mainComponentName);
+	public JSBundleActivityDelegate(Activity activity, JSBundle jsBundle, JSIntent jsIntent) {
+		super(activity, jsIntent.getMainComponentName());
+		mJSBundle = jsBundle;
 	}
 
 	public JSBundleActivityDelegate(ReactActivity activity, @Nullable String mainComponentName) {
@@ -25,11 +27,10 @@ public class JSBundleActivityDelegate extends ReactActivityDelegate {
 
 	@Override
 	public ReactNativeHost getReactNativeHost() {
-		JSBundle jsBundle = JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName());
-		if(jsBundle.getReactNativeHost() != null){
-			return jsBundle.getReactNativeHost();
+		if(mJSBundle.getReactNativeHost() != null){
+			return mJSBundle.getReactNativeHost();
 		}
-		return new JSBundleReactNativeHost(JSBundleManager.getInstance().getJSBundleFromMultiple(getMainComponentName()),getPlainActivity().getApplication());
+		return  null;
 	}
 
 
