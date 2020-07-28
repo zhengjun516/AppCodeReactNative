@@ -71,7 +71,21 @@ public class JSBundle implements Serializable {
 		return mJSBundleType == JS_BUNDLE_TYPE_SIMPLE;
 	}
 
+	public JSBundleInfo getJSBundleInfo() {
+		return mJSBundleInfo;
+	}
 
+	public void setJSBundleInfo(JSBundleInfo jSBundleInfo) {
+		this.mJSBundleInfo = jSBundleInfo;
+	}
+
+	public JSBundleInfo getBaseJSBundleInfo() {
+		return mBaseJSBundleInfo;
+	}
+
+	public void setBaseJSBundleInfo(JSBundleInfo baseJSBundleInfo) {
+		this.mBaseJSBundleInfo = baseJSBundleInfo;
+	}
 
 	public String getBundleDir() {
 		return mJSBundleInfo.mBundleDir;

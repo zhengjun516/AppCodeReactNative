@@ -1,0 +1,1210 @@
+[
+  {
+    "id": null,
+    "path": "index2_2.js"
+  },
+  {
+    "id": null,
+    "path": "app2/RootNavigation.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/index.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/index.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/routers/src/index.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/routers/src/CommonActions.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/routers/src/BaseRouter.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/routers/src/StackRouter.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/alphabet.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/random/random-from-seed.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/build.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/generate.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/random/random-byte-browser.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/nanoid/format.browser.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/is-valid.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/shortid/lib/util/cluster-worker-id-browser.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/routers/src/TabRouter.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/routers/src/DrawerRouter.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/routers/src/types.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/BaseNavigationContainer.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/EnsureSingleNavigator.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/NavigationBuilderContext.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useFocusedListeners.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useDevTools.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useStateGetters.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/isSerializable.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useEventEmitter.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useSyncState.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/createNavigatorFactory.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/Screen.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/NavigationContext.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/NavigationRouteContext.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useNavigationBuilder.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-is/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-is/cjs/react-is.production.min.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useRegisterNavigator.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useDescriptors.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/SceneView.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/StaticContainer.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useNavigationCache.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useNavigationHelpers.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/types.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useOnAction.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useFocusEvents.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useOnRouteFocus.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useChildActionListeners.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useFocusedListenersChildrenAdapter.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useOnGetState.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useNavigation.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useRoute.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useFocusEffect.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useIsFocused.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/use-subscription/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/use-subscription/cjs/use-subscription.production.min.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/useNavigationState.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/getStateFromPath.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/node_modules/escape-string-regexp/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/query-string/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/strict-uri-encode/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/decode-uri-component/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/split-on-first/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/getPathFromState.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/core/src/getActionFromState.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/NavigationContainer.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/theming/ThemeProvider.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/theming/ThemeContext.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/theming/DefaultTheme.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/useBackButton.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/NavigationNativeContainer.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/useLinking.native.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/useScrollToTop.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/theming/DarkTheme.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/native/src/theming/useTheme.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/index.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/TransitionConfigs/CardStyleInterpolators.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-iphone-x-helper/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/conditional.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/TransitionConfigs/HeaderStyleInterpolators.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/TransitionConfigs/TransitionSpecs.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/TransitionConfigs/TransitionPresets.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/navigators/createStackNavigator.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Stack/StackView.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-safe-area-context/src/index.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-safe-area-context/src/NativeSafeAreaView.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-safe-area-context/src/InitialWindowSafeAreaInsets.ts"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/Swipeable.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/GestureHandler.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/createNativeWrapper.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/NativeViewGestureHandler.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/createHandler.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/fbjs/lib/areEqual.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/RNGestureHandlerModule.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/State.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/GestureHandlerPropTypes.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/Directions.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/gestureHandlerRootHOC.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/GestureHandlerRootView.android.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/GestureButtons.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/GestureHandlerButton.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/GestureComponents.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/Gestures.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/PlatformConstants.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/DrawerLayout.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/touchables/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/touchables/TouchableNativeFeedback.android.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/touchables/GenericTouchable.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/touchables/TouchableWithoutFeedback.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/touchables/TouchableOpacity.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-gesture-handler/touchables/TouchableHighlight.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Stack/CardStack.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/react-native-screens/src/screens.native.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Header/HeaderSegment.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Header/HeaderBackButton.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/MaskedView.native.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-native-community/masked-view/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-native-community/masked-view/js/MaskedView.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/TouchableItem.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/BorderlessButton.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/assets/back-icon.png"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/assets/back-icon-mask.png"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Header/HeaderBackground.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/memoize.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Stack/CardContainer.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Stack/Card.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/color/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/color-string/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/color-name/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/simple-swizzle/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/simple-swizzle/node_modules/is-arrayish/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/color-convert/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/color-convert/conversions.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/color-convert/node_modules/color-name/index.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/color-convert/route.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/GestureHandlerRefContext.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/CardAnimationContext.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/getDistanceForDirection.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/getInvertedMultiplier.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/HeaderHeightContext.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/KeyboardManager.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Header/HeaderContainer.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Header/Header.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/Header/HeaderTitle.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/debounce.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/views/SafeAreaProviderCompat.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/useCardAnimation.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/useHeaderHeight.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/utils/useGestureHandlerRef.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/stack/src/types.tsx"
+  },
+  {
+    "id": null,
+    "path": "app2/main/TabNavigation.js"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/index.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/navigators/createBottomTabNavigator.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/views/BottomTabView.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/views/SafeAreaProviderCompat.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/views/ResourceSavingScene.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/views/BottomTabBar.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/views/BottomTabItem.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/views/TabBarIcon.tsx"
+  },
+  {
+    "id": null,
+    "path": "node_modules/@react-navigation/bottom-tabs/src/types.tsx"
+  },
+  {
+    "id": null,
+    "path": "app2/main/TabBarItem.js"
+  },
+  {
+    "id": null,
+    "path": "app2/main/HomePage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/RefreshListView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/HomeActionBar.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/SelectCityPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/SortListView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/ToastUtil.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/NavigationBar.js"
+  },
+  {
+    "id": null,
+    "path": "app2/util/ViewUtils.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_tiaozhuan.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_more_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_share_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_share.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_back_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_back_green.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_back.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_circle_back.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_close_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/config/city-list.json"
+  },
+  {
+    "id": null,
+    "path": "app2/component/MorePopWidows.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/SpacingView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/QRScanPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/Separator.js"
+  },
+  {
+    "id": null,
+    "path": "app2/util/Utils.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_scan_code_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_code_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_arrow_down.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_search.png"
+  },
+  {
+    "id": null,
+    "path": "app2/home/ProductItemCell.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/Text.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/MenuView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/PageControl.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/MenuItem.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/ActiveView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/ActiveItem.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/LimitTimeView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/util/Images.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/sale_0.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/sale_1.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/sale_2.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/sale_3.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/sale_4.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_avatar_default.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_star.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_star2.png"
+  },
+  {
+    "id": null,
+    "path": "app2/component/CountDownView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/classify/ClassifyPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/util/Parabolic.js"
+  },
+  {
+    "id": null,
+    "path": "app2/config/data.js"
+  },
+  {
+    "id": null,
+    "path": "app2/classify/GoodsList.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/RNButton.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/categer_bg.jpg"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_remove_circle.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_add_circle.png"
+  },
+  {
+    "id": null,
+    "path": "app2/classify/Comments.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_checkbox_filter.png"
+  },
+  {
+    "id": null,
+    "path": "app2/classify/ShopBar.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_shopping_cart.png"
+  },
+  {
+    "id": null,
+    "path": "app2/detail/DetailPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/ShareAlertDialog.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/share_ic_friends.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/share_ic_weixin.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/share_ic_weibo.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_deal_anytime_refund.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_detail.png"
+  },
+  {
+    "id": null,
+    "path": "app2/component/WebViewPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/FoodPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/home/FoodActionBar.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_address.png"
+  },
+  {
+    "id": null,
+    "path": "app2/component/BannerView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/config/api.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_foodCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_movieCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_hotelCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_KTVCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_default.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_foottreatCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_lifeServiceCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_entertainmentCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_beautyCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_homepage_shoppingCategory.png"
+  },
+  {
+    "id": null,
+    "path": "app2/main/NearbyPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/nearby/NearbyListScene.js"
+  },
+  {
+    "id": null,
+    "path": "app2/nearby/NearbyCell.js"
+  },
+  {
+    "id": null,
+    "path": "app2/nearby/NearbyHeaderView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_address.png"
+  },
+  {
+    "id": null,
+    "path": "app2/main/DiscoverPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/NavBar.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/RNWebView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/main/OrderPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/order/OrderMenuItem.js"
+  },
+  {
+    "id": null,
+    "path": "app2/order/MineOrderPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/order/OrderItemView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/EmptyView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/order_empty_default.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/order_tab_need_pay.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/order_tab_need_use.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/order_tab_need_review.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/order_tab_needoffer_aftersale.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_arrow.png"
+  },
+  {
+    "id": null,
+    "path": "app2/main/MinePage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/MineItemCell.js"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/SettingPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/ItemCell.js"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/LoginPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/PasswordLoginView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_mobile.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_message.png"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/MobileLoginView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/component/TimerButton.js"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/UserinfoPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/AddressPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/ic_locate.png"
+  },
+  {
+    "id": null,
+    "path": "app2/mine/AboutPage.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/meituan_logo.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_setting_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_message_white.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/beauty_v1.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_wallet.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_balance.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_voucher.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_membercard.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_friends.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_comment.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_collection.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_mineorder.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_member.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_service.png"
+  },
+  {
+    "id": null,
+    "path": "app2/images/icon_mine_about.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_homepage.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_homepage_selected.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_merchant_normal.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_merchant_selected.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_misc.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_misc_selected.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_mine.png"
+  },
+  {
+    "id": null,
+    "path": "res/icon_tabbar_mine_selected.png"
+  },
+  {
+    "id": null,
+    "path": "app2/navigation/SplashView.js"
+  },
+  {
+    "id": null,
+    "path": "app2/images/splash.png"
+  },
+  {
+    "id": null,
+    "path": "app2.json"
+  }
+]

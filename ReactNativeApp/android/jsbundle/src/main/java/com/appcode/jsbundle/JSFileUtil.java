@@ -13,12 +13,7 @@ public class JSFileUtil {
 
 	public static void copyAssets(String assetDir, String dir) {
 		String[] files;
-		try {
-			// 获得Assets一共有几多文件
-			files = JSBundleSdk.getApplication().getResources().getAssets().list(assetDir);
-		} catch (IOException e1) {
-			return;
-		}
+
 		File mWorkingPath = new File(dir);
 		// 如果文件路径不存在
 		if (!mWorkingPath.exists()) {
@@ -27,6 +22,14 @@ public class JSFileUtil {
 				// 文件夹创建不成功时调用
 			}
 		}
+
+		try {
+			// 获得Assets一共有几多文件
+			files = JSBundleSdk.getApplication().getResources().getAssets().list(assetDir);
+		} catch (IOException e1) {
+			return;
+		}
+
 
 		for (int i = 0; i < files.length; i++) {
 			try {

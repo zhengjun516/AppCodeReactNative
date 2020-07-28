@@ -61,8 +61,8 @@ export default function StackNavigation(){
         			name="Home" 
         			component={TabNavigation} 
         			options={{ headerShown: false }}
+        			{props => <TabNavigation {...props} navigator='navigator' />}
         			/>
-        		{props => <Home {...props} navigator='navigator' />}
         	</Stack.Navigator>
         </NavigationContainer>
 	)

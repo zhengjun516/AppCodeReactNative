@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "bundleDir": "business2",
+    "outputFile": "business2.android.bundle",
+    "entryFile": "index.js",
+    "configFile":"business.config.js",
+    "isBase": false,
+    "isPreload": true,
+    "md5":""
+}

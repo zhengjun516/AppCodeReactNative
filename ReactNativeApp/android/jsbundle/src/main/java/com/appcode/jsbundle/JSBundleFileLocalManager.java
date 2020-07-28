@@ -18,10 +18,10 @@ public class JSBundleFileLocalManager extends JSBundleFileBaseManager{
 
 	@Override
 	public void init(String bundlesDir) {
-		if(JSBundleSdk.isEnableCopyFromAssets()){
+		super.init(bundlesDir);
+		if(JSBundleManager.getInstance().getJSBundleMap().size() <= 0){
 			copyAssetsBundlesToSdcard();
 		}
-		super.init(bundlesDir);
 	}
 
 	public void copyAssetsBundlesToSdcard(){

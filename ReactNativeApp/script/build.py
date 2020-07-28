@@ -69,7 +69,8 @@ def create_manifest(module_path,bundleConfig):
     if app_json_file is not None:
         with open(app_json_file_folder+app_json_file,'r', encoding='UTF-8') as app_file:
             app_json = json.load(app_file)
-            manifest['mainComponent'] = app_json["name"]
+            if "name" in app_json:
+                manifest['mainComponent'] = app_json["name"]
 
     manifest_json_file =  module_path+"/"+bundleConfig.bundleDir+"/"+"manifest.json"
     with open(manifest_json_file,'w', encoding='UTF-8') as manifest_file:

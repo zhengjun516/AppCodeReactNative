@@ -1,6 +1,6 @@
 package com.appcode.jsbundle;
 
-import com.appcode.react.AppCodeReactNativeHost;
+import com.appcode.react.DevReactNativeHost;
 import com.facebook.react.JSBundleReactNativeHost;
 import com.facebook.react.ReactNativeHost;
 
@@ -44,12 +44,7 @@ public class JSBundleManager {
 	}
 
 	public void addJSBundle(JSBundle jsBundle){
-		ReactNativeHost reactNativeHost;
-		if(jsBundle.isSimpleJSBundle()){
-			reactNativeHost = new AppCodeReactNativeHost(jsBundle,JSBundleSdk.getApplication());
-		}else{
-			reactNativeHost = new JSBundleReactNativeHost(jsBundle,JSBundleSdk.getApplication());
-		}
+		ReactNativeHost reactNativeHost = new JSBundleReactNativeHost(jsBundle,JSBundleSdk.getApplication());
 		jsBundle.setReactNativeHost(reactNativeHost);
 
 		mJSBundleMap.put(jsBundle.getBundleDir(),jsBundle);

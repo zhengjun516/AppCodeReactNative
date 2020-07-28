@@ -3,8 +3,8 @@ package com.facebook.react;
 import android.app.Application;
 import androidx.annotation.Nullable;
 
-import com.appcode.jsbundle.BuildConfig;
 import com.appcode.jsbundle.JSBundle;
+import com.appcode.jsbundle.JSBundleSdk;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +19,7 @@ public class JSBundleReactNativeHost extends ReactNativeHost {
 
 	@Override
 	public boolean getUseDeveloperSupport() {
-		return BuildConfig.DEBUG;
+		return JSBundleSdk.isDebug();
 	}
 
 	@Override
@@ -47,10 +47,5 @@ public class JSBundleReactNativeHost extends ReactNativeHost {
 			return mJsBundle.getBundleAssetName();
 		}
 		return mJsBundle.getCommonJSBundleAssetName();
-	}
-
-	@Override
-	protected String getJSMainModuleName() {
-		return "index";
 	}
 }

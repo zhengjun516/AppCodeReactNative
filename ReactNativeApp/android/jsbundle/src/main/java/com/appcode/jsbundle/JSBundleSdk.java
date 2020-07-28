@@ -3,7 +3,6 @@ package com.appcode.jsbundle;
 import android.app.Application;
 import android.content.Intent;
 
-import com.facebook.react.JSBundlePreloadActivity;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 
@@ -15,7 +14,9 @@ public class JSBundleSdk {
 
 	private  static Application sApplication;
 	private  static boolean sIsDebug;
-	private  static boolean sEnableCopyFromAssets;
+
+	private  static JSIntent sJsIntent;
+	private  static GetReactPackageCallback sGetReactPackageCallback;
 
 	public static void init(Application application){
 		sApplication = application;
@@ -25,15 +26,8 @@ public class JSBundleSdk {
 		sIsDebug = isDebug;
 	}
 
-	public static void setEnableCopyFromAssets(boolean enableCopyFromAssets){
-		sEnableCopyFromAssets = enableCopyFromAssets;
-	}
 
-	public static boolean isEnableCopyFromAssets() {
-		return sEnableCopyFromAssets;
-	}
-
-	public static boolean isIsDebug(){
+	public static boolean isDebug(){
 		return sIsDebug;
 	}
 
@@ -44,6 +38,7 @@ public class JSBundleSdk {
 	}
 
 	public static void initSDCardJSBundle(GetReactPackageCallback getReactPackageCallback){
+		sGetReactPackageCallback = getReactPackageCallback;
 		JSBundleFileBaseManager jsBundleFileBaseManager = Singleton.get(JSBundleFileLocalManager.class);
 		jsBundleFileBaseManager.setGetReactPackageCallback(getReactPackageCallback);
 		jsBundleFileBaseManager.init("");
@@ -81,6 +76,10 @@ public class JSBundleSdk {
 		return sApplication;
 	}
 
+	public static GetReactPackageCallback getGetReactPackageCallback() {
+		return sGetReactPackageCallback;
+	}
+
 	public static void addJSBundle(JSBundle jsBundle){
 		if(JSBundleManager.getInstance().hasJSBundle(jsBundle)){
 			throw new RuntimeException("组件："+jsBundle.getBundleDir()+" 已经存在,不能重复添加");
@@ -96,15 +95,16 @@ public class JSBundleSdk {
 		return JSBundleManager.getInstance().deleteJSBundle(mainComponentName);
 	}
 
-
+	public static JSIntent getJsIntent() {
+		return sJsIntent;
+	}
 
 	public static void startJSBundle(JSIntent jsIntent){
-
+		sJsIntent = jsIntent;
 		JSBundle jsBundle = getJSBundler(jsIntent);
 		if(jsBundle != null){
 			JSBundleManager.getInstance().addJSBundleToStackTop(jsBundle);
 			Intent	intent = new Intent(sApplication, JSBundlePreloadActivity.class);
-			//intent.putExtra(JSBundle.MAIN_COMPONENT_NAME,jsBundle.getDefaultMainComponentName());
 			intent.putExtra(JSIntent.KEY_JS_INTENT,jsIntent);
 			intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 			sApplication.startActivity(intent);
