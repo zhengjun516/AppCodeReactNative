@@ -1,4 +1,4 @@
-package com.appcode.downloadsdk.db;
+package com.appcode.downloadsdk.database;
 
 import android.content.Context;
 import android.database.DatabaseErrorHandler;

@@ -1,9 +1,7 @@
 package com.appcode.downloadsdk.net;
 
-import android.util.Log;
-
 import com.appcode.downloadsdk.DownloadTask;
-import com.appcode.downloadsdk.Downloader;
+import com.appcode.downloadsdk.DownloadManager;
 import com.appcode.downloadsdk.IDownloadCallback;
 import com.appcode.downloadsdk.IDownloadTask;
 import com.appcode.downloadsdk.model.ProcessCall;
@@ -28,15 +26,13 @@ public class NetworkManager implements INetworkManager {
 
     private final OkHttpClient mClient;
     private final DownloadInterceptor mInterceptor;
-    private final Downloader.UIHandler mUIHandler;
+    private final DownloadManager.UIHandler mUIHandler;
     private final RepoManager mRepoManager;
 
-    public NetworkManager(Downloader.UIHandler uiHandler, RepoManager repoManager) {
+    public NetworkManager(DownloadManager.UIHandler uiHandler, RepoManager repoManager) {
         mUIHandler = uiHandler;
         mRepoManager = repoManager;
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(60, TimeUnit.SECONDS);
-        builder.connectionPool(new ConnectionPool(5, 5, TimeUnit.MINUTES));
+
         ThreadPoolExecutor executor = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>(), new ThreadFactory() {
             @Override
@@ -46,27 +42,38 @@ public class NetworkManager implements INetworkManager {
                 return thread;
             }
         });
+
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(60, TimeUnit.SECONDS);
+        builder.connectionPool(new ConnectionPool(5, 5, TimeUnit.MINUTES));
         builder.dispatcher(new Dispatcher(executor));
+
         mInterceptor = new DownloadInterceptor(uiHandler);
         builder.addNetworkInterceptor(mInterceptor);
+
         mClient = builder.build();
     }
 
     public IDownloadTask enqueue(boolean isResume, final DownloadData data, final IDownloadCallback callback) {
         mUIHandler.sendBeforeMsg(callback);
-        Request.Builder builder = new Request.Builder();
+
         String url = data.getDownloadUrl();
         long offset = data.getOffset();
+
+        Request.Builder builder = new Request.Builder();
         final Request request = builder.url(url).header("RANGE", "bytes=" + offset + "-").build();
         Call call = mClient.newCall(request);
+
         mInterceptor.addCallback(url, callback);
         mInterceptor.addOffset(url, offset);
+
         final DownloadTask downloadTask = new DownloadTask(this, data.getDownloadUrl(), callback);
         if (isResume) {
             mUIHandler.sendResumeMsg(callback);
         }
-        downloadTask.setCall(call);
-        call.enqueue(new Callback() {
+
+        downloadTask.setCall(call,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 mUIHandler.sendFailedMsg(e.getMessage(), callback);

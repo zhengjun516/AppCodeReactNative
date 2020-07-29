@@ -2,7 +2,7 @@ package com.appcode.downloadsdk.model;
 
 import android.text.TextUtils;
 
-import com.appcode.downloadsdk.Downloader;
+import com.appcode.downloadsdk.DownloadManager;
 import com.appcode.downloadsdk.IDownloadCallback;
 import com.appcode.downloadsdk.internal.NamedRunnable;
 import com.appcode.downloadsdk.model.bean.DataState;
@@ -23,14 +23,14 @@ public class ProcessCall {
     private final DownloadData mData;
     private final Response mResponse;
     private final IDownloadCallback mCallback;
-    private final Downloader.UIHandler mUIHandler;
+    private final DownloadManager.UIHandler mUIHandler;
     private final Repo mDBRepo;
     private boolean mCanceled;
     private boolean mPaused;
     private ProcessTask mProcessTask;
     private boolean mIsSupportRange = false;
 
-    public ProcessCall(ProcessDispatcher dispatcher, Repo repo, Response response, DownloadData data, Downloader.UIHandler uiHandler, IDownloadCallback callback) {
+    public ProcessCall(ProcessDispatcher dispatcher, Repo repo, Response response, DownloadData data, DownloadManager.UIHandler uiHandler, IDownloadCallback callback) {
         mDispatcher = dispatcher;
         mData = data;
         mResponse = response;

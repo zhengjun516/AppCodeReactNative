@@ -2,7 +2,7 @@ package com.appcode.downloadsdk.net;
 
 
 import com.appcode.downloadsdk.DLog;
-import com.appcode.downloadsdk.Downloader;
+import com.appcode.downloadsdk.DownloadManager;
 import com.appcode.downloadsdk.IDownloadCallback;
 
 import java.io.IOException;
@@ -17,11 +17,11 @@ import okhttp3.Response;
 public class DownloadInterceptor implements Interceptor {
     private static final String TAG = "DownloadInterceptor";
 
-    private final Downloader.UIHandler mUIHandler;
+    private final DownloadManager.UIHandler mUIHandler;
     private Map<String, IDownloadCallback> mCallbacks;
     private Map<String, Long> mOffsets;
 
-    public DownloadInterceptor(Downloader.UIHandler uiHandler) {
+    public DownloadInterceptor(DownloadManager.UIHandler uiHandler) {
         mCallbacks = new HashMap<>();
         mOffsets = new HashMap<>();
         mUIHandler = uiHandler;

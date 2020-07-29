@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.appcode.downloadsdk.model.RepoManager;
 import com.appcode.downloadsdk.model.bean.DownloadData;
@@ -14,13 +13,18 @@ import com.appcode.downloadsdk.utils.FileUtil;
 
 import java.io.File;
 
-public class Downloader implements IDownloader {
+public class DownloadManager implements IDownloader {
 
+
+    private static Context mContext;
+    private static DownloadConfig mDownloadConfig;
+    private static boolean mInit;
 
     private NetworkManager mNetWorkManager;
     private UIHandler mUIHandler;
     private RepoManager mRepoManager;
-    private boolean mInit;
+
+
 
     /**
      * 下载器有几部分组成：
@@ -29,26 +33,31 @@ public class Downloader implements IDownloader {
      * 3 Downloader, 事件转发
      */
     private static final class InstanceHolder {
-        private static final Downloader INSTANCE = new Downloader();
+        private static final DownloadManager INSTANCE = new DownloadManager();
     }
 
-    private Downloader() {
-        mInit = false;
+    private DownloadManager() {
+        mUIHandler = new UIHandler();
+        mRepoManager = new RepoManager(mContext, mDownloadConfig.getDownloadRootPath());
+        mNetWorkManager = new NetworkManager(mUIHandler, mRepoManager);
     }
 
-    public static Downloader getInstance() {
+    public static DownloadManager getInstance() {
         return InstanceHolder.INSTANCE;
     }
 
-    public void init(Context context, DownloadConfig config) {
-        mUIHandler = new UIHandler();
-        File dlDir = new File(config.mDownloadRootPath);
+    public static void init(Context context){
+        init(context,new DownloadConfig.Builder().build());
+    }
+
+    public static void init(Context context, DownloadConfig config) {
+        mContext = context;
+        mDownloadConfig = config;
+        mInit = true;
+        File dlDir = new File(config.getDownloadRootPath());
         if (!FileUtil.isDirExists(dlDir)) {
             dlDir.mkdirs();
         }
-        mRepoManager = new RepoManager(context, config.mDownloadRootPath);
-        mNetWorkManager = new NetworkManager(mUIHandler, mRepoManager);
-        mInit = true;
     }
 
     @Override

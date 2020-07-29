@@ -1,7 +1,7 @@
 package com.appcode.downloadsdk.net;
 
 
-import com.appcode.downloadsdk.Downloader;
+import com.appcode.downloadsdk.DownloadManager;
 import com.appcode.downloadsdk.IDownloadCallback;
 
 import java.io.IOException;
@@ -19,9 +19,9 @@ public class DownloadResponseBody extends ResponseBody {
     private final Response mResponse;
     private final IDownloadCallback mCallback;
     private final long mOffset;
-    private final Downloader.UIHandler mUIHandler;
+    private final DownloadManager.UIHandler mUIHandler;
 
-    DownloadResponseBody(Response response, long offset, Downloader.UIHandler uiHandler, IDownloadCallback callback) {
+    DownloadResponseBody(Response response, long offset, DownloadManager.UIHandler uiHandler, IDownloadCallback callback) {
         mResponse = response;
         mCallback = callback;
         mOffset = offset;

@@ -31,6 +31,10 @@ public abstract class JSBundleFileBaseManager {
 			if(!TextUtils.isEmpty(bundlesDir)){
 				mBundlesDir = bundlesDir;
 			}
+			File bundlesFolder = new File(mBundlesDir);
+			if(!bundlesFolder.exists()){
+				bundlesFolder.mkdirs();
+			}
 
 			String[] bundleDirs = getChildDirs(null,mBundlesDir);
 

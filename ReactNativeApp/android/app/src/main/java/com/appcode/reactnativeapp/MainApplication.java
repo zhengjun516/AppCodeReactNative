@@ -3,8 +3,10 @@ package com.appcode.reactnativeapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.appcode.downloadsdk.DownloadConfig;
 import com.appcode.downloadsdk.DownloadSdk;
 import com.appcode.jsbundle.GetReactPackageCallback;
+import com.appcode.jsbundle.JSBundleConstant;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.reactnativeapp.communication.CommPackage;
 import com.facebook.react.PackageList;
@@ -32,8 +34,14 @@ public class MainApplication extends Application implements ReactApplication {
     /* native exopackage */
     SoLoader.init(this,  false);
     JSBundleSdk.init(this);
-    JSBundleSdk.setDebug(true);
+    JSBundleSdk.setDebug(false);
+
+
     DownloadSdk.init(this);
+
+    DownloadConfig.Builder builder = new DownloadConfig.Builder();
+    builder.setDownloadRootPath(JSBundleConstant.DOWNLOAD_PATH_DATA);
+    DownloadSdk.setDownloadConfig(builder.build());
   }
 
   @Override

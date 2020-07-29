@@ -1,4 +1,4 @@
-package com.appcode.downloadsdk.db;
+package com.appcode.downloadsdk.database;
 
 public interface DownloadDBConstant {
     String TABLE_DOWNLOAD_NAME = "download_data";

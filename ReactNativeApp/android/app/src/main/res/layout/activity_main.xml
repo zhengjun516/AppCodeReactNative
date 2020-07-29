@@ -7,14 +7,23 @@
     android:gravity="center_horizontal"
     >
     <Button
-        android:id="@+id/btn_load"
+        android:id="@+id/mLoadBaseBundleBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="66dp"
+        android:text="加載最新baseBundle"
+        android:onClick="loadBaseBundle"
+        android:textColor="@android:color/white"
+        />
+    <Button
+        android:id="@+id/mLoadBusinessBundleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:padding="10dp"
-        android:text="加載最新Bundle"
-        android:onClick="load"
+        android:text="加載Business2Bundle"
+        android:onClick="loadBusiness2Bundle"
         android:textColor="@android:color/white"
         />
     <Button

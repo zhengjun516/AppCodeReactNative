@@ -8,8 +8,11 @@ public class JSBundleConstant  {
 
 	public static final String DIR_ASSETS = "assets://";
 	public static final String DIR_BUNDLES = "bundles";
+	public static final String DIR_DOWNLOAD="download";
+	public static final String DIR_HIDDEN_BUNDLES = ".bundles";
 	public static final String APP_NAME = JSBUtil.getAppName();
 	public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
-	public static final String BUNDLES_PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() +"/"+APP_NAME+ "/"+DIR_BUNDLES;
+	public static final String BUNDLES_PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() +"/"+APP_NAME+ "/"+ DIR_HIDDEN_BUNDLES;
+	public static final String DOWNLOAD_PATH_DATA = JSBundleSdk.getApplication().getDir(DIR_DOWNLOAD,MODE_PRIVATE).getAbsolutePath();
 	public static final String BUNDLES_PATH_DATA = JSBundleSdk.getApplication().getDir(DIR_BUNDLES,MODE_PRIVATE).getAbsolutePath();
 }

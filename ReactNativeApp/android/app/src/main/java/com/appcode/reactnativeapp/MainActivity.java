@@ -1,7 +1,6 @@
 package com.appcode.reactnativeapp;
 
 import android.Manifest;
-import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.appcode.downloadsdk.DownloadManager;
+import com.appcode.downloadsdk.DownloadSdk;
+import com.appcode.downloadsdk.UnZipManager;
+import com.appcode.downloadsdk.model.bean.DownloadData;
 import com.appcode.jsbundle.GetReactPackageCallback;
-import com.appcode.jsbundle.JSBundle;
+import com.appcode.jsbundle.JSBundleConstant;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.jsbundle.JSIntent;
 import com.appcode.reactnativeapp.communication.CommPackage;
@@ -25,7 +28,6 @@ import com.facebook.react.PackageList;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -70,9 +72,59 @@ public class MainActivity extends AppCompatActivity {
      * 下载更新包
      * @param v
      */
-    public void load(View v) {
-        checkVersion();
-        HotUpdate.mergePatAndAsset(this);
+    public void loadBaseBundle(View v) {
+        DownloadManager downloadManager = DownloadSdk.getDownloadManager();
+        downloadManager.download(Api.baseBundleUrl,new DownloadManager.DefaultDownloadCallback(){
+            @Override
+            public void onBefore() {
+                super.onBefore();
+            }
+
+            @Override
+            public void onProgress(int process) {
+                super.onProgress(process);
+            }
+
+            @Override
+            public void onComplete(DownloadData data) {
+                super.onComplete(data);
+                UnZipManager.unzip(data.getLocalUrl(), JSBundleConstant.BUNDLES_PATH_DATA);
+            }
+
+            @Override
+            public void onFailed(String error) {
+                super.onFailed(error);
+            }
+        });
+
+    }
+
+    public void loadBusiness2Bundle(View v) {
+        // checkVersion();
+        //HotUpdate.mergePatAndAsset(this);
+        DownloadManager downloadManager = DownloadSdk.getDownloadManager();
+        downloadManager.download(Api.business2BundleUrl,new DownloadManager.DefaultDownloadCallback(){
+            @Override
+            public void onBefore() {
+                super.onBefore();
+            }
+
+            @Override
+            public void onProgress(int process) {
+                super.onProgress(process);
+            }
+
+            @Override
+            public void onComplete(DownloadData data) {
+                super.onComplete(data);
+                UnZipManager.unzip(data.getLocalUrl(), JSBundleConstant.BUNDLES_PATH_DATA);
+            }
+
+            @Override
+            public void onFailed(String error) {
+                super.onFailed(error);
+            }
+        });
     }
     private void checkVersion() {
         // 默认有最新版本
@@ -85,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void registeReceiver() {
         localReceiver = new CompleteReceiver();
-        registerReceiver(localReceiver,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        //registerReceiver(localReceiver,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
     public void sendMsgToRN(View view) {
@@ -97,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startAppCodeReactActivity(View view){
 
-        String appName = "ReactNativeApp";
+        String appName = "AppCodeReactNative";
         JSIntent jsIntent = new JSIntent("business2",appName);
         JSBundleSdk.startJSBundle(jsIntent);
     }
@@ -118,10 +170,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            long completeId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,-1);
+            /*long completeId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,-1);
             if(completeId == mDownLoadId) {
-                HotUpdate.handleZIP(getApplicationContext());
-            }
+            HotUpdate.handleZIP(getApplicationContext());*/
         }
     }
 

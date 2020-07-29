@@ -11,10 +11,10 @@ import java.io.File;
 public class DownloadConfig {
 
     public static final int MAX_THREAD_NUMBER = 4;
-    static final int DEFAULT_THREAD_NUMBER = 1;
+    public static final int DEFAULT_THREAD_NUMBER = 1;
 
-    int mDownloadThreadNumber = DEFAULT_THREAD_NUMBER;
-    String mDownloadRootPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DownloadSdk.getAppName() + "/download/").getAbsolutePath();
+    private int mDownloadThreadNumber = DEFAULT_THREAD_NUMBER;
+    private String mDownloadRootPath;
 
     private DownloadConfig(Builder builder) {
         if (builder.downloadThreadNumber > MAX_THREAD_NUMBER) {
@@ -25,7 +25,25 @@ public class DownloadConfig {
 
         if (!TextUtils.isEmpty(builder.downloadRootPath)) {
             this.mDownloadRootPath = builder.downloadRootPath;
+        }else{
+            this.mDownloadRootPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), DownloadSdk.getAppName() + "/download/").getAbsolutePath();
         }
+    }
+
+    public int getDownloadThreadNumber() {
+        return mDownloadThreadNumber;
+    }
+
+    public void setDownloadThreadNumber(int downloadThreadNumber) {
+        this.mDownloadThreadNumber = downloadThreadNumber;
+    }
+
+    public String getDownloadRootPath() {
+        return mDownloadRootPath;
+    }
+
+    public void setDownloadRootPath(String downloadRootPath) {
+        this.mDownloadRootPath = downloadRootPath;
     }
 
     public static final class Builder {

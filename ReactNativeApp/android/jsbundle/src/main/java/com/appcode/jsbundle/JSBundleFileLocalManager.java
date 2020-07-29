@@ -12,7 +12,7 @@ public class JSBundleFileLocalManager extends JSBundleFileBaseManager{
 	private Context mContext;
 
 	public JSBundleFileLocalManager(){
-		super(JSBundleConstant.BUNDLES_PATH_SDCARD);
+		super(JSBundleConstant.BUNDLES_PATH_DATA);
 		mContext = JSBundleSdk.getApplication();
 	}
 
@@ -25,7 +25,7 @@ public class JSBundleFileLocalManager extends JSBundleFileBaseManager{
 	}
 
 	public void copyAssetsBundlesToSdcard(){
-		JSFileUtil.copyAssets(JSBundleConstant.DIR_BUNDLES,JSBundleConstant.BUNDLES_PATH_SDCARD);
+		JSFileUtil.copyAssets(JSBundleConstant.DIR_BUNDLES,JSBundleConstant.BUNDLES_PATH_DATA);
 	}
 
 	@Override

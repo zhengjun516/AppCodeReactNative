@@ -7,6 +7,7 @@ import com.appcode.downloadsdk.model.bean.DownloadData;
 import com.appcode.downloadsdk.net.NetworkManager;
 
 import okhttp3.Call;
+import okhttp3.Callback;
 
 public class DownloadTask implements IDownloadTask {
 
@@ -72,8 +73,9 @@ public class DownloadTask implements IDownloadTask {
         mProcessCall = processCall;
     }
 
-    public void setCall(Call call) {
+    public void setCall(Call call, Callback callback) {
         mCall = call;
+        mCall.enqueue(callback);
     }
 
     @Override

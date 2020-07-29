@@ -3,11 +3,11 @@ package com.appcode.downloadsdk.model;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.appcode.downloadsdk.Downloader;
+import com.appcode.downloadsdk.DownloadManager;
 import com.appcode.downloadsdk.IDownloadCallback;
 import com.appcode.downloadsdk.model.bean.DataState;
 import com.appcode.downloadsdk.model.bean.DownloadData;
-import com.appcode.downloadsdk.db.DownloadDB;
+import com.appcode.downloadsdk.database.DownloadDB;
 import com.appcode.downloadsdk.utils.MD5Util;
 
 import java.io.File;
@@ -17,17 +17,17 @@ import okhttp3.Response;
 public class RepoManager {
 
     private String mRootPath;
-    private final DownloadDB mDBRepo;
-    private final ProcessDispatcher mDispatcher;
+    private final DownloadDB mDownloadDB;
+    private final ProcessDispatcher mProcessDispatcher;
 
     public RepoManager(Context context, String rootPath) {
-        mDBRepo = new DownloadDB(context);
+        mDownloadDB = new DownloadDB(context);
         mRootPath = rootPath;
         if (!rootPath.endsWith("/")) {
             mRootPath = rootPath + "/";
         }
         checkDir();
-        mDispatcher = new ProcessDispatcher();
+        mProcessDispatcher = new ProcessDispatcher();
     }
 
     private void checkDir() {
@@ -39,12 +39,12 @@ public class RepoManager {
 
     public DownloadData getData(String url) {
         checkDir();
-        DownloadData data = mDBRepo.query(url);
+        DownloadData data = mDownloadDB.query(url);
         if (checkFileIsValid(data)) {
             return data;
         } else {
             if (data != null) {
-                mDBRepo.delete(data.getDownloadUrl());
+                mDownloadDB.delete(data.getDownloadUrl());
                 deleteFile(data.getLocalUrl());
             }
             data = new DownloadData();
@@ -52,14 +52,14 @@ public class RepoManager {
             String fileSuffix = getFileSuffix(url);
             String fileMD5Name = MD5Util.getMD5(url);
             data.setLocalUrl(mRootPath + fileMD5Name + "." + fileSuffix);
-            mDBRepo.insert(data);
+            mDownloadDB.insert(data);
             return data;
         }
     }
 
     public boolean isDownload(String url) {
         checkDir();
-        DownloadData data = mDBRepo.query(url);
+        DownloadData data = mDownloadDB.query(url);
         return checkFileIsCompelte(data);
     }
 
@@ -102,9 +102,9 @@ public class RepoManager {
 
 
 
-    public ProcessCall enqueue(Response response, DownloadData data, Downloader.UIHandler handler, IDownloadCallback callback) {
+    public ProcessCall enqueue(Response response, DownloadData data, DownloadManager.UIHandler handler, IDownloadCallback callback) {
         checkDir();
-        ProcessCall call = new ProcessCall(mDispatcher, mDBRepo, response, data, handler, callback);
+        ProcessCall call = new ProcessCall(mProcessDispatcher, mDownloadDB, response, data, handler, callback);
         call.enqueue();
         return call;
     }
