@@ -13,9 +13,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
 
 import com.appcode.downloadsdk.DownloadManager;
 import com.appcode.downloadsdk.DownloadSdk;
+import com.appcode.downloadsdk.FileManager;
 import com.appcode.downloadsdk.UnZipManager;
 import com.appcode.downloadsdk.model.bean.DownloadData;
 import com.appcode.jsbundle.GetReactPackageCallback;
@@ -28,6 +30,7 @@ import com.facebook.react.PackageList;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     private CompleteReceiver localReceiver;
     private long mDownLoadId;
+
+    private ContentLoadingProgressBar mProgressBar;
+    private ContentLoadingProgressBar mProgressBar2;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -44,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         initReactInstance();
 
         setContentView(R.layout.activity_main);
+
+        mProgressBar = findViewById(R.id.mProgressBar);
+        mProgressBar2 = findViewById(R.id.mProgressBar2);
+
         checkPermissions();
         requestPermission();
 
@@ -73,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
      * @param v
      */
     public void loadBaseBundle(View v) {
+        mProgressBar.setVisibility(View.VISIBLE);
         DownloadManager downloadManager = DownloadSdk.getDownloadManager();
         downloadManager.download(Api.baseBundleUrl,new DownloadManager.DefaultDownloadCallback(){
             @Override
@@ -83,17 +94,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgress(int process) {
                 super.onProgress(process);
+                mProgressBar.setProgress(process);
             }
 
             @Override
             public void onComplete(DownloadData data) {
                 super.onComplete(data);
                 UnZipManager.unzip(data.getLocalUrl(), JSBundleConstant.BUNDLES_PATH_DATA);
+                mProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailed(String error) {
                 super.onFailed(error);
+                mProgressBar.setVisibility(View.GONE);
             }
         });
 
@@ -102,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
     public void loadBusiness2Bundle(View v) {
         // checkVersion();
         //HotUpdate.mergePatAndAsset(this);
+        mProgressBar2.setVisibility(View.VISIBLE);
         DownloadManager downloadManager = DownloadSdk.getDownloadManager();
         downloadManager.download(Api.business2BundleUrl,new DownloadManager.DefaultDownloadCallback(){
             @Override
@@ -112,20 +127,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgress(int process) {
                 super.onProgress(process);
+                mProgressBar2.setProgress(process);
             }
 
             @Override
             public void onComplete(DownloadData data) {
                 super.onComplete(data);
                 UnZipManager.unzip(data.getLocalUrl(), JSBundleConstant.BUNDLES_PATH_DATA);
+                mProgressBar2.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailed(String error) {
                 super.onFailed(error);
+                mProgressBar2.setVisibility(View.GONE);
             }
         });
     }
+
+    public void deleteBundle(View view){
+        FileManager.deleteDir(JSBundleConstant.BUNDLES_PATH_DATA);
+        FileManager.deleteDir(JSBundleConstant.DOWNLOAD_PATH_DATA);
+    }
+
     private void checkVersion() {
         // 默认有最新版本
         Toast.makeText(this, "开始下载", Toast.LENGTH_SHORT).show();

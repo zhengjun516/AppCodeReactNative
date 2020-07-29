@@ -16,6 +16,14 @@
         android:onClick="loadBaseBundle"
         android:textColor="@android:color/white"
         />
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/mProgressBar"
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="0"
+        />
     <Button
         android:id="@+id/mLoadBusinessBundleBtn"
         android:layout_width="wrap_content"
@@ -26,34 +34,28 @@
         android:onClick="loadBusiness2Bundle"
         android:textColor="@android:color/white"
         />
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/mProgressBar2"
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="0"
+        />
     <Button
-        android:id="@+id/btn_go"
+        android:id="@+id/mDeleteDownloadBundle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_load"
-        android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="進入第一个RN界面"
-        android:onClick="sendMsgToRN"
+        android:text="删除下载的bundle"
+        android:onClick="deleteBundle"
         android:textColor="@android:color/white"
         />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_go"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:text="进入第二个RN界面"
-        android:onClick="startAppCodeReactActivity"
-        android:textColor="@android:color/white"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:padding="10dp"
         android:text="拆包方案界面"
         android:onClick="jumpToMultipleActivity"
@@ -63,7 +65,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:padding="10dp"
         android:text="拆包方案界面2"
         android:onClick="jumpToMultipleActivity2"
