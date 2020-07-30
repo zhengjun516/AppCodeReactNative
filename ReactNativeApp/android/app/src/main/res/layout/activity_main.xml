@@ -30,6 +30,24 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:padding="10dp"
+        android:text="加載BusinessBundle"
+        android:onClick="loadBusinessBundle"
+        android:textColor="@android:color/white"
+        />
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/mProgressBar1"
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="0"
+        />
+    <Button
+        android:id="@+id/mLoadBusiness2BundleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
         android:text="加載Business2Bundle"
         android:onClick="loadBusiness2Bundle"
         android:textColor="@android:color/white"
@@ -50,6 +68,16 @@
         android:padding="10dp"
         android:text="删除下载的bundle"
         android:onClick="deleteBundle"
+        android:textColor="@android:color/white"
+        />
+    <Button
+        android:id="@+id/mReinitialize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:text="重新初始化"
+        android:onClick="reinitialize"
         android:textColor="@android:color/white"
         />
     <Button

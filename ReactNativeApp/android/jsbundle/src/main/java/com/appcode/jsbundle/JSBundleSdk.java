@@ -38,6 +38,8 @@ public class JSBundleSdk {
 	}
 
 	public static void initSDCardJSBundle(GetReactPackageCallback getReactPackageCallback){
+		JSBundleManager.getInstance().clearJSBundles();
+
 		sGetReactPackageCallback = getReactPackageCallback;
 		JSBundleFileBaseManager jsBundleFileBaseManager = Singleton.get(JSBundleFileLocalManager.class);
 		jsBundleFileBaseManager.setGetReactPackageCallback(getReactPackageCallback);

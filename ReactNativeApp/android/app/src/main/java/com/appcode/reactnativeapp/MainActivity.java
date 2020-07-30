@@ -4,17 +4,14 @@ import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.ContentLoadingProgressBar;
-
 import com.appcode.downloadsdk.DownloadManager;
 import com.appcode.downloadsdk.DownloadSdk;
 import com.appcode.downloadsdk.FileManager;
@@ -25,12 +22,9 @@ import com.appcode.jsbundle.JSBundleConstant;
 import com.appcode.jsbundle.JSBundleSdk;
 import com.appcode.jsbundle.JSIntent;
 import com.appcode.reactnativeapp.communication.CommPackage;
-import com.appcode.reactnativeapp.hotupdate.HotUpdate;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-
-import java.io.File;
 import java.util.List;
 
 
@@ -41,22 +35,30 @@ public class MainActivity extends AppCompatActivity {
     private long mDownLoadId;
 
     private ContentLoadingProgressBar mProgressBar;
+    private ContentLoadingProgressBar mProgressBar1;
     private ContentLoadingProgressBar mProgressBar2;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-        initReactInstance();
+
 
         setContentView(R.layout.activity_main);
 
         mProgressBar = findViewById(R.id.mProgressBar);
+        mProgressBar1 = findViewById(R.id.mProgressBar1);
         mProgressBar2 = findViewById(R.id.mProgressBar2);
 
         checkPermissions();
         requestPermission();
 
+        initJSBundle();
+
+        initReactInstance();
+    }
+
+    private void initJSBundle() {
         JSBundleSdk.initSDCardJSBundle(new GetReactPackageCallback() {
             @Override
             public List<ReactPackage> getReactPackages(ReactNativeHost reactNativeHost) {
@@ -113,6 +115,38 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void loadBusinessBundle(View v) {
+        // checkVersion();
+        //HotUpdate.mergePatAndAsset(this);
+        mProgressBar1.setVisibility(View.VISIBLE);
+        DownloadManager downloadManager = DownloadSdk.getDownloadManager();
+        downloadManager.download(Api.businessBundleUrl,new DownloadManager.DefaultDownloadCallback(){
+            @Override
+            public void onBefore() {
+                super.onBefore();
+            }
+
+            @Override
+            public void onProgress(int process) {
+                super.onProgress(process);
+                mProgressBar1.setProgress(process);
+            }
+
+            @Override
+            public void onComplete(DownloadData data) {
+                super.onComplete(data);
+                UnZipManager.unzip(data.getLocalUrl(), JSBundleConstant.BUNDLES_PATH_DATA);
+                mProgressBar1.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailed(String error) {
+                super.onFailed(error);
+                mProgressBar1.setVisibility(View.GONE);
+            }
+        });
+    }
+
     public void loadBusiness2Bundle(View v) {
         // checkVersion();
         //HotUpdate.mergePatAndAsset(this);
@@ -148,6 +182,10 @@ public class MainActivity extends AppCompatActivity {
     public void deleteBundle(View view){
         FileManager.deleteDir(JSBundleConstant.BUNDLES_PATH_DATA);
         FileManager.deleteDir(JSBundleConstant.DOWNLOAD_PATH_DATA);
+    }
+
+    public void reinitialize(View view){
+        initJSBundle();
     }
 
     private void checkVersion() {

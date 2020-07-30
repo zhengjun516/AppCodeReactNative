@@ -64,6 +64,10 @@ public class JSBundleManager {
 		return mJSBundleMap.remove(mainComonentname);
 	}
 
+	public void clearJSBundles(){
+		mJSBundleMap.clear();
+	}
+
 	public void addJSBundleToStackTop(JSBundle jsBundle){
 		mJsBundlelinkedBlockingDeque.offer(jsBundle);
 	}
